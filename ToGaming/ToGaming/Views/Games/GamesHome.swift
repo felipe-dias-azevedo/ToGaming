@@ -9,8 +9,30 @@ import SwiftUI
 
 struct GamesHome: View {
     var body: some View {
-        List {
-            GameCard()
+        NavigationView {
+            List {
+                GameCard()
+                GameCard()
+                GameCard()
+            }
+            .navigationTitle("Games")
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    NavigationLink {
+                        EditGame()
+                    } label: {
+                        Text("Edit")
+                    }
+                }
+                
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    NavigationLink {
+                        EditGame()
+                    } label: {
+                        Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+                    }
+                }
+            }
         }
     }
 }

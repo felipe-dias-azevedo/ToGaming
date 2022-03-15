@@ -32,7 +32,7 @@ struct SearchHome: View {
                     }
                 }
                 .searchable(text: $searchText)
-                .navigationTitle("Search New Games")
+                .navigationTitle("Search")
                 .toolbar {
                     NavigationLink {
                         NewGame()

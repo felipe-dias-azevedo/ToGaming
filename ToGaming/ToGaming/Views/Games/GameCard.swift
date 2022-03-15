@@ -10,33 +10,34 @@ import SwiftUI
 struct GameCard: View {
     var body: some View {
         HStack {
-            Image("GodofWar")
+            Image("tw")
                 .resizable()
-                .clipShape(Circle())
+                .frame(width: 141.6, height: 80)
                 .aspectRatio(contentMode: .fit)
-                .shadow(radius: 6)
+                .cornerRadius(10)
             
-            Spacer()
-            
-            VStack {
+            VStack(alignment: .leading, spacing: 4) {
                 Text("God of War")
-                    .font(.title2)
+                    .font(.headline)
+                    .bold()
                 
                 Text("Playstation 4")
                     .font(.subheadline)
+                    .foregroundColor(.secondary)
             }
-            .offset(x: -35)
+            .padding(.leading, 8)
             
+            Spacer()
+            
+            Image(systemName: "")
         }
-        .padding()
-//        .overlay(
-//            RoundedRectangle(cornerRadius: 20)
-//                    .stroke(.gray, lineWidth: 5))
+        .padding(.vertical, 4)
     }
 }
 
 struct GameCard_Previews: PreviewProvider {
     static var previews: some View {
         GameCard()
+            .previewLayout(.fixed(width: 360, height: 90))
     }
 }
