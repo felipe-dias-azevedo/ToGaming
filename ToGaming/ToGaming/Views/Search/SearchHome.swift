@@ -11,6 +11,7 @@ struct SearchHome: View {
     
     let games = ["GT7", "GOW", "TLOU2"]
     @State private var searchText = ""
+    @State private var addingNew = false
     
     var searchResults: [String] {
         if searchText.isEmpty {
@@ -34,11 +35,14 @@ struct SearchHome: View {
                 .searchable(text: $searchText)
                 .navigationTitle("Search")
                 .toolbar {
-                    NavigationLink {
-                        NewGame()
+                    Button {
+                        addingNew.toggle()
                     } label: {
                         Label("New Game", systemImage: "plus")
                     }
+                }
+                .sheet(isPresented: $addingNew) {
+                    NewGame()
                 }
             }
         }

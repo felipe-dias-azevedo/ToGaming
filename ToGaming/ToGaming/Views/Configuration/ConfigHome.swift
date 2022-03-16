@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct ConfigHome: View {
+    @FocusState private var isFocused: Bool
+    @State var texto: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            HStack {
+                Text("User Name")
+                
+                TextField("commida boa", text: $texto)
+                    .focused($isFocused)
+            }
+        }
     }
 }
 
 struct ConfigHome_Previews: PreviewProvider {
     static var previews: some View {
-        ConfigHome()
+        ConfigHome(texto: "felipe")
     }
 }

@@ -14,6 +14,7 @@ struct ContentView: View {
     enum Tab {
         case games
         case search
+        case stats
         case config
     }
     
@@ -31,7 +32,13 @@ struct ContentView: View {
                 }
                 .tag(Tab.search)
             
-            ConfigHome()
+            StatsHome()
+                .tabItem {
+                    Label("Stats", systemImage: "chart.bar")
+                }
+                .tag(Tab.stats)
+            
+            ConfigHome(texto: "")
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }

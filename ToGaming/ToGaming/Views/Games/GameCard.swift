@@ -8,36 +8,42 @@
 import SwiftUI
 
 struct GameCard: View {
+    var isFavorite = true
+    
     var body: some View {
         HStack {
             Image("tw")
                 .resizable()
-                .frame(width: 141.6, height: 80)
+                .frame(width: 88.88, height: 50)
                 .aspectRatio(contentMode: .fit)
                 .cornerRadius(10)
             
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text("God of War")
-                    .font(.headline)
                     .bold()
                 
                 Text("Playstation 4")
-                    .font(.subheadline)
+                    .font(.caption)
                     .foregroundColor(.secondary)
             }
-            .padding(.leading, 8)
+            .padding(.leading, 2)
             
             Spacer()
             
-            Image(systemName: "")
+            Image(systemName: "cart.fill")
+                .foregroundColor(.blue)
+            
+            if (isFavorite) {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+            }
         }
-        .padding(.vertical, 4)
     }
 }
 
 struct GameCard_Previews: PreviewProvider {
     static var previews: some View {
         GameCard()
-            .previewLayout(.fixed(width: 360, height: 90))
+            .previewLayout(.fixed(width: 300, height: 60))
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A3F991B27E217D60016AC9C /* StatsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3F991A27E217D60016AC9C /* StatsHome.swift */; };
 		4A87279327E02F0700E8F76B /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87279227E02F0700E8F76B /* Game.swift */; };
 		4A87279527E0309200E8F76B /* EditGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87279427E0309200E8F76B /* EditGame.swift */; };
 		4A87279727E0330600E8F76B /* GameDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87279627E0330600E8F76B /* GameDetail.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A3F991A27E217D60016AC9C /* StatsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsHome.swift; sourceTree = "<group>"; };
 		4A87279227E02F0700E8F76B /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		4A87279427E0309200E8F76B /* EditGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGame.swift; sourceTree = "<group>"; };
 		4A87279627E0330600E8F76B /* GameDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetail.swift; sourceTree = "<group>"; };
@@ -48,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A3F991927E217C10016AC9C /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				4A3F991A27E217D60016AC9C /* StatsHome.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		4A87D2BC27DE729300585B01 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +98,7 @@
 		4A87D2D627DEBC5300585B01 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4A3F991927E217C10016AC9C /* Statistics */,
 				4A87D2DA27DEBC9A00585B01 /* Games */,
 				4A87D2D827DEBC8D00585B01 /* Search */,
 				4A87D2D927DEBC9500585B01 /* Configuration */,
@@ -211,6 +222,7 @@
 				4A87279527E0309200E8F76B /* EditGame.swift in Sources */,
 				4A87D2E027DEBF3300585B01 /* ConfigHome.swift in Sources */,
 				4A87279327E02F0700E8F76B /* Game.swift in Sources */,
+				4A3F991B27E217D60016AC9C /* StatsHome.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

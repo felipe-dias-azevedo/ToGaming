@@ -12,7 +12,7 @@ struct GamesHome: View {
         NavigationView {
             List {
                 GameCard()
-                GameCard()
+                GameCard(isFavorite: false)
                 GameCard()
             }
             .navigationTitle("Games")
