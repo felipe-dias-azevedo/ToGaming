@@ -11,20 +11,16 @@ struct GamesHome: View {
     var body: some View {
         NavigationView {
             List {
-                GameCard()
-                GameCard(isFavorite: false)
-                GameCard()
+                GameRow()
+                GameRow(isFavorite: false)
+                GameRow()
             }
             .navigationTitle("Games")
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
-                    NavigationLink {
-                        EditGame()
-                    } label: {
-                        Text("Edit")
-                    }
+                    EditButton()
                 }
-                
+
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     NavigationLink {
                         EditGame()

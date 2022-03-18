@@ -38,7 +38,7 @@ struct ContentView: View {
                 }
                 .tag(Tab.stats)
             
-            ConfigHome(texto: "")
+            ConfigHome(username: String(), clientid: String(), secretkey: String())
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
