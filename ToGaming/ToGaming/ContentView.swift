@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @EnvironmentObject var modelData: ModelData
     @State private var selection: Tab = .games
     
     enum Tab {
@@ -38,7 +39,7 @@ struct ContentView: View {
                 }
                 .tag(Tab.stats)
             
-            ConfigHome(username: String(), clientid: String(), secretkey: String())
+            ConfigHome(userConfig: $modelData.userConfig)
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
@@ -51,6 +52,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ContentView()
+                .environmentObject(ModelData())
                 .previewInterfaceOrientation(.portrait)
         }
     }

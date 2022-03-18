@@ -7,6 +7,8 @@
 
 import Foundation
 
-struct Config {
-    
+struct UserConfig {
+    var userName: String
+    var clientId: String
+    var secretKey: String
 }

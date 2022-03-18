@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct ConfigHome: View {
-    @State var username: String
-    @State var clientid: String
-    @State var secretkey: String
+    
+    @Binding var userConfig: UserConfig
     
     @State private var seeAbout = false
     
@@ -19,7 +18,7 @@ struct ConfigHome: View {
             List {
                 HStack {
                     Text("User Name")
-                    TextField("User Name", text: $username)
+                    TextField("User Name", text: $userConfig.userName)
                 }
                 
                 Section(
@@ -28,12 +27,12 @@ struct ConfigHome: View {
                 ) {
                     HStack {
                         Text("Client ID")
-                        SecureField("Client ID", text: $clientid)
+                        SecureField("Client ID", text: $userConfig.clientId)
                     }
                     
                     HStack {
                         Text("Secret Key")
-                        SecureField("Secret Key", text: $secretkey)
+                        SecureField("Secret Key", text: $userConfig.secretKey)
                     }
                 }
             }
@@ -52,6 +51,6 @@ struct ConfigHome: View {
 
 struct ConfigHome_Previews: PreviewProvider {
     static var previews: some View {
-        ConfigHome(username: String(), clientid: String(), secretkey: String())
+        ConfigHome(userConfig: .constant(UserConfig(userName: "", clientId: "", secretKey: "")))
     }
 }

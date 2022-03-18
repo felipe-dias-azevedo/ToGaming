@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct GamesHome: View {
+    
+    @Environment(\.editMode) var editMode
+    
     var body: some View {
         NavigationView {
             List {
