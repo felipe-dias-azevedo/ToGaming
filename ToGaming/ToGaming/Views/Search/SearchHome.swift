@@ -36,7 +36,7 @@ struct SearchHome: View {
                 Button {
                     addingNew.toggle()
                 } label: {
-                    Label("New Game", systemImage: "plus")
+                    Label("New Game", systemImage: "square.and.pencil")
                 }
             }
             .sheet(isPresented: $addingNew) {

@@ -10,36 +10,32 @@ import SwiftUI
 struct GamesHome: View {
     
     @Binding var games: [Game]
-    @Environment(\.editMode) var editMode
-    
-    var gamesSorted: [Game] {
-        games.sorted { $0.isFavorite && !$1.isFavorite }
-    }
+    @State private var searching = false
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(gamesSorted) { game in
+                ForEach($games) { game in
+                    // TODO: Change it to Scroll View and Preview of recent games based on category, platform, etc
                     NavigationLink {
                         GameDetail()
                     } label: {
-                        GameRow(game: game)
+                        GameCard(game: game)
                     }
                 }
             }
             .navigationTitle("Games")
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
-                    EditButton()
-                }
-
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    NavigationLink {
-                        EditGame()
+                    Button {
+                        searching.toggle()
                     } label: {
-                        Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+                        Label("Filter", systemImage: "magnifyingglass.circle")
                     }
                 }
+            }
+            .sheet(isPresented: $searching) {
+                GamesSearch(games: $games, canceled: $searching)
             }
         }
     }

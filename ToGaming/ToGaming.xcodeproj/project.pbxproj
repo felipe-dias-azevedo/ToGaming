@@ -25,6 +25,7 @@
 		4A87D2E027DEBF3300585B01 /* ConfigHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87D2DF27DEBF3300585B01 /* ConfigHome.swift */; };
 		4A87D2E227DEC5F000585B01 /* NewGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87D2E127DEC5F000585B01 /* NewGame.swift */; };
 		4A87D2E427DEC8D800585B01 /* GameCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87D2E327DEC8D800585B01 /* GameCard.swift */; };
+		4A881E3F27E62DD400E86EBA /* GamesSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A881E3E27E62DD400E86EBA /* GamesSearch.swift */; };
 		4AE2F22B27E4314A0036EAD9 /* AboutPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2F22A27E4314A0036EAD9 /* AboutPage.swift */; };
 		4AE2F22D27E433F80036EAD9 /* GameRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2F22C27E433F80036EAD9 /* GameRow.swift */; };
 /* End PBXBuildFile section */
@@ -49,6 +50,7 @@
 		4A87D2DF27DEBF3300585B01 /* ConfigHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigHome.swift; sourceTree = "<group>"; };
 		4A87D2E127DEC5F000585B01 /* NewGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGame.swift; sourceTree = "<group>"; };
 		4A87D2E327DEC8D800585B01 /* GameCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCard.swift; sourceTree = "<group>"; };
+		4A881E3E27E62DD400E86EBA /* GamesSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesSearch.swift; sourceTree = "<group>"; };
 		4AE2F22A27E4314A0036EAD9 /* AboutPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPage.swift; sourceTree = "<group>"; };
 		4AE2F22C27E433F80036EAD9 /* GameRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				4A87D2DD27DEBF2900585B01 /* GamesHome.swift */,
+				4A881E3E27E62DD400E86EBA /* GamesSearch.swift */,
 				4A87D2E127DEC5F000585B01 /* NewGame.swift */,
 				4A87D2E327DEC8D800585B01 /* GameCard.swift */,
 				4A87279427E0309200E8F76B /* EditGame.swift */,
@@ -255,6 +258,7 @@
 				4A87D2E427DEC8D800585B01 /* GameCard.swift in Sources */,
 				4A81A28B27E571830078BD7B /* GameSearch.swift in Sources */,
 				4A87279527E0309200E8F76B /* EditGame.swift in Sources */,
+				4A881E3F27E62DD400E86EBA /* GamesSearch.swift in Sources */,
 				4A87D2E027DEBF3300585B01 /* ConfigHome.swift in Sources */,
 				4A81A29227E58A200078BD7B /* DateHelper.swift in Sources */,
 				4A87279327E02F0700E8F76B /* Game.swift in Sources */,
