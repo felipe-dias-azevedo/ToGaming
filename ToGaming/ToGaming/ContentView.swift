@@ -21,13 +21,13 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $selection) {
-            GamesHome()
+            GamesHome(games: $modelData.games)
                 .tabItem {
                     Label("Games", systemImage: "gamecontroller")
                 }
                 .tag(Tab.games)
             
-            SearchHome()
+            SearchHome(recentlySearched: $modelData.recentlySearched)
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }

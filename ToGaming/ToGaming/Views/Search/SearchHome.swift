@@ -9,41 +9,38 @@ import SwiftUI
 
 struct SearchHome: View {
     
-    let games = ["GT7", "GOW", "TLOU2"]
+    @Binding var recentlySearched: [GameSearch]
     @State private var searchText = ""
     @State private var addingNew = false
     
-    var searchResults: [String] {
+    var searchResults: [GameSearch] {
         if searchText.isEmpty {
-            return games
+            return recentlySearched
         }
-        return games
-            .map { $0.uppercased() }
-            .filter { $0.contains(searchText.uppercased()) }
+        return recentlySearched
+            .filter { $0.name.uppercased().contains(searchText.uppercased()) }
     }
     
     var body: some View {
-        VStack {
-            NavigationView {
-                List {
-                    ForEach(searchResults, id: \.self) { name in
-                        NavigationLink(destination: Text(name)) {
-                            Text(name)
-                        }
+        NavigationView {
+            List {
+                ForEach(searchResults, id: \.self) { gameSearched in
+                    NavigationLink(gameSearched.name) {
+                        SearchGameDetail(gameSearched: gameSearched)
                     }
                 }
-                .searchable(text: $searchText)
-                .navigationTitle("Search")
-                .toolbar {
-                    Button {
-                        addingNew.toggle()
-                    } label: {
-                        Label("New Game", systemImage: "plus")
-                    }
+            }
+            .searchable(text: $searchText)
+            .navigationTitle("Search")
+            .toolbar {
+                Button {
+                    addingNew.toggle()
+                } label: {
+                    Label("New Game", systemImage: "plus")
                 }
-                .sheet(isPresented: $addingNew) {
-                    NewGame(canceled: $addingNew)
-                }
+            }
+            .sheet(isPresented: $addingNew) {
+                NewGame(canceled: $addingNew)
             }
         }
     }
@@ -51,6 +48,6 @@ struct SearchHome: View {
 
 struct SearchHome_Previews: PreviewProvider {
     static var previews: some View {
-        SearchHome()
+        SearchHome(recentlySearched: .constant(ModelData().recentlySearched))
     }
 }

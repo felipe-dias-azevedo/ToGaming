@@ -51,6 +51,6 @@ struct ConfigHome: View {
 
 struct ConfigHome_Previews: PreviewProvider {
     static var previews: some View {
-        ConfigHome(userConfig: .constant(UserConfig(userName: "", clientId: "", secretKey: "")))
+        ConfigHome(userConfig: .constant(ModelData().userConfig))
     }
 }

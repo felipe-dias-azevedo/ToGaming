@@ -9,14 +9,23 @@ import SwiftUI
 
 struct GamesHome: View {
     
+    @Binding var games: [Game]
     @Environment(\.editMode) var editMode
+    
+    var gamesSorted: [Game] {
+        games.sorted { $0.isFavorite && !$1.isFavorite }
+    }
     
     var body: some View {
         NavigationView {
             List {
-                GameRow()
-                GameRow(isFavorite: false)
-                GameRow()
+                ForEach(gamesSorted) { game in
+                    NavigationLink {
+                        GameDetail()
+                    } label: {
+                        GameRow(game: game)
+                    }
+                }
             }
             .navigationTitle("Games")
             .toolbar {
@@ -38,6 +47,6 @@ struct GamesHome: View {
 
 struct GamesHome_Previews: PreviewProvider {
     static var previews: some View {
-        GamesHome()
+        GamesHome(games: .constant(ModelData().games))
     }
 }
