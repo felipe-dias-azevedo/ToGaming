@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Game: Hashable, Codable, Identifiable {
     
-    var id: Int
+    var id: UUID
     var name: String
     var platform: String
     var insertDate: Date
@@ -18,7 +18,13 @@ struct Game: Hashable, Codable, Identifiable {
     
     // TODO: Score point for game
     
-    // TODO: State of the game
+    var gameState: GameStatus?
+    enum GameStatus: String, CaseIterable, Codable {
+        case playing = "Playing"
+        case played = "Played"
+        case toPlay = "To Play"
+        case toBuy = "To Buy"
+    }
     
     var imageName: String
     var image: Image {

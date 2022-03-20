@@ -9,7 +9,7 @@ import Foundation
 
 struct GameSearch: Hashable, Codable, Identifiable {
     
-    var id: Int
+    var id: UUID
     var name: String
     var insertDate: Date
     var game: Game?

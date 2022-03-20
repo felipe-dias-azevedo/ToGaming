@@ -26,7 +26,7 @@ struct GamesHome: View {
             }
             .navigationTitle("Games")
             .toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
                         searching.toggle()
                     } label: {

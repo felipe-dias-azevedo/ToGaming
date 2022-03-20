@@ -37,13 +37,11 @@ struct GamesSearch: View {
             .navigationTitle("Games")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
-                    EditButton()
-                }
-                
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                    Button {
                         canceled.toggle()
+                    } label: {
+                        Label("Close", systemImage: "xmark.circle")
                     }
                 }
             }
