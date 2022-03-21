@@ -12,18 +12,21 @@ struct GamesHome: View {
     @Binding var games: [Game]
     @State private var searching = false
     
+    var gamesBought: [Game] {
+        $games.wrappedValue.filter { game -> Bool in
+            guard let state = game.gameState else { return false }
+            return state != Game.GameStatus.toBuy
+        }
+    }
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach($games) { game in
-                    // TODO: Change it to Scroll View and Preview of recent games based on category, platform, etc
-                    NavigationLink {
-                        GameDetail()
-                    } label: {
-                        GameCard(game: game)
-                    }
-                }
+                GameItem(title: "All Games", games: $games)
+                
+                GameItem(title: "Bought Games", games: .constant(gamesBought))
             }
+            .listStyle(.inset)
             .navigationTitle("Games")
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {

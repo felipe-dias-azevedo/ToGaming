@@ -25,12 +25,14 @@ struct SearchHome: View {
         NavigationView {
             List {
                 ForEach(searchResults, id: \.self) { gameSearched in
-                    NavigationLink(gameSearched.name) {
+                    NavigationLink {
                         SearchGameDetail(gameSearched: gameSearched)
+                    } label: {
+                        SearchGameRow(searchGame: gameSearched)
                     }
                 }
             }
-            .searchable(text: $searchText)
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .navigationTitle("Search")
             .toolbar {
                 Button {

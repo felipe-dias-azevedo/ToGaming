@@ -33,7 +33,8 @@ struct GamesSearch: View {
                     }
                 }
             }
-            .searchable(text: $searchText)
+            .listStyle(.inset)
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .navigationTitle("Games")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

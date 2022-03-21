@@ -15,8 +15,7 @@ struct Game: Hashable, Codable, Identifiable {
     var platform: String
     var insertDate: Date
     var isFavorite: Bool
-    
-    // TODO: Score point for game
+    var score: Float?
     
     var gameState: GameStatus?
     enum GameStatus: String, CaseIterable, Codable {
