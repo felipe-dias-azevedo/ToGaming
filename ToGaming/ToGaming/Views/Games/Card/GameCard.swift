@@ -23,7 +23,7 @@ struct GameCard: View {
                 HStack(alignment: .center) {
                     Text(game.name)
                         .font(.headline)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                         .bold()
                     
                     Spacer()
@@ -32,9 +32,10 @@ struct GameCard: View {
                         HStack(alignment: .center, spacing: 2) {
                             Text(String(score))
                                 .font(.headline)
-                                .foregroundColor(.black)
+                                .foregroundColor(.primary)
                             
                             Image(systemName: "star.fill")
+                                .foregroundColor(.primary)
                         }
                     }
                 }
@@ -60,7 +61,12 @@ struct GameCard: View {
 
 struct GameCard_Previews: PreviewProvider {
     static var previews: some View {
+        
         GameCard(game: .constant(ModelData().games[0]))
             .previewLayout(.fixed(width: 230, height: 180))
+        
+        GameCard(game: .constant(ModelData().games[1]))
+            .previewLayout(.fixed(width: 230, height: 180))
+            .preferredColorScheme(.dark)
     }
 }

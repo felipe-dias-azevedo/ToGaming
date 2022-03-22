@@ -11,7 +11,6 @@ struct GamesSearch: View {
     
     @Binding var games: [Game]
     @Binding var canceled: Bool
-    @Environment(\.editMode) var editMode
     @State private var searchText = ""
     
     var gamesSortedSearched: [Game] {

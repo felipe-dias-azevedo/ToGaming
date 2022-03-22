@@ -36,6 +36,7 @@ struct GameRow: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(game.name)
+                    .foregroundColor(.primary)
                 
                 Text(game.platform)
                     .font(.caption)
@@ -63,11 +64,13 @@ struct GameRow_Previews: PreviewProvider {
         
         GameRow(game: ModelData().games[1])
             .previewLayout(.fixed(width: 300, height: 60))
+            .preferredColorScheme(.dark)
         
         GameRow(game: ModelData().games[2])
             .previewLayout(.fixed(width: 300, height: 60))
         
         GameRow(game: ModelData().games[3])
             .previewLayout(.fixed(width: 300, height: 60))
+            .preferredColorScheme(.dark)
     }
 }

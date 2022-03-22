@@ -15,7 +15,7 @@ struct GameItem: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(title)
-                .font(.headline)
+                .font(.title3)
                 .padding(.leading, 15)
                 .padding(.top, 5)
             
@@ -26,6 +26,15 @@ struct GameItem: View {
                             GameDetail()
                         } label: {
                             GameCard(game: game)
+                        }
+                    }
+                    if ($games.isEmpty) {
+                        EmptyGameCard()
+                    } else {
+                        NavigationLink {
+                            GamesList(titleList: title, games: $games)
+                        } label: {
+                            ToListGameCard()
                         }
                     }
                 }
@@ -47,5 +56,10 @@ struct GameItem_Previews: PreviewProvider {
         
         GameItem(title: "New Games", games: .constant(Array(ModelData().games.prefix(2))))
             .previewLayout(.fixed(width: 360, height: 250))
+            .preferredColorScheme(.dark)
+        
+        GameItem(title: "New Games", games: .constant(Array()))
+            .previewLayout(.fixed(width: 360, height: 250))
+            .preferredColorScheme(.dark)
     }
 }
