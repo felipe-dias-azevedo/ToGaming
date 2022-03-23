@@ -15,7 +15,7 @@ struct ConfigHome: View {
     
     var body: some View {
         NavigationView {
-            List {
+            Form {
                 HStack {
                     Text("User Name")
                     TextField("User Name", text: $userConfig.userName)

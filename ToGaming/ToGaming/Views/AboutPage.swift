@@ -9,28 +9,32 @@ import SwiftUI
 
 struct AboutPage: View {
     var body: some View {
-        VStack {
-            VStack(spacing: 4) {
-                Text("Created By:")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
+        NavigationView {
+            VStack {
+                VStack(spacing: 4) {
+                    Text("Created By:")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                    
+                    Text("Felipe Azevedo")
+                        .font(.title2)
+                }
+                .padding()
                 
-                Text("Felipe Azevedo")
-                    .font(.title2)
-            }
-            .padding()
-            
-            Divider()
-            
-            VStack(spacing: 8) {
-                Text("2022")
-                    .foregroundColor(.gray)
+                Divider()
                 
-                Text("Open Source")
-                    .font(.caption)
-                    .foregroundColor(.gray)
+                VStack(spacing: 8) {
+                    Text("2022")
+                        .foregroundColor(.gray)
+                    
+                    Text("Open Source")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+                .padding()
             }
-            .padding()
+            .navigationTitle("About")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

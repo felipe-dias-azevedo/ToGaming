@@ -34,7 +34,7 @@ struct GamesSearch: View {
             }
             .listStyle(.inset)
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
-            .navigationTitle("Games")
+            .navigationTitle("All Games")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {

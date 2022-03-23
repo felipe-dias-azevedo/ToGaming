@@ -21,7 +21,7 @@ struct GamesHome: View {
     
     var body: some View {
         NavigationView {
-            List {
+            ScrollView {
                 GameItem(title: "All Games", games: $games)
                 
                 GameItem(title: "Bought Games", games: .constant(gamesBought))
@@ -47,5 +47,6 @@ struct GamesHome: View {
 struct GamesHome_Previews: PreviewProvider {
     static var previews: some View {
         GamesHome(games: .constant(ModelData().games))
+            .preferredColorScheme(.dark)
     }
 }

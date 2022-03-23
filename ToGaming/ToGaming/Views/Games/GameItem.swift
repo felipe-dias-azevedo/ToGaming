@@ -13,39 +13,46 @@ struct GameItem: View {
     @Binding var games: [Game]
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(title)
-                .font(.title3)
-                .padding(.leading, 15)
-                .padding(.top, 5)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 0) {
-                    ForEach($games) { game in
-                        NavigationLink {
-                            GameDetail()
-                        } label: {
-                            GameCard(game: game)
-                        }
-                    }
-                    if ($games.isEmpty) {
-                        EmptyGameCard()
-                    } else {
-                        NavigationLink {
-                            GamesList(titleList: title, games: $games)
-                        } label: {
-                            ToListGameCard()
-                        }
+        if (!$games.isEmpty) {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(title)
+                        .font(.title3)
+                        .bold()
+                        .padding(.leading, 15)
+                        .padding(.top, 5)
+                    
+                    Spacer()
+                    
+                    NavigationLink {
+                        GamesList(titleList: title, games: $games)
+                    } label: {
+                        Text("See it all")
+                            .foregroundColor(.blue)
+                            .padding(.trailing, 15)
+                            .padding(.top, 5)
                     }
                 }
-                .padding(.horizontal, 10)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .top, spacing: 0) {
+                        ForEach($games) { game in
+                            NavigationLink {
+                                GameDetail()
+                            } label: {
+                                GameCard(game: game)
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 10)
+                }
+                .frame(height: 160)
             }
-            .frame(height: 160)
+            .padding(.top, 15)
+            .padding(.bottom, 10)
+            .listRowInsets(EdgeInsets())
+            .listRowSeparator(.hidden)
         }
-        .padding(.top, 15)
-        .padding(.bottom, 10)
-        .listRowInsets(EdgeInsets())
-        .listRowSeparator(.hidden)
     }
 }
 

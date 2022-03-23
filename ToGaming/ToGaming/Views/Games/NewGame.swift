@@ -13,9 +13,8 @@ struct NewGame: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            Form {
                 // TODO: Form with data to add new game locally
-                Text("New Game Form")
             }
             .toolbar {
                 ToolbarItemGroup(placement: .cancellationAction) {
@@ -32,6 +31,8 @@ struct NewGame: View {
                     }
                 }
             }
+            .navigationBarTitle("Add New Game")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
