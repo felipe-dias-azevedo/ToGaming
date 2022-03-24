@@ -10,11 +10,27 @@ import SwiftUI
 struct NewGame: View {
     
     @Binding var canceled: Bool
+    @State var game: Game
     
     var body: some View {
         NavigationView {
-            Form {
-                // TODO: Form with data to add new game locally
+            VStack {
+                Form {
+                    FormField(title: "Name", placeholder: "Ex: Grand Theft Auto", textField: $game.name)
+                    
+                    FormField(title: "Platform", placeholder: "Ex: Playstation 4", textField: $game.platform)
+                    
+                    HStack {
+                        Toggle(isOn: $game.isFavorite) {
+                            Text("Favorite")
+                        }
+                    }
+                    
+                    // TODO: WIP Form with data to add new game locally
+                    // TODO: Add Score, gameState and Image in Form
+                }
+                
+                Spacer()
             }
             .toolbar {
                 ToolbarItemGroup(placement: .cancellationAction) {
@@ -39,6 +55,6 @@ struct NewGame: View {
 
 struct NewGame_Previews: PreviewProvider {
     static var previews: some View {
-        NewGame(canceled: .constant(false))
+        NewGame(canceled: .constant(false), game: .new)
     }
 }

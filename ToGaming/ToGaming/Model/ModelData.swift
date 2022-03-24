@@ -18,8 +18,8 @@ final class ModelData: ObservableObject {
     ]
     
     @Published var recentlySearched: [GameSearch] = [
-        GameSearch(id: UUID(), name: "The Last Of Us 2", insertDate: Date()),
-        GameSearch(id: UUID(), name: "Gran Turismo 7", insertDate: Date(), game: Game(id: UUID(), name: "Gran Turismo 7", platform: "Playstation 4", insertDate: Date.now, isFavorite: true, gameState: .toBuy, imageName: "tw")),
+        GameSearch(id: UUID(), name: "The Last Of Us 2", insertDate: Date.now),
+        GameSearch(id: UUID(), name: "Gran Turismo 7", insertDate: Date.now, game: Game(id: UUID(), name: "Gran Turismo 7", platform: "Playstation 4", insertDate: Date.now, isFavorite: true, gameState: .toBuy, imageName: "tw")),
         GameSearch(id: UUID(), name: "Ghost of Tsushima", insertDate: Date.now),
     ]
 }

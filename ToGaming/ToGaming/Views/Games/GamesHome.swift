@@ -11,6 +11,11 @@ struct GamesHome: View {
     
     @Binding var games: [Game]
     @State private var searching = false
+    @State private var dateInterval = Date.now.addingTimeInterval(-TimeInterval(604800))
+    
+    var recentGames: [Game] {
+        $games.wrappedValue.filter { $0.insertDate >= dateInterval }
+    }
     
     var gamesBought: [Game] {
         $games.wrappedValue.filter { game -> Bool in
@@ -22,7 +27,10 @@ struct GamesHome: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                GameItem(title: "All Games", games: $games)
+                
+                // TODO: Overview of favorite + recent games in summary box
+                
+                GameItem(title: "Recent Games", games: .constant(recentGames))
                 
                 GameItem(title: "Bought Games", games: .constant(gamesBought))
             }

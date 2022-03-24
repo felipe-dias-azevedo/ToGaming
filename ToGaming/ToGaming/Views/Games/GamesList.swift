@@ -13,11 +13,15 @@ struct GamesList: View {
     @Binding var games: [Game]
     @State private var searchText = ""
     
+    var gamesSorted: [Game] {
+        games.sorted(by: { $0.insertDate.compare($1.insertDate) == .orderedDescending })
+    }
+    
     var gamesSortedSearched: [Game] {
         if searchText.isEmpty || searchText.count < 3 {
-            return games
+            return gamesSorted
         }
-        return games.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        return gamesSorted.filter { $0.name.lowercased().contains(searchText.lowercased()) }
     }
         
     var body: some View {

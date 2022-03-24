@@ -16,24 +16,15 @@ struct ConfigHome: View {
     var body: some View {
         NavigationView {
             Form {
-                HStack {
-                    Text("User Name")
-                    TextField("User Name", text: $userConfig.userName)
-                }
+                FormField(title: "User Name", textField: $userConfig.userName)
                 
                 Section(
                     header: Text("API Credentials"),
                     footer: Text("Store your API Credentials for searching for Games")
                 ) {
-                    HStack {
-                        Text("Client ID")
-                        SecureField("Client ID", text: $userConfig.clientId)
-                    }
+                    FormField(title: "Client ID", textField: $userConfig.clientId)
                     
-                    HStack {
-                        Text("Secret Key")
-                        SecureField("Secret Key", text: $userConfig.secretKey)
-                    }
+                    FormField(title: "Secret Key", textField: $userConfig.secretKey)
                 }
             }
             .toolbar {
@@ -43,7 +34,7 @@ struct ConfigHome: View {
             }
             .navigationTitle("Settings")
             .sheet(isPresented: $seeAbout) {
-                AboutPage()
+                AboutPage(showingCanceled: $seeAbout)
             }
         }
     }

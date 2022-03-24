@@ -8,39 +8,67 @@
 import SwiftUI
 
 struct AboutPage: View {
+    
+    @Binding var showingCanceled: Bool
+    
     var body: some View {
         NavigationView {
             VStack {
-                VStack(spacing: 4) {
-                    Text("Created By:")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+                // TODO: Add App icon + App Name on top of information
+                
+                HStack {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Created By:")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        
+                        Text("Felipe Azevedo")
+                            .font(.title)
+                    }
+                    .padding()
                     
-                    Text("Felipe Azevedo")
-                        .font(.title2)
+                    
+                    Spacer()
+                    
+                    VStack(alignment: .trailing, spacing: 8) {
+                        Text("Open Source GPL-3")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        
+                        Text("2022")
+                            .font(.title2)
+                            .foregroundColor(.primary)
+                    }
+                    .padding()
                 }
-                .padding()
+                .padding(.top, 10)
                 
                 Divider()
                 
-                VStack(spacing: 8) {
-                    Text("2022")
-                        .foregroundColor(.gray)
-                    
-                    Text("Open Source")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                .padding()
+                Text("Version 0.1")
+                
+                Spacer()
+                
+                // TODO: Button to read license on Github
+                // TODO: Button to redirect to repo on Github
             }
             .navigationTitle("About")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button {
+                        showingCanceled.toggle()
+                    } label: {
+                        Label("Close", systemImage: "xmark.circle")
+                    }
+                }
+            }
         }
     }
 }
 
 struct AboutPage_Previews: PreviewProvider {
     static var previews: some View {
-        AboutPage()
+        AboutPage(showingCanceled: .constant(true))
     }
 }

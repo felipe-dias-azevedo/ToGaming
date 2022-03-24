@@ -42,7 +42,7 @@ struct SearchHome: View {
                 }
             }
             .sheet(isPresented: $addingNew) {
-                NewGame(canceled: $addingNew)
+                NewGame(canceled: $addingNew, game: .new)
             }
         }
     }
