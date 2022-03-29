@@ -18,16 +18,14 @@ struct SearchGameDetail: View {
                 Text(gameSearched.name)
                     .font(.title)
                 
-                if let game = gameSearched.game {
-                    Text(game.platform)
-                        .font(.headline)
-                }
+                Text(gameSearched.platform)
+                    .font(.headline)
             }
             
             Spacer()
             Divider()
             
-            Text("Inserted in: \(DateHelper.toString(gameSearched.insertDate))")
+            Text("Inserted in: \(DateHelper.toString(gameSearched.releaseDate))")
                 .font(.caption)
                 .foregroundColor(.secondary)
         }

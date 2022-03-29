@@ -13,22 +13,26 @@ struct GamesList: View {
     @Binding var games: [Game]
     @State private var searchText = ""
     
-    var gamesSorted: [Game] {
-        games.sorted(by: { $0.insertDate.compare($1.insertDate) == .orderedDescending })
-    }
-    
-    var gamesSortedSearched: [Game] {
+    var gamesSortedSearched: Array<Binding<Game>> {
+        let gamesSorted = $games
+            .sorted(by: {
+                $0.wrappedValue.insertDate.compare($1.wrappedValue.insertDate) == .orderedDescending
+            })
+        
         if searchText.isEmpty || searchText.count < 3 {
             return gamesSorted
         }
-        return gamesSorted.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        return gamesSorted
+            .filter {
+                $0.wrappedValue.name.lowercased().contains(searchText.lowercased())
+            }
     }
         
     var body: some View {
         List {
-            ForEach(gamesSortedSearched) { game in
+            ForEach(gamesSortedSearched) { $game in
                 NavigationLink {
-                    GameDetail()
+                    GameDetail(game: $game)
                 } label: {
                     GameRow(game: game)
                 }

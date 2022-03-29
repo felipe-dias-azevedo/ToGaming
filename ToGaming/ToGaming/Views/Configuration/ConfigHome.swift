@@ -18,6 +18,8 @@ struct ConfigHome: View {
             Form {
                 FormField(title: "User Name", textField: $userConfig.userName)
                 
+                FormField(title: "Preferred Platform", textField: $userConfig.preferredPlatform)
+                
                 Section(
                     header: Text("API Credentials"),
                     footer: Text("Store your API Credentials for searching for Games")

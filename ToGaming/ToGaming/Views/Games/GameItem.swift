@@ -36,11 +36,11 @@ struct GameItem: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .top, spacing: 0) {
-                        ForEach($games) { game in
+                        ForEach($games) { $game in
                             NavigationLink {
-                                GameDetail()
+                                GameDetail(game: $game)
                             } label: {
-                                GameCard(game: game)
+                                GameCard(game: $game)
                             }
                         }
                     }

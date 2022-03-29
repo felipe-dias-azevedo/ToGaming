@@ -11,6 +11,6 @@ struct GameSearch: Hashable, Codable, Identifiable {
     
     var id: UUID
     var name: String
-    var insertDate: Date
-    var game: Game?
+    var releaseDate: Date
+    var platform: String
 }

@@ -35,6 +35,7 @@ struct SearchHome: View {
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .navigationTitle("Search")
             .toolbar {
+		// TODO: Filter menu game of platform, genre, etc
                 Button {
                     addingNew.toggle()
                 } label: {

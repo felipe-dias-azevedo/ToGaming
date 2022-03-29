@@ -11,21 +11,6 @@ struct GameRow: View {
     
     var game: Game
     
-    var iconStatus: String {
-        switch (game.gameState) {
-            case .toBuy:
-                return "cart.fill"
-            case .playing:
-                return "play.fill"
-            case .played:
-                return "checkmark.circle.fill"
-            case .toPlay:
-                return "forward.frame.fill"
-            default:
-                return "questionmark.circle.fill"
-        }
-    }
-    
     var body: some View {
         HStack {
             game.image
@@ -45,7 +30,7 @@ struct GameRow: View {
             
             Spacer()
             
-            Image(systemName: iconStatus)
+            Image(systemName: StatusToIcon.name(game.gameState))
                 .accessibilityLabel(game.gameState?.rawValue ?? "Undefined State")
                 .foregroundColor(.blue)
             

@@ -13,20 +13,24 @@ struct GamesSearch: View {
     @Binding var canceled: Bool
     @State private var searchText = ""
     
-    var gamesSortedSearched: [Game] {
-        let gamesSort = games.sorted { $0.isFavorite && !$1.isFavorite }
-        if searchText.isEmpty || searchText.count < 3 {
-            return gamesSort
+    var gamesSortedSearched: Array<Binding<Game>> {
+        let gamesSorted = $games.sorted {
+            $0.wrappedValue.isFavorite && !$1.wrappedValue.isFavorite
         }
-        return gamesSort.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        
+        if searchText.isEmpty || searchText.count < 3 {
+            return gamesSorted
+        }
+        return gamesSorted
+            .filter { $0.wrappedValue .name.lowercased().contains(searchText.lowercased()) }
     }
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(gamesSortedSearched) { game in
+                ForEach(gamesSortedSearched) { $game in
                     NavigationLink {
-                        GameDetail()
+                        GameDetail(game: $game)
                     } label: {
                         GameRow(game: game)
                     }

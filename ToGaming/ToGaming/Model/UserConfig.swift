@@ -10,6 +10,7 @@ import Foundation
 struct UserConfig {
     
     var userName: String
+    var preferredPlatform: String
     var clientId: String
     var secretKey: String
 }
