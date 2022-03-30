@@ -10,10 +10,10 @@ import SwiftUI
 struct GameItem: View {
     
     var title: String
-    @Binding var games: [Game]
+    var games: Array<Binding<Game>>
     
     var body: some View {
-        if (!$games.isEmpty) {
+        if (!games.isEmpty) {
             VStack(alignment: .leading) {
                 HStack {
                     Text(title)
@@ -25,7 +25,7 @@ struct GameItem: View {
                     Spacer()
                     
                     NavigationLink {
-                        GamesList(titleList: title, games: $games)
+                        GamesList(titleList: title, games: games)
                     } label: {
                         Text("See it all")
                             .foregroundColor(.blue)
@@ -36,7 +36,7 @@ struct GameItem: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .top, spacing: 0) {
-                        ForEach($games) { $game in
+                        ForEach(games) { $game in
                             NavigationLink {
                                 GameDetail(game: $game)
                             } label: {
@@ -57,15 +57,18 @@ struct GameItem: View {
 }
 
 struct GameItem_Previews: PreviewProvider {
+    
+    static let games = ModelData().games
+    
     static var previews: some View {
-        GameItem(title: "All Games", games: .constant(ModelData().games))
+        GameItem(title: "All Games", games: games.map { .constant($0) })
             .previewLayout(.fixed(width: 360, height: 250))
         
-        GameItem(title: "New Games", games: .constant(Array(ModelData().games.prefix(2))))
+        GameItem(title: "New Games", games: games.map { .constant($0) })
             .previewLayout(.fixed(width: 360, height: 250))
             .preferredColorScheme(.dark)
         
-        GameItem(title: "New Games", games: .constant(Array()))
+        GameItem(title: "New Games", games: Array())
             .previewLayout(.fixed(width: 360, height: 250))
             .preferredColorScheme(.dark)
     }

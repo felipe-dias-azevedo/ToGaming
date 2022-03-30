@@ -42,12 +42,12 @@ struct GameDetail: View {
                             
                             VStack(alignment: .leading, spacing: 4) {
                                 HStack {
-                                    Text("Added")
+                                    Text("Added:")
                                     Text(DateHelper.toString(game.insertDate))
                                 }
                                 
                                 HStack {
-                                    Text("Launched")
+                                    Text("Launched:")
                                     Text(DateHelper.toString(game.releaseDate))
                                 }
                             }
@@ -62,13 +62,13 @@ struct GameDetail: View {
                         
                         ZStack {
                             Circle()
-                                .strokeBorder(Color.green, antialiased: true)
+                                .strokeBorder(.green, lineWidth: 3, antialiased: true)
                                 .frame(width: 50, height: 50)
-                                .shadow(radius: 4)
                                 
                             VStack {
-                                Text(String(format: "%.1f", game.rating))
+                                Text(String(format: "%.0f%%", game.rating))
                                     .font(.caption)
+                                    .bold()
                                     .foregroundColor(.primary)
                                     
                                 Text("Rating")
@@ -90,9 +90,14 @@ struct GameDetail: View {
                             
                             Spacer()
                             
-                            Image(systemName: game.isFavorite ? "star.fill" : "star")
-                                .font(.title2)
-                                .foregroundColor(game.isFavorite ? .yellow : .secondary)
+                            Button {
+                                game.isFavorite.toggle()
+                            } label: {
+                                Label("Toggle Favorite", systemImage: game.isFavorite ? "star.fill" : "star")
+                                    .labelStyle(.iconOnly)
+                                    .font(.title2)
+                                    .foregroundColor(game.isFavorite ? .yellow : .secondary)
+                            }
                         }
                         
                         HStack {
@@ -113,7 +118,7 @@ struct GameDetail: View {
                         }
                         
                         HStack {
-                            Text("SIE Santa Monica Studios")
+                            Text(game.publisher)
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                             
@@ -173,9 +178,10 @@ struct GameDetail: View {
                             .foregroundColor(.white)
                             .clipShape(Capsule())
                         }
-                        .padding(.vertical, 30)
+                        .padding(.top, 30)
                     }
                 }
+                .padding(.bottom, 30)
                 .padding(.horizontal, 20)
             }
             
@@ -197,7 +203,7 @@ struct GameDetail: View {
 struct GameDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            GameDetail(game: .constant(ModelData().games[0]))
+            GameDetail(game: .constant(ModelData().games[1]))
         }
     }
 }

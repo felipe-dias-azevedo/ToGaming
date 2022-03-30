@@ -16,7 +16,8 @@ struct Game: Hashable, Codable, Identifiable {
     // TODO: Platform of Class and have its platforms stored in ModelData
     var platform: String
     // TODO: Include game genres, enum
-    // TODO: Inlcude Publisher of the game
+    // involved_companies.company.name
+    var publisher: String
     var insertDate: Date
     var releaseDate: Date
     var summary: String
@@ -52,5 +53,5 @@ struct Game: Hashable, Codable, Identifiable {
         Image(coverImageName)
     }
     
-    static let new = Game(id: UUID(), igdbId: 0, name: "", platform: "", insertDate: Date(), releaseDate: Date(), summary: "", rating: 0.0, ratingCount: 0, isFavorite: false, imageName: "", coverImageName: "")
+    static let new = Game(id: UUID(), igdbId: 0, name: "", platform: "", publisher: "", insertDate: Date(), releaseDate: Date(), summary: "", rating: 0.0, ratingCount: 0, isFavorite: false, imageName: "", coverImageName: "")
 }

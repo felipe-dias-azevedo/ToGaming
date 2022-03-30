@@ -50,10 +50,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            ContentView()
-                .environmentObject(ModelData())
-                .previewInterfaceOrientation(.portrait)
-        }
+        ContentView()
+            .environmentObject(ModelData())
+            .previewInterfaceOrientation(.portrait)
     }
 }

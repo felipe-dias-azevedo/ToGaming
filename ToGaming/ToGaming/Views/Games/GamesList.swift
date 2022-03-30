@@ -10,11 +10,11 @@ import SwiftUI
 struct GamesList: View {
     
     var titleList: String
-    @Binding var games: [Game]
+    var games: Array<Binding<Game>>
     @State private var searchText = ""
     
     var gamesSortedSearched: Array<Binding<Game>> {
-        let gamesSorted = $games
+        let gamesSorted = games
             .sorted(by: {
                 $0.wrappedValue.insertDate.compare($1.wrappedValue.insertDate) == .orderedDescending
             })
@@ -48,7 +48,7 @@ struct GamesList: View {
 struct GamesList_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            GamesList(titleList: "Example List", games: .constant(ModelData().games))
+            GamesList(titleList: "Example List", games: ModelData().games.map { .constant($0) })
         }
     }
 }

@@ -13,13 +13,13 @@ struct GamesHome: View {
     @State private var searching = false
     @State private var dateInterval = Date.now.addingTimeInterval(-TimeInterval(604800))
     
-    var recentGames: [Game] {
-        $games.wrappedValue.filter { $0.insertDate >= dateInterval }
+    var recentGamesAvailable: Array<Binding<Game>> {
+        $games.filter { $0.wrappedValue.insertDate >= dateInterval }
     }
     
-    var gamesBought: [Game] {
-        $games.wrappedValue.filter { game -> Bool in
-            guard let state = game.gameState else { return false }
+    var gamesBought: Array<Binding<Game>> {
+        $games.filter { $game -> Bool in
+            guard let state = $game.gameState.wrappedValue else { return false }
             return state != Game.Status.toBuy
         }
     }
@@ -30,9 +30,9 @@ struct GamesHome: View {
                 
                 // TODO: Overview of favorite + recent games in summary box
                 
-                GameItem(title: "Recent Games", games: .constant(recentGames))
+                GameItem(title: "Recent Games", games: recentGamesAvailable)
                 
-                GameItem(title: "Bought Games", games: .constant(gamesBought))
+                GameItem(title: "Bought Games", games: gamesBought)
             }
             .listStyle(.inset)
             .navigationTitle("Games")
