@@ -31,12 +31,12 @@ struct GameRow: View {
             Spacer()
             
             Image(systemName: StatusToIcon.name(game.gameState))
-                .accessibilityLabel(game.gameState?.rawValue ?? "Undefined State")
+                .accessibilityLabel(game.gameState.rawValue)
                 .foregroundColor(.blue)
             
             if (game.isFavorite) {
-                Image(systemName: "star.fill")
-                    .foregroundColor(.yellow)
+                Image(systemName: "heart.fill")
+                    .foregroundColor(.red)
             }
         }
     }

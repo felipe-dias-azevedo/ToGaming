@@ -12,198 +12,212 @@ struct GameDetail: View {
     @Environment(\.openURL) var openURL
     
     @Binding var game: Game
-    @State var editing: EditMode = .inactive
-    @State var testing: String = ""
+    @State var editing = false
+    @State private var index = 0
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            if editing == .inactive {
-                // TODO: Add Carrousel for array of images in games
-                game.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                
-                VStack {
-                    HStack(alignment: .top) {
-                        game.coverImage
-                            .resizable()
-                            .frame(width: 112.5, height: 150)
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                            .shadow(radius: 4)
-                        
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Text("Action, Adventure")
-                                    .font(.subheadline)
-                            }
-                            
-                            Spacer()
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                HStack {
-                                    Text("Added:")
-                                    Text(DateHelper.toString(game.insertDate))
-                                }
-                                
-                                HStack {
-                                    Text("Launched:")
-                                    Text(DateHelper.toString(game.releaseDate))
-                                }
-                            }
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+            // TODO: Change foreach limit to games images count
+            // FIXME: When less than 3 images it'll be a mess
+            TabView(selection: $index) {
+                ForEach((0..<3), id: \.self) { index in
+                    game.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                }
+            }
+            .frame(height: 220)
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+            .aspectRatio(contentMode: .fill)
+            
+            VStack {
+                HStack(alignment: .top) {
+                    game.coverImage
+                        .resizable()
+                        .frame(width: 112.5, height: 150)
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                        .shadow(radius: 4)
+                    
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Action, Adventure")
+                                .font(.subheadline)
                         }
-                        .padding(.top, 50)
-                        .padding(.bottom, 8)
-                        .padding(.leading, 10)
                         
                         Spacer()
                         
-                        ZStack {
-                            Circle()
-                                .strokeBorder(.green, lineWidth: 3, antialiased: true)
-                                .frame(width: 50, height: 50)
-                                
-                            VStack {
-                                Text(String(format: "%.0f%%", game.rating))
-                                    .font(.caption)
-                                    .bold()
-                                    .foregroundColor(.primary)
-                                    
-                                Text("Rating")
-                                    .font(.caption2)
-                                    .foregroundColor(.primary)
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack {
+                                Text("Added:")
+                                Text(DateHelper.toString(game.insertDate))
+                            }
+                            
+                            HStack {
+                                Text("Launched:")
+                                Text(DateHelper.toString(game.releaseDate))
                             }
                         }
-                        .padding(.top, 50)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
                     }
-                    .padding(.top, -40)
+                    .padding(.top, 50)
+                    .padding(.bottom, 8)
+                    .padding(.leading, 10)
                     
+                    Spacer()
                     
-                    VStack(alignment: .leading, spacing: 10) {
-                        HStack {
-                            Text(game.name)
-                                .font(.largeTitle)
+                    ZStack {
+                        Circle()
+                            .strokeBorder(.green, lineWidth: 3, antialiased: true)
+                            .frame(width: 50, height: 50)
+                            
+                        VStack {
+                            Text(String(format: "%.0f%%", game.rating))
+                                .font(.caption)
                                 .bold()
                                 .foregroundColor(.primary)
-                            
-                            Spacer()
-                            
-                            Button {
-                                game.isFavorite.toggle()
-                            } label: {
-                                Label("Toggle Favorite", systemImage: game.isFavorite ? "star.fill" : "star")
-                                    .labelStyle(.iconOnly)
-                                    .font(.title2)
-                                    .foregroundColor(game.isFavorite ? .yellow : .secondary)
-                            }
+                                
+                            Text("Rating")
+                                .font(.caption2)
+                                .foregroundColor(.primary)
                         }
+                    }
+                    .padding(.top, 50)
+                }
+                .padding(.top, -40)
+                .padding(.bottom, 10)
+                
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Text(game.name)
+                            .font(.largeTitle)
+                            .bold()
+                            .foregroundColor(.primary)
                         
-                        HStack {
-                            Text(game.platform)
-                                .font(.headline)
-                                .foregroundColor(.secondary)
-                            
-                            Spacer()
-                            
-                            HStack {
-                                Text(game.gameState?.rawValue ?? "")
-                                    .bold()
-                                Image(systemName: StatusToIcon.name(game.gameState))
-                                    .accessibilityLabel(game.gameState?.rawValue ?? "Undefined State")
-                                    .foregroundColor(.accentColor)
-                            }
-                            .font(.headline)
-                        }
+                        Spacer()
                         
-                        HStack {
-                            Text(game.publisher)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            
-                            Spacer()
-                            
-                            HStack {
-                                Text(String(format: "%.1f", game.score ?? 0))
-                                    .font(.headline)
-                                    .bold()
-                                Text("Score")
-                                    .font(.subheadline)
-                            }
+                        Button {
+                            game.isFavorite.toggle()
+                        } label: {
+                            Label("Toggle Favorite", systemImage: game.isFavorite ? "heart.fill" : "heart")
+                                .labelStyle(.iconOnly)
+                                .font(.title2)
+                                .foregroundColor(game.isFavorite ? .red : .secondary)
                         }
                     }
                     
-                    Divider()
-                        .padding(.vertical, 10)
-                        .padding(.top, 10)
+                    HStack {
+                        Text(game.platform)
+                            .font(.headline)
+                            .foregroundColor(.secondary)
+                        
+                        Spacer()
+                        
+                        HStack {
+                            Text(game.gameState.rawValue)
+                                .bold()
+                            Image(systemName: StatusToIcon.name(game.gameState))
+                                .accessibilityLabel(game.gameState.rawValue)
+                                .foregroundColor(.accentColor)
+                        }
+                        .font(.headline)
+                    }
                     
                     HStack {
-                        Text("Summary")
+                        Text(game.publisher)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        
+                        Spacer()
+                        
+                        HStack {
+                            Text(String(game.score?.rawValue ?? 0))
+                                .font(.headline)
+                                .bold()
+                            Label("Score Star Icon", systemImage: "star.fill")
+                                .labelStyle(.iconOnly)
+                                .font(.subheadline)
+                                .foregroundColor(.primary)
+                        }
+                    }
+                }
+                
+                Divider()
+                    .padding(.vertical, 10)
+                    .padding(.top, 10)
+                
+                HStack {
+                    Text("Summary")
+                        .font(.title2)
+                        .foregroundColor(.primary)
+                    Spacer()
+                }
+                .padding(.bottom, 10)
+                
+                Text(game.summary)
+                    .multilineTextAlignment(.leading)
+                    .font(.body)
+                    .foregroundColor(.primary)
+                
+                if let storyline = game.storyline {
+                    Divider()
+                        .padding(.vertical, 10)
+                    
+                    HStack {
+                        Text("Storyline")
+                            .multilineTextAlignment(.leading)
                             .font(.title2)
                             .foregroundColor(.primary)
                         Spacer()
                     }
+                    .padding(.top, 20)
                     .padding(.bottom, 10)
                     
-                    Text(game.summary)
-                        .multilineTextAlignment(.leading)
+                    Text(storyline)
                         .font(.body)
                         .foregroundColor(.primary)
-                    
-                    if let storyline = game.storyline {
-                        HStack {
-                            Text("Storyline")
-                                .font(.title2)
-                                .foregroundColor(.primary)
-                            Spacer()
-                        }
-                        .padding(.top, 20)
-                        .padding(.bottom, 10)
-                        
-                        Text(storyline)
-                            .multilineTextAlignment(.leading)
-                            .font(.body)
-                            .foregroundColor(.primary)
-                    }
-                    
-                    if let url = game.igdbReference {
-                        VStack {
-                            Button("View More on IGDB") {
-                                openURL(url)
-                            }
-                            .padding(.horizontal, 40)
-                            .padding(.vertical, 12)
-                            .background(.blue)
-                            .foregroundColor(.white)
-                            .clipShape(Capsule())
-                        }
-                        .padding(.top, 30)
-                    }
                 }
-                .padding(.bottom, 30)
-                .padding(.horizontal, 20)
+                
+                if let url = game.igdbReference {
+                    VStack {
+                        Button("View More on IGDB") {
+                            openURL(url)
+                        }
+                        .padding(.horizontal, 40)
+                        .padding(.vertical, 12)
+                        .background(.blue)
+                        .foregroundColor(.white)
+                        .clipShape(Capsule())
+                    }
+                    .padding(.top, 30)
+                }
             }
-            
-            if editing == .active {
-                EditGame()
-            }
+            .padding(.bottom, 30)
+            .padding(.horizontal, 20)
         }
         .navigationTitle(game.name)
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $editing) {
+            EditGame(editing: $editing, game: $game)
+        }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                EditButton()
+                Button {
+                    editing.toggle()
+                } label: {
+                    Label("Edit", systemImage: "gearshape")
+                }
             }
         }
-        .environment(\.editMode, $editing)
     }
 }
 
 struct GameDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            GameDetail(game: .constant(ModelData().games[1]))
+            GameDetail(game: .constant(ModelData().games[0]))
         }
     }
 }

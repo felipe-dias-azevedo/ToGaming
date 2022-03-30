@@ -25,7 +25,7 @@ final class ModelData: ObservableObject {
             ratingCount: 130000,
             igdbReference: URL(string: "https://www.igdb.com/games/god-of-war--1"),
             isFavorite: false,
-            score: 4.0,
+            score: .four,
             gameState: .playing,
             imageName: "gow",
             coverImageName: "cover_gow"),

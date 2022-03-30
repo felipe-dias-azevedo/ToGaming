@@ -30,7 +30,7 @@ struct GameCard: View {
                     
                     if let score = game.score {
                         HStack(alignment: .center, spacing: 2) {
-                            Text(String(score))
+                            Text(String(score.rawValue))
                                 .font(.headline)
                                 .foregroundColor(.primary)
                             

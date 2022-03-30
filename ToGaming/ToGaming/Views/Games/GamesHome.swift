@@ -19,8 +19,7 @@ struct GamesHome: View {
     
     var gamesBought: Array<Binding<Game>> {
         $games.filter { $game -> Bool in
-            guard let state = $game.gameState.wrappedValue else { return false }
-            return state != Game.Status.toBuy
+            return $game.gameState.wrappedValue != Game.Status.toBuy
         }
     }
     

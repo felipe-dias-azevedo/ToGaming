@@ -29,17 +29,28 @@ struct Game: Hashable, Codable, Identifiable {
     var igdbReference: URL?
     var isFavorite: Bool
     // users defined own rating
-    var score: Float?
+    var score: Score?
+    enum Score: Int, CaseIterable, Codable, Identifiable {
+        case one = 1
+        case two = 2
+        case three = 3
+        case four = 4
+        case five = 5
+        
+        var id: Int { rawValue }
+    }
     
     // TODO: Virtual State for GameStatus -> When started toBuy, when toPlay, etc.
     // If Date of next attribute is nil, then its the previous state
     
-    var gameState: Status?
-    enum Status: String, CaseIterable, Codable {
+    var gameState: Status
+    enum Status: String, CaseIterable, Codable, Identifiable {
         case playing = "Playing"
         case played = "Played"
         case toPlay = "To Play"
         case toBuy = "To Buy"
+        
+        var id: String { rawValue }
     }
     
     // TODO: array of images (max 3: first, second and last)
@@ -53,5 +64,5 @@ struct Game: Hashable, Codable, Identifiable {
         Image(coverImageName)
     }
     
-    static let new = Game(id: UUID(), igdbId: 0, name: "", platform: "", publisher: "", insertDate: Date(), releaseDate: Date(), summary: "", rating: 0.0, ratingCount: 0, isFavorite: false, imageName: "", coverImageName: "")
+    static let new = Game(id: UUID(), igdbId: 0, name: "", platform: "", publisher: "", insertDate: Date(), releaseDate: Date(), summary: "", rating: 0.0, ratingCount: 0, isFavorite: false, gameState: .playing, imageName: "", coverImageName: "")
 }
