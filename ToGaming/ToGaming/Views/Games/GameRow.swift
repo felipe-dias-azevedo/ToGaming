@@ -13,7 +13,7 @@ struct GameRow: View {
     
     var body: some View {
         HStack {
-            game.image
+            Image(game.artworkImagesName[0])
                 .resizable()
                 .frame(width: 88.88, height: 50)
                 .aspectRatio(contentMode: .fit)

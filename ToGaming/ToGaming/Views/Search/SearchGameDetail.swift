@@ -18,8 +18,8 @@ struct SearchGameDetail: View {
                 Text(gameSearched.name)
                     .font(.title)
                 
-                Text(gameSearched.platform)
-                    .font(.headline)
+                //Text(gameSearched.platform)
+                //    .font(.headline)
             }
             
             Spacer()

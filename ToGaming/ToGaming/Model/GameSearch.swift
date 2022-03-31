@@ -6,11 +6,24 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct GameSearch: Hashable, Codable, Identifiable {
     
     var id: UUID
+    var igdbId: Int?
     var name: String
+    var genres: [String]
+    var platforms: [String]
+    var publisher: String
     var releaseDate: Date
-    var platform: String
+    var summary: String
+    var storyline: String?
+    // rating from IGDB: aggregated_rating
+    var rating: Double
+    // rating count from IGDB: aggregated_rating_count
+    var ratingCount: Double
+    var igdbReference: URL?
+    var artworkImagesName: [String]
+    var coverImageName: String
 }

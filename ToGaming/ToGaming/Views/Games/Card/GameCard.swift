@@ -13,7 +13,7 @@ struct GameCard: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            game.image
+            Image(game.artworkImagesName[0])
                 .renderingMode(.original)
                 .resizable()
                 .frame(width: 195.55, height: 110)

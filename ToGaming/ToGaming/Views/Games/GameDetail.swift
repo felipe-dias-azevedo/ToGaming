@@ -17,11 +17,9 @@ struct GameDetail: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            // TODO: Change foreach limit to games images count
-            // FIXME: When less than 3 images it'll be a mess
             TabView(selection: $index) {
-                ForEach((0..<3), id: \.self) { index in
-                    game.image
+                ForEach((0..<game.artworkImagesName.count), id: \.self) { index in
+                    Image(game.artworkImagesName[index])
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                 }
@@ -32,7 +30,7 @@ struct GameDetail: View {
             
             VStack {
                 HStack(alignment: .top) {
-                    game.coverImage
+                    Image(game.coverImageName)
                         .resizable()
                         .frame(width: 112.5, height: 150)
                         .aspectRatio(contentMode: .fit)
@@ -69,6 +67,7 @@ struct GameDetail: View {
                     
                     ZStack {
                         Circle()
+                        // TODO: Change color based on rating value (green >70%, yellow >40%, red 1<=39%, grey 0%)
                             .strokeBorder(.green, lineWidth: 3, antialiased: true)
                             .frame(width: 50, height: 50)
                             
@@ -156,6 +155,7 @@ struct GameDetail: View {
                 }
                 .padding(.bottom, 10)
                 
+                // TODO: Show in a summarized way value with button to read everything
                 Text(game.summary)
                     .multilineTextAlignment(.leading)
                     .font(.body)
@@ -175,6 +175,7 @@ struct GameDetail: View {
                     .padding(.top, 20)
                     .padding(.bottom, 10)
                     
+                    // TODO: Show in a summarized way value with button to read everything
                     Text(storyline)
                         .font(.body)
                         .foregroundColor(.primary)

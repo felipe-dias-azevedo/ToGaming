@@ -11,11 +11,11 @@ import SwiftUI
 struct Game: Hashable, Codable, Identifiable {
     
     var id: UUID
-    var igdbId: Int
+    var igdbId: Int?
     var name: String
-    // TODO: Platform of Class and have its platforms stored in ModelData
+    var platforms: [String]
     var platform: String
-    // TODO: Include game genres, enum
+    var genres: [String]
     // involved_companies.company.name
     var publisher: String
     var insertDate: Date
@@ -40,9 +40,6 @@ struct Game: Hashable, Codable, Identifiable {
         var id: Int { rawValue }
     }
     
-    // TODO: Virtual State for GameStatus -> When started toBuy, when toPlay, etc.
-    // If Date of next attribute is nil, then its the previous state
-    
     var gameState: Status
     enum Status: String, CaseIterable, Codable, Identifiable {
         case playing = "Playing"
@@ -53,16 +50,8 @@ struct Game: Hashable, Codable, Identifiable {
         var id: String { rawValue }
     }
     
-    // TODO: array of images (max 3: first, second and last)
-    var imageName: String
-    var image: Image {
-        Image(imageName)
-    }
-    
+    var artworkImagesName: [String]
     var coverImageName: String
-    var coverImage: Image {
-        Image(coverImageName)
-    }
     
-    static let new = Game(id: UUID(), igdbId: 0, name: "", platform: "", publisher: "", insertDate: Date(), releaseDate: Date(), summary: "", rating: 0.0, ratingCount: 0, isFavorite: false, gameState: .playing, imageName: "", coverImageName: "")
+    static let new = Game(id: UUID(), igdbId: 0, name: "", platforms: [], platform: "", genres: [], publisher: "", insertDate: Date(), releaseDate: Date(), summary: "", rating: 0.0, ratingCount: 0, isFavorite: false, gameState: .playing, artworkImagesName: [], coverImageName: "")
 }
