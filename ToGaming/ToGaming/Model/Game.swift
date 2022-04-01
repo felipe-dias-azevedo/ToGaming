@@ -14,7 +14,7 @@ struct Game: Hashable, Codable, Identifiable {
     var igdbId: Int?
     var name: String
     var platforms: [String]
-    var platform: String
+    var favoritePlatform: Int
     var genres: [String]
     // involved_companies.company.name
     var publisher: String
@@ -53,5 +53,5 @@ struct Game: Hashable, Codable, Identifiable {
     var artworkImagesName: [String]
     var coverImageName: String
     
-    static let new = Game(id: UUID(), igdbId: 0, name: "", platforms: [], platform: "", genres: [], publisher: "", insertDate: Date(), releaseDate: Date(), summary: "", rating: 0.0, ratingCount: 0, isFavorite: false, gameState: .playing, artworkImagesName: [], coverImageName: "")
+    static let new = Game(id: UUID(), igdbId: 0, name: "", platforms: [], favoritePlatform: 0, genres: [], publisher: "", insertDate: Date(), releaseDate: Date(), summary: "", rating: 0.0, ratingCount: 0, isFavorite: false, gameState: .playing, artworkImagesName: [], coverImageName: "")
 }

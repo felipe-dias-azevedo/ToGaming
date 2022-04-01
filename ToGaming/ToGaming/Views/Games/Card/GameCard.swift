@@ -41,7 +41,7 @@ struct GameCard: View {
                 }
                 
                 HStack(alignment: .center) {
-                    Text(game.platform)
+                    Text(game.platforms[game.favoritePlatform])
                         .font(.caption)
                         .foregroundColor(.secondary)
                     

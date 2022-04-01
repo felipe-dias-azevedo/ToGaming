@@ -27,7 +27,15 @@ struct EditGame: View {
                         HStack(alignment: .center, spacing: 10) {
                             Text("Platform")
                                 .bold()
-                            TextField("Platform", text: $game.platform)
+                            Spacer()
+                            Picker("Platform", selection: $game.favoritePlatform) {
+                                ForEach((0..<game.platforms.count), id: \.self) { index in
+                                    Label(game.platforms[index], systemImage: "star")
+                                        .labelStyle(.titleOnly)
+                                        .tag(index)
+                                }
+                            }
+                            .pickerStyle(.menu)
                         }
                         
                         HStack(alignment: .center, spacing: 10) {

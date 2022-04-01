@@ -17,4 +17,13 @@ class DateHelper {
         
         return dateFormatter.string(from: date)
     }
+    
+    static func toInterval(from dateCount: Int) -> Date {
+        
+        let time = 86400 * dateCount
+        
+        let interval = TimeInterval(time)
+        
+        return Date.now.addingTimeInterval(-interval)
+    }
 }

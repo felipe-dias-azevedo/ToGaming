@@ -18,7 +18,7 @@ struct NewGame: View {
                 Form {
                     FormField(title: "Name", placeholder: "Ex: Grand Theft Auto", textField: $game.name)
                     
-                    FormField(title: "Platform", placeholder: "Ex: Playstation 4", textField: $game.platform)
+                    //FormField(title: "Platform", placeholder: "Ex: Playstation 4", textField: $game.favoritePlatform)
                     
                     HStack {
                         Toggle(isOn: $game.isFavorite) {

@@ -39,7 +39,7 @@ struct GameDetail: View {
                     
                     VStack(alignment: .leading) {
                         HStack {
-                            Text("Action, Adventure")
+                            Text(game.genres.joined(separator: ", "))
                                 .font(.subheadline)
                         }
                         
@@ -108,7 +108,7 @@ struct GameDetail: View {
                     }
                     
                     HStack {
-                        Text(game.platform)
+                        Text(game.platforms[game.favoritePlatform])
                             .font(.headline)
                             .foregroundColor(.secondary)
                         

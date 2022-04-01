@@ -11,10 +11,11 @@ struct GamesHome: View {
     
     @Binding var games: [Game]
     @State private var searching = false
-    @State private var dateInterval = Date.now.addingTimeInterval(-TimeInterval(604800))
+    @State private var interval = 0
+    @State private var intervals = [7, 15, 30, 90]
     
     var recentGamesAvailable: Array<Binding<Game>> {
-        $games.filter { $0.wrappedValue.insertDate >= dateInterval }
+        $games.filter { $0.wrappedValue.insertDate >= DateHelper.toInterval(from: intervals[interval]) }
     }
     
     var gamesBought: Array<Binding<Game>> {
@@ -41,6 +42,20 @@ struct GamesHome: View {
                         searching.toggle()
                     } label: {
                         Label("Filter", systemImage: "magnifyingglass.circle")
+                    }
+                }
+                
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Menu {
+                        Picker("Days", selection: $interval) {
+                            ForEach((0..<intervals.count), id: \.self) { index in
+                                Text("\(intervals[index]) Days")
+                                    .tag(index)
+                            }
+                        }
+                        .pickerStyle(.inline)
+                    } label: {
+                        Label("Filter", systemImage: "ellipsis.circle")
                     }
                 }
             }
