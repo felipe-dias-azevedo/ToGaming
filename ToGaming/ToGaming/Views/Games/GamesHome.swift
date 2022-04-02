@@ -55,7 +55,8 @@ struct GamesHome: View {
                         }
                         .pickerStyle(.inline)
                     } label: {
-                        Label("Filter", systemImage: "ellipsis.circle")
+                        Label("\(intervals[interval]) Days", systemImage: "ellipsis.circle")
+                            .labelStyle(.titleAndIcon)
                     }
                 }
             }

@@ -106,16 +106,16 @@ final class ModelData: ObservableObject {
         GameSearch(
             id: UUID(),
             igdbId: 10,
-            name: "The Last Of Us 2",
+            name: "Grand Theft Auto V",
             genres: ["Stealth", "Action", "Adventure"],
-            platforms: ["Playstation 4"],
+            platforms: ["Playstation 4", "Xbox One", "PC"],
             publisher: "Sony Interactive Entertainment",
             releaseDate: Date(timeIntervalSince1970: 1558666800),
-            summary: "",
+            summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mi justo, sagittis id rhoncus id, sodales quis turpis. Vivamus convallis purus et enim dictum, non tristique ligula imperdiet. Praesent nec nisi ultricies, mollis ex in, sollicitudin tellus. Proin justo libero, pharetra ut risus sit amet, cursus pellentesque risus. Praesent gravida luctus elit semper eleifend. Morbi et imperdiet nisi. Fusce eu justo efficitur, aliquam lorem lacinia, mollis felis. Aenean dignissim, augue placerat dapibus rhoncus, neque enim efficitur metus, nec tristique nisi odio a orci. Ut egestas odio ut quam varius lacinia. Phasellus non lacinia urna. Curabitur diam odio, condimentum nec ipsum tincidunt, scelerisque congue enim. Sed gravida sem eu volutpat bibendum. Vivamus in ex id enim luctus luctus quis eget mi. Proin facilisis hendrerit ante ut blandit. Maecenas quis tellus enim. Nulla facilisis eros non vehicula aliquam.",
             rating: 97.61,
             ratingCount: 1300,
-            artworkImagesName: ["gw"],
-            coverImageName: "gw_cover"),
+            artworkImagesName: ["gow", "gt", "tw"],
+            coverImageName: "cover_gow"),
         GameSearch(
             id: UUID(),
             igdbId: 11,
@@ -127,8 +127,8 @@ final class ModelData: ObservableObject {
             summary: "",
             rating: 84.31,
             ratingCount: 200,
-            artworkImagesName: ["gw"],
-            coverImageName: "gw_cover"),
+            artworkImagesName: ["gt"],
+            coverImageName: "cover_gow"),
         GameSearch(
             id: UUID(),
             igdbId: 13,
@@ -140,7 +140,7 @@ final class ModelData: ObservableObject {
             summary: "",
             rating: 91.12,
             ratingCount: 102,
-            artworkImagesName: ["gw"],
-            coverImageName: "gw_cover")
+            artworkImagesName: ["gow"],
+            coverImageName: "cover_gow")
     ]
 }

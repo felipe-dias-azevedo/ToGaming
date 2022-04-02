@@ -12,6 +12,7 @@ struct SearchHome: View {
     @Binding var recentlySearched: [GameSearch]
     @State private var searchText = ""
     @State private var addingNew = false
+    @State private var filtering = false
     
     var searchResults: [GameSearch] {
         if searchText.isEmpty {
@@ -26,7 +27,7 @@ struct SearchHome: View {
             List {
                 ForEach(searchResults, id: \.self) { gameSearched in
                     NavigationLink {
-                        SearchGameDetail(gameSearched: gameSearched)
+                        //SearchGameDetail(game: gameSearched)
                     } label: {
                         SearchGameRow(searchGame: gameSearched)
                     }
@@ -35,15 +36,26 @@ struct SearchHome: View {
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .navigationTitle("Search")
             .toolbar {
-		// TODO: Filter menu game of platform, genre, etc
-                Button {
-                    addingNew.toggle()
-                } label: {
-                    Label("New Game", systemImage: "square.and.pencil")
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Button {
+                        filtering.toggle()
+                    } label: {
+                        Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+                    }
+                }
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button {
+                        addingNew.toggle()
+                    } label: {
+                        Label("New Game", systemImage: "square.and.pencil")
+                    }
                 }
             }
             .sheet(isPresented: $addingNew) {
                 NewGame(canceled: $addingNew, game: .new)
+            }
+            .sheet(isPresented: $filtering) {
+                SearchFilter()
             }
         }
     }
@@ -52,5 +64,6 @@ struct SearchHome: View {
 struct SearchHome_Previews: PreviewProvider {
     static var previews: some View {
         SearchHome(recentlySearched: .constant(ModelData().recentlySearched))
+            .preferredColorScheme(.dark)
     }
 }
