@@ -9,15 +9,28 @@ import SwiftUI
 
 struct SearchGameRow: View {
     
-    var searchGame: GameSearch
+    var game: GameSearch
     
     var body: some View {
-        Text(searchGame.name)
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(game.name)
+                    .font(.headline)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+                Text(game.developer)
+                    .font(.subheadline)
+                    .fontWeight(.light)
+                    .foregroundColor(.secondary)
+            }
+            Spacer()
+            // TODO: If game platform is in preferred then green Check else red Cross (X)
+        }
     }
 }
 
 struct SearchGameRow_Previews: PreviewProvider {
     static var previews: some View {
-        SearchGameRow(searchGame: ModelData().recentlySearched[0])
+        SearchGameRow(game: ModelData().recentlySearched[0])
     }
 }

@@ -16,6 +16,7 @@ struct GameSearch: Hashable, Codable, Identifiable {
     var genres: [String]
     var platforms: [String]
     var publisher: String
+    var developer: String
     var releaseDate: Date
     var summary: String
     var storyline: String?

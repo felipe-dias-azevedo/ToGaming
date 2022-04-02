@@ -65,24 +65,8 @@ struct GameDetail: View {
                     
                     Spacer()
                     
-                    ZStack {
-                        Circle()
-                        // TODO: Change color based on rating value (green >70%, yellow >40%, red 1<=39%, grey 0%)
-                            .strokeBorder(.green, lineWidth: 3, antialiased: true)
-                            .frame(width: 50, height: 50)
-                            
-                        VStack {
-                            Text(String(format: "%.0f%%", game.rating))
-                                .font(.caption)
-                                .bold()
-                                .foregroundColor(.primary)
-                                
-                            Text("Rating")
-                                .font(.caption2)
-                                .foregroundColor(.primary)
-                        }
-                    }
-                    .padding(.top, 50)
+                    Rating(score: game.rating)
+                        .padding(.top, 50)
                 }
                 .padding(.top, -40)
                 .padding(.bottom, 10)

@@ -27,9 +27,9 @@ struct SearchHome: View {
             List {
                 ForEach(searchResults, id: \.self) { gameSearched in
                     NavigationLink {
-                        //SearchGameDetail(game: gameSearched)
+                        SearchGameDetail(game: gameSearched)
                     } label: {
-                        SearchGameRow(searchGame: gameSearched)
+                        SearchGameRow(game: gameSearched)
                     }
                 }
             }

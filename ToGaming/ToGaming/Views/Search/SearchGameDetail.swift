@@ -9,12 +9,15 @@ import SwiftUI
 
 struct SearchGameDetail: View {
     
-    @Binding var game: GameSearch
+    @Environment(\.openURL) var openURL
+    
+    var game: GameSearch
     @State private var index = 0
     @State private var addingGame = false
     
     var body: some View {
         ZStack {
+            // TODO: When requesting data show ProgressView (loader)
             ScrollView(.vertical, showsIndicators: false) {
                 TabView(selection: $index) {
                     ForEach((0..<game.artworkImagesName.count), id: \.self) { index in
@@ -28,67 +31,97 @@ struct SearchGameDetail: View {
                 .aspectRatio(contentMode: .fill)
                 
             VStack {
-                VStack {
+                VStack(alignment: .leading, spacing: 4) {
                     HStack {
                         Text(game.name)
+                            .fontWeight(.bold)
                             .font(.largeTitle)
-                     
+                            .foregroundColor(.primary)
                         Spacer()
                     }
                     HStack {
-                        Text(game.platforms.joined(separator: ", "))
-                            .font(.subheadline)
+                        Text(game.developer)
+                            .fontWeight(.medium)
+                            .font(.title3)
                             .foregroundColor(.secondary)
-                        
                         Spacer()
                     }
-                }
-                .padding(.bottom, 20)
-                
-                Section {
                     HStack {
-                        Text("Released in:")
-                            .font(.headline)
-                        Spacer()
-                        Text(DateHelper.toString(game.releaseDate))
-                            .font(.subheadline)
-                    }
-                    HStack {
-                        Text("Genres:")
-                            .font(.headline)
-                        Spacer()
-                        Text(game.genres.joined(separator: ", "))
-                            .font(.subheadline)
-                    }
-                    HStack {
-                        Text("Rating:")
-                            .font(.headline)
-                        Spacer()
-                        Text(String(format: "%.0f%%", game.rating))
-                            .font(.subheadline)
-                    }
-                    HStack {
-                        Text("Rating Count:")
-                            .font(.headline)
-                        Spacer()
-                        Text(String(format: "%.0f", game.ratingCount))
-                            .font(.subheadline)
-                    }
-                    HStack {
-                        Text("Publisher:")
-                            .font(.headline)
-                        Spacer()
                         Text(game.publisher)
-                            .font(.subheadline)
+                            .fontWeight(.heavy)
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                        Spacer()
                     }
                 }
+                .padding(.bottom, 12)
                 
-                Image(game.coverImageName)
-                    .resizable()
-                    .frame(width: 112.5, height: 150)
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(10)
-                    .shadow(radius: 4)
+                HStack {
+                    Image(game.coverImageName)
+                        .resizable()
+                        .frame(width: 112.5, height: 150)
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                        .shadow(radius: 2)
+                    
+                    Spacer()
+                    
+                    VStack(alignment: .center, spacing: 20) {
+                        
+                        HStack {
+                            Spacer()
+                            Rating(score: game.rating)
+                            Spacer()
+                            VStack {
+                                Text("Rating Count:")
+                                    .font(.footnote)
+                                    .fontWeight(.regular)
+                                Text(String(format: "%.0f", game.ratingCount))
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                                    .bold()
+                            }
+                            Spacer()
+                        }
+                        
+                        
+                        if let url = game.igdbReference {
+                            Button {
+                                openURL(url)
+                            } label: {
+                                Text("View More on IGDB")
+                                    .fontWeight(.regular)
+                                Label("Arrow Icon", systemImage: "arrow.right")
+                                    .labelStyle(.iconOnly)
+                            }
+                            .font(.footnote)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 10)
+                            .background(.blue)
+                            .foregroundColor(.white)
+                            .clipShape(Capsule())
+                        }
+                    }
+                    .padding(.leading, 10)
+                }
+                
+                
+                ScrollItems(title: "Genres:", items: game.genres)
+                    .padding(.vertical, 6)
+                
+                ScrollItems(title: "Platforms:", subtitle: "Total: \(game.platforms.count)", items: game.platforms)
+                    .padding(.vertical, 6)
+                
+                HStack {
+                    Text("Released in:")
+                        .fontWeight(.light)
+                        .font(.callout)
+                    Spacer()
+                    Text(DateHelper.toString(game.releaseDate))
+                        .fontWeight(.bold)
+                        .font(.subheadline)
+                }
+                .padding(.top, 8)
                 
                 VStack {
                     Divider()
@@ -97,15 +130,40 @@ struct SearchGameDetail: View {
 
                     HStack {
                         Text("Summary")
+                            .fontWeight(.medium)
                             .font(.title2)
                             .foregroundColor(.primary)
                         Spacer()
                     }
-                    .padding(.bottom, 10)
+                    .padding(.vertical, 10)
 
                     Text(game.summary)
+                        .multilineTextAlignment(.leading)
                         .font(.body)
+                        .foregroundColor(.primary)
 
+                    if let storyline = game.storyline {
+                        Divider()
+                            .padding(.vertical, 10)
+                        
+                        HStack {
+                            Text("Storyline")
+                                .fontWeight(.medium)
+                                .multilineTextAlignment(.leading)
+                                .font(.title2)
+                                .foregroundColor(.primary)
+                            Spacer()
+                        }
+                        .padding(.top, 20)
+                        .padding(.bottom, 10)
+                        
+                        // TODO: Show in a summarized way value with button to read everything
+                        Text(storyline)
+                            .multilineTextAlignment(.leading)
+                            .font(.body)
+                            .foregroundColor(.primary)
+                    }
+                    
                 }
             }
             .padding(.horizontal)
@@ -114,14 +172,17 @@ struct SearchGameDetail: View {
             VStack {
                 Spacer()
                 HStack {
-                    Button("Get Game") {
+                    Button {
                         addingGame.toggle()
+                    } label: {
+                        Text("Get Game")
+                            .fontWeight(.bold)
+                            .font(.body)
+                            .foregroundColor(.white)
                     }
-                    .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 10)
                     .background(.blue)
-                    .foregroundColor(.white)
                     .clipShape(Capsule())
                 }
                 .padding(.horizontal, 20)
@@ -138,7 +199,7 @@ struct SearchGameDetail: View {
                 Button {
                     addingGame.toggle()
                 } label: {
-                    Label("Get Game", systemImage: "plus.square.on.square")
+                    Label("Get Game", systemImage: "plus.circle")
                         .labelStyle(.iconOnly)
                 }
             }
@@ -152,8 +213,8 @@ struct SearchGameDetail: View {
 struct SearchGameDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SearchGameDetail(game: .constant(ModelData().recentlySearched[0]))
-                .preferredColorScheme(.dark)
+            SearchGameDetail(game: ModelData().recentlySearched[0])
+                .preferredColorScheme(.light)
         }
     }
 }
