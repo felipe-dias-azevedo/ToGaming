@@ -119,6 +119,8 @@ struct EditGame: View {
                         }
                         .padding(.vertical, 6)
                     }
+                
+                // TODO: Option to remove game from "games"
             }
             .navigationBarTitle(game.name)
             .navigationBarTitleDisplayMode(.inline)

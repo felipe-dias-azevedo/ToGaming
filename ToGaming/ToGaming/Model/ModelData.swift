@@ -30,7 +30,7 @@ final class ModelData: ObservableObject {
             isFavorite: false,
             score: .four,
             gameState: .playing,
-            artworkImagesName: ["gow"],
+            artworkImagesName: ["gow", "tw"],
             coverImageName: "cover_gow"),
         Game(
             id: UUID(),

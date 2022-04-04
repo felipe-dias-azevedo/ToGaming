@@ -38,35 +38,40 @@ struct GameDetail: View {
                         .shadow(radius: 4)
                     
                     VStack(alignment: .leading) {
-                        HStack {
-                            Text(game.genres.joined(separator: ", "))
-                                .font(.subheadline)
+                        
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(game.developer)
+                                .fontWeight(.medium)
+                                .font(.footnote)
+                                .foregroundColor(.primary)
+                            
+                            Text(game.publisher)
+                                .fontWeight(.light)
+                                .font(.caption)
+                                .foregroundColor(.primary)
                         }
                         
                         Spacer()
                         
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack {
-                                Text("Added:")
-                                Text(DateHelper.toString(game.insertDate))
-                            }
+                        HStack(alignment: .center, spacing: 10) {
+                            Rating(score: game.rating)
                             
-                            HStack {
-                                Text("Launched:")
-                                Text(DateHelper.toString(game.releaseDate))
+                            VStack {
+                                Text("Rating Count:")
+                                    .font(.footnote)
+                                    .fontWeight(.light)
+                                Text(String(format: "%.0f", game.ratingCount))
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                                    .bold()
                             }
                         }
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
                     }
-                    .padding(.top, 50)
+                    .padding(.top, 45)
                     .padding(.bottom, 8)
                     .padding(.leading, 10)
                     
                     Spacer()
-                    
-                    Rating(score: game.rating)
-                        .padding(.top, 50)
                 }
                 .padding(.top, -40)
                 .padding(.bottom, 10)
@@ -92,12 +97,6 @@ struct GameDetail: View {
                     }
                     
                     HStack {
-                        Text(game.platforms[game.favoritePlatform])
-                            .font(.headline)
-                            .foregroundColor(.secondary)
-                        
-                        Spacer()
-                        
                         HStack {
                             Text(game.gameState.rawValue)
                                 .bold()
@@ -106,26 +105,60 @@ struct GameDetail: View {
                                 .foregroundColor(.accentColor)
                         }
                         .font(.headline)
+                        
+                        Spacer()
+                        
+                        Text(game.platforms[game.favoritePlatform])
+                            .fontWeight(.bold)
+                            .font(.headline)
+                            .foregroundColor(.primary)
                     }
                     
                     HStack {
-                        Text(game.publisher)
-                            .font(.subheadline)
+                        Text("Added: \(DateHelper.toString(game.insertDate))")
+                            .fontWeight(.light)
+                            .font(.footnote)
                             .foregroundColor(.secondary)
                         
                         Spacer()
                         
-                        HStack {
-                            Text(String(game.score?.rawValue ?? 0))
-                                .font(.headline)
-                                .bold()
-                            Label("Score Star Icon", systemImage: "star.fill")
-                                .labelStyle(.iconOnly)
-                                .font(.subheadline)
-                                .foregroundColor(.primary)
+                        if let score = game.score {
+                            HStack {
+                                Text(String(score.rawValue))
+                                    .font(.headline)
+                                    .bold()
+                                Label("Score Star Icon", systemImage: "star.fill")
+                                    .labelStyle(.iconOnly)
+                                    .font(.subheadline)
+                                    .foregroundColor(.yellow)
+                            }
+                        } else {
+                            HStack {
+                                Text("No Score")
+                                    .font(.headline)
+                                    .bold()
+                                Label("Score Star Icon", systemImage: "star.fill")
+                                    .labelStyle(.iconOnly)
+                                    .font(.subheadline)
+                                    .foregroundColor(.yellow)
+                            }
                         }
                     }
                 }
+                
+                ScrollItems(title: "Genres:", items: game.genres)
+                    .padding(.top, 10)
+                
+                HStack {
+                    Text("Released in:")
+                        .fontWeight(.light)
+                        .font(.callout)
+                    Spacer()
+                    Text(DateHelper.toString(game.releaseDate))
+                        .fontWeight(.bold)
+                        .font(.subheadline)
+                }
+                .padding(.top, 10)
                 
                 Divider()
                     .padding(.vertical, 10)
@@ -203,6 +236,7 @@ struct GameDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             GameDetail(game: .constant(ModelData().games[0]))
+                .preferredColorScheme(.dark)
         }
     }
 }

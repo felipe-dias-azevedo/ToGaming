@@ -9,8 +9,13 @@ import SwiftUI
 
 struct SearchFilter: View {
     var body: some View {
-        // TODO: Filter menu game of platform, genre, etc
-        Text("Search Filter")
+        NavigationView {
+            Form {
+                // TODO: Filter menu game of platform, genre, publisher, developer, releaseDate etc
+                Text("Search Filter")
+            }
+        }
+        
     }
 }
 

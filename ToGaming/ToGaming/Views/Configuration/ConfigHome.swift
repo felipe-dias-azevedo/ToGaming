@@ -20,6 +20,8 @@ struct ConfigHome: View {
                 
                 FormField(title: "Preferred Platform", textField: $userConfig.preferredPlatform)
                 
+                // TODO: Change which modes to show in GamesHome (select which to see)
+                
                 Section(
                     header: Text("API Credentials"),
                     footer: Text("Store your API Credentials for searching for Games")

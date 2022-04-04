@@ -205,7 +205,7 @@ struct SearchGameDetail: View {
             }
         }
         .sheet(isPresented: $addingGame) {
-            SearchGameAdd(game: game)
+            SearchGameAdd(game: game, adding: $addingGame)
         }
     }
 }
