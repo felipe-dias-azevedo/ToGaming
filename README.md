@@ -1,5 +1,15 @@
 # ToGaming
-To Do for Games App built on SwiftUI for iOS
+
+Games To Do App built on SwiftUI for iOS
+
+* Native SwiftUI
+* IGDB API Connection 
+
+## App Icon
+
+<p align="center">
+  <img width="120" src="./.github/togaming-app-icon.png">
+</p>
 
 ## Planning
 
@@ -26,11 +36,15 @@ To Do for Games App built on SwiftUI for iOS
 - [ ] loader for async calls to apis
 
 #### Easy
-- [ ] settings page for username, apis keys and secrets for IGDB
-- [ ] startup page with recent games bought, to bought, by platforms, favorite games, etc. Progress bar with level/xp
-- [ ] sheets for adding game that didnt find on search
-- [ ] status for games (playing, played, to play, to buy)
-- [ ] searching on first page to view only "my" games
+- [X] settings page for username, apis keys and secrets for IGDB
+- [ ] startup page with recent games bought, to bought, by platforms, favorite games, etc. 
+- [ ] Progress bar with level/xp on startup page
+- [ ] sheet for adding game that didnt find on search
+- [X] status for games (playing, played, to play, to buy)
+- [X] searching on first page to view only "my" games
 - [ ] swipe on search page to delete recent searched
-- [ ] swipe on games search to favorite 
-- [ ] settings sheet for creator/dev for this project
+- [ ] swipe on games search to add to library 
+- [X] settings sheet of author of this project
+
+## LICENSE
+GPL 3.0
