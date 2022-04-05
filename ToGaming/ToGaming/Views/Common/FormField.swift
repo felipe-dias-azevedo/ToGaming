@@ -24,6 +24,10 @@ struct FormField: View {
 
 struct FormField_Previews: PreviewProvider {
     static var previews: some View {
-        FormField(title: "Example", textField: .constant(String()))
+        NavigationView {
+            Form {
+                FormField(title: "Example", textField: .constant(String()))
+            }            
+        }
     }
 }

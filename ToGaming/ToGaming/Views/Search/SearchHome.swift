@@ -14,6 +14,12 @@ struct SearchHome: View {
     @State private var addingNew = false
     @State private var filtering = false
     
+    @State private var dateFilter: Date = Date()
+    @State private var platformFilter: String? = nil
+    @State private var genreFilter: String? = nil
+    @State private var publisherFilter: String? = nil
+    @State private var developerFilter: String? = nil
+    
     var searchResults: [GameSearch] {
         if searchText.isEmpty {
             return recentlySearched
@@ -55,7 +61,7 @@ struct SearchHome: View {
                 NewGame(canceled: $addingNew, game: .new)
             }
             .sheet(isPresented: $filtering) {
-                SearchFilter()
+                SearchFilter(filtering: $filtering, date: $dateFilter, selectedPlatform: $platformFilter, selectedGenre: $genreFilter, selectedPublishers: $publisherFilter, selectedDevelopers: $developerFilter)
             }
         }
     }

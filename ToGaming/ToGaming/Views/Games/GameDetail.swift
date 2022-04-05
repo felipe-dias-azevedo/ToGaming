@@ -200,8 +200,13 @@ struct GameDetail: View {
                 
                 if let url = game.igdbReference {
                     VStack {
-                        Button("View More on IGDB") {
+                        Button {
                             openURL(url)
+                        } label: {
+                            Text("View More on IGDB")
+                                .fontWeight(.regular)
+                            Label("Arrow Icon", systemImage: "arrow.right")
+                                .labelStyle(.iconOnly)
                         }
                         .padding(.horizontal, 40)
                         .padding(.vertical, 12)
