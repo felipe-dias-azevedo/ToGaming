@@ -9,9 +9,17 @@ import SwiftUI
 
 struct SearchGameAdd: View {
     
+    @EnvironmentObject var modelData: ModelData
+    @Environment(\.presentationMode) var presentationMode
+    
     var game: GameSearch
     @Binding var adding: Bool
     @State private var gameToAdd: Game = .new
+    
+    func addGameToLibrary() {
+        let newGame = Game(id: UUID(), igdbId: game.igdbId, name: game.name, platforms: game.platforms, favoritePlatform: gameToAdd.favoritePlatform, genres: game.genres, publisher: game.publisher, developer: game.developer, insertDate: Date(), releaseDate: game.releaseDate, summary: game.summary, storyline: game.storyline, rating: game.rating, ratingCount: game.ratingCount, igdbReference: game.igdbReference, isFavorite: gameToAdd.isFavorite, score: gameToAdd.score, gameState: gameToAdd.gameState, artworkImagesName: game.artworkImagesName, coverImageName: game.coverImageName)
+        modelData.games.append(newGame)
+    }
     
     var body: some View {
         NavigationView {
@@ -88,14 +96,33 @@ struct SearchGameAdd: View {
                 }
                 
                 Section {
-                    Button {
-                        // TODO: Include game data to gameToAdd in adding to library
-                    } label: {
-                        HStack {
-                            Text("Add Game")
-                            Spacer()
-                            Label("Add Game", systemImage: "plus")
-                                .labelStyle(.iconOnly)
+                    if let index = modelData.games.firstIndex(where: { $0.igdbId == game.igdbId })
+                    {
+                        Button {
+                            modelData.games.remove(at: index)
+                            self.presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            HStack {
+                                Text("Remove Game")
+                                    .fontWeight(.medium)
+                                Spacer()
+                                Label("Remove Game", systemImage: "minus")
+                                    .labelStyle(.iconOnly)
+                            }
+                        }
+                        .foregroundColor(.red)
+                    } else {
+                        Button {
+                            addGameToLibrary()
+                            self.presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            HStack {
+                                Text("Add Game")
+                                    .fontWeight(.medium)
+                                Spacer()
+                                Label("Add Game", systemImage: "plus")
+                                    .labelStyle(.iconOnly)
+                            }
                         }
                     }
                 }
@@ -118,5 +145,6 @@ struct SearchGameAdd: View {
 struct SearchGameAdd_Previews: PreviewProvider {
     static var previews: some View {
         SearchGameAdd(game: ModelData().recentlySearched[0], adding: .constant(true))
+            .environmentObject(ModelData())
     }
 }

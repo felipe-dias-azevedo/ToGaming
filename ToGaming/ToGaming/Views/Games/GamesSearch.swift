@@ -49,9 +49,9 @@ struct GamesSearch: View {
             .navigationTitle("All Games")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
-                    EditButton()
-                }
+//                ToolbarItemGroup(placement: .navigationBarLeading) {
+//                    EditButton()
+//                }
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {

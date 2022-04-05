@@ -11,7 +11,8 @@ struct SearchFilter: View {
     
     @Binding var filtering: Bool
     
-    @Binding var date: Date
+    @Binding var dateAfter: Date
+    @Binding var dateBefore: Date
     @State private var filterReleaseDate = false
     
     @State private var filterPlatform = false
@@ -36,16 +37,22 @@ struct SearchFilter: View {
             List {
                 Section {
                     Toggle(isOn: $filterReleaseDate) {
-                        Text("Release Date After")
+                        Text("Release Date")
                             .fontWeight(.light)
-                            .font(.title3)
+                            .font(.body)
                     }
                     
                     if filterReleaseDate {
-                        DatePicker(selection: $date, displayedComponents: .date) {
+                        DatePicker(selection: $dateBefore, displayedComponents: .date) {
+                            Text("Date Before")
+                                .font(.body)
+                                .fontWeight(.medium)
+                        }
+                        
+                        DatePicker(selection: $dateAfter, displayedComponents: .date) {
                             Text("Date After")
                                 .font(.body)
-                                .fontWeight(.bold)
+                                .fontWeight(.medium)
                         }
                     }
                 }
@@ -67,7 +74,8 @@ struct SearchFilter: View {
                         selectedPlatform = nil
                         selectedDevelopers = nil
                         selectedPublishers = nil
-                        date = Date()
+                        dateAfter = Date()
+                        dateBefore = Date()
                         filtering.toggle()
                     } label: {
                         Text("Cancel")
@@ -76,6 +84,10 @@ struct SearchFilter: View {
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
+                        if !filterReleaseDate {
+                            dateAfter = Date()
+                            dateBefore = Date()
+                        }
                         filtering.toggle()
                     } label: {
                         Text("Done")
@@ -100,6 +112,6 @@ struct SearchFilter: View {
 
 struct SearchFilter_Previews: PreviewProvider {
     static var previews: some View {
-        SearchFilter(filtering: .constant(true), date: .constant(Date()), selectedPlatform: .constant(nil), selectedGenre: .constant(nil), selectedPublishers: .constant(nil), selectedDevelopers: .constant(nil))
+        SearchFilter(filtering: .constant(true), dateAfter: .constant(Date()), dateBefore: .constant(Date()), selectedPlatform: .constant(nil), selectedGenre: .constant(nil), selectedPublishers: .constant(nil), selectedDevelopers: .constant(nil))
     }
 }

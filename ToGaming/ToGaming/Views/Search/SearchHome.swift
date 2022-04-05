@@ -9,18 +9,20 @@ import SwiftUI
 
 struct SearchHome: View {
     
-    @Binding var recentlySearched: [GameSearch]
+    @EnvironmentObject var modelData: ModelData
     @State private var searchText = ""
     @State private var addingNew = false
     @State private var filtering = false
     
-    @State private var dateFilter: Date = Date()
+    @State private var dateBeforeFilter: Date = Date()
+    @State private var dateAfterFilter: Date = Date()
     @State private var platformFilter: String? = nil
     @State private var genreFilter: String? = nil
     @State private var publisherFilter: String? = nil
     @State private var developerFilter: String? = nil
     
     var searchResults: [GameSearch] {
+        let recentlySearched = modelData.recentlySearched
         if searchText.isEmpty {
             return recentlySearched
         }
@@ -38,6 +40,13 @@ struct SearchHome: View {
                         SearchGameRow(game: gameSearched)
                     }
                 }
+                .onDelete(perform: { searchesToDelete in
+                    searchesToDelete
+                        .map({ searchResults[$0].id })
+                        .forEach({ searchToDelete in
+                            modelData.recentlySearched.removeAll(where: { $0.id == searchToDelete })
+                        })
+                })
             }
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .navigationTitle("Search")
@@ -61,7 +70,7 @@ struct SearchHome: View {
                 NewGame(canceled: $addingNew, game: .new)
             }
             .sheet(isPresented: $filtering) {
-                SearchFilter(filtering: $filtering, date: $dateFilter, selectedPlatform: $platformFilter, selectedGenre: $genreFilter, selectedPublishers: $publisherFilter, selectedDevelopers: $developerFilter)
+                SearchFilter(filtering: $filtering, dateAfter: $dateAfterFilter, dateBefore: $dateBeforeFilter, selectedPlatform: $platformFilter, selectedGenre: $genreFilter, selectedPublishers: $publisherFilter, selectedDevelopers: $developerFilter)
             }
         }
     }
@@ -69,7 +78,8 @@ struct SearchHome: View {
 
 struct SearchHome_Previews: PreviewProvider {
     static var previews: some View {
-        SearchHome(recentlySearched: .constant(ModelData().recentlySearched))
+        SearchHome()
+            .environmentObject(ModelData())
             .preferredColorScheme(.dark)
     }
 }

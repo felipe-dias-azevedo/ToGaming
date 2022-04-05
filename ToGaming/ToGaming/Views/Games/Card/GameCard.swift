@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameCard: View {
     
-    @Binding var game: Game
+    var game: Game
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -28,15 +28,11 @@ struct GameCard: View {
                     
                     Spacer()
                     
-                    if let score = game.score {
-                        HStack(alignment: .center, spacing: 2) {
-                            Text(String(score.rawValue))
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                            
-                            Image(systemName: "star.fill")
-                                .foregroundColor(.primary)
-                        }
+                    if game.isFavorite {
+                        Label("Game Favorite", systemImage: "heart.fill")
+                            .labelStyle(.iconOnly)
+                            .font(.body)
+                            .foregroundColor(.red)
                     }
                 }
                 
@@ -47,9 +43,17 @@ struct GameCard: View {
                     
                     Spacer()
                     
-                    Text(DateHelper.toString(game.insertDate))
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                    if let score = game.score {
+                        HStack(alignment: .center, spacing: 2) {
+                            Text(String(score.rawValue))
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            
+                            Image(systemName: "star.fill")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
                 }
             }
             .padding(.horizontal, 4)
@@ -62,10 +66,10 @@ struct GameCard: View {
 struct GameCard_Previews: PreviewProvider {
     static var previews: some View {
         
-        GameCard(game: .constant(ModelData().games[0]))
+        GameCard(game: ModelData().games[0])
             .previewLayout(.fixed(width: 230, height: 180))
         
-        GameCard(game: .constant(ModelData().games[1]))
+        GameCard(game: ModelData().games[2])
             .previewLayout(.fixed(width: 230, height: 180))
             .preferredColorScheme(.dark)
     }

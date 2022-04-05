@@ -54,5 +54,5 @@ struct Game: Hashable, Codable, Identifiable {
     var artworkImagesName: [String]
     var coverImageName: String
     
-    static let new = Game(id: UUID(), igdbId: 0, name: "", platforms: [], favoritePlatform: 0, genres: [], publisher: "", developer: "", insertDate: Date(), releaseDate: Date(), summary: "", rating: 0.0, ratingCount: 0, isFavorite: false, gameState: .playing, artworkImagesName: [], coverImageName: "")
+    static let new = Game(id: UUID(), igdbId: 0, name: "", platforms: [], favoritePlatform: 0, genres: [], publisher: "", developer: "", insertDate: Date(), releaseDate: Date(), summary: "", rating: 0.0, ratingCount: 0, isFavorite: false, gameState: .toBuy, artworkImagesName: [], coverImageName: "")
 }

@@ -20,6 +20,7 @@ struct GameDetail: View {
             TabView(selection: $index) {
                 ForEach((0..<game.artworkImagesName.count), id: \.self) { index in
                     Image(game.artworkImagesName[index])
+                        .renderingMode(.original)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                 }
@@ -31,6 +32,7 @@ struct GameDetail: View {
             LazyVStack {
                 HStack(alignment: .top) {
                     Image(game.coverImageName)
+                        .renderingMode(.original)
                         .resizable()
                         .frame(width: 112.5, height: 150)
                         .aspectRatio(contentMode: .fit)

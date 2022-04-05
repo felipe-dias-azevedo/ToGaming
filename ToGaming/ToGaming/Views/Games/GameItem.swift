@@ -40,7 +40,7 @@ struct GameItem: View {
                             NavigationLink {
                                 GameDetail(game: $game)
                             } label: {
-                                GameCard(game: $game)
+                                GameCard(game: game)
                             }
                         }
                     }

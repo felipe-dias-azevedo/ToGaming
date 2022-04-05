@@ -9,6 +9,8 @@ import SwiftUI
 
 struct EditGame: View {
     
+    @EnvironmentObject var modelData: ModelData
+    @Environment(\.presentationMode) var presentationMode
     @Environment(\.openURL) var openURL
     
     @Binding var editing: Bool
@@ -120,6 +122,22 @@ struct EditGame: View {
                         .padding(.vertical, 6)
                     }
                 
+                Section {
+                    Button {
+                        guard let index = modelData.games.firstIndex(of: game) else { return }
+                        modelData.games.remove(at: index)
+                        self.presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        HStack {
+                            Text("Remove Game")
+                                .fontWeight(.medium)
+                            Spacer()
+                            Label("Remove Game", systemImage: "minus")
+                                .labelStyle(.iconOnly)
+                        }
+                    }
+                    .foregroundColor(.red)
+                }
                 // TODO: Option to remove game from "games"
             }
             .navigationBarTitle(game.name)

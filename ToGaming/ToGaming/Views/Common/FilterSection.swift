@@ -18,7 +18,7 @@ struct FilterSection: View {
             HStack {
                 Text(title)
                     .fontWeight(.light)
-                    .font(.title3)
+                    .font(.body)
              
                 Spacer()
                 
@@ -26,7 +26,7 @@ struct FilterSection: View {
                     toggle.toggle()
                 } label: {
                     Label("Open Sheet", systemImage: "list.bullet")
-                        .font(.title3)
+                        .font(.body)
                         .labelStyle(.iconOnly)
                         .foregroundColor(.primary)
                 }
@@ -44,7 +44,7 @@ struct FilterSection: View {
                         selectedItem = nil
                     } label: {
                         Label("Unselect Selected Item", systemImage: "xmark.circle.fill")
-                            .font(.title3)
+                            .font(.body)
                             .labelStyle(.iconOnly)
                     }
                 }

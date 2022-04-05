@@ -27,7 +27,7 @@ struct ContentView: View {
                 }
                 .tag(Tab.games)
             
-            SearchHome(recentlySearched: $modelData.recentlySearched)
+            SearchHome()
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
