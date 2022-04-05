@@ -28,7 +28,7 @@ struct GameDetail: View {
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             .aspectRatio(contentMode: .fill)
             
-            VStack {
+            LazyVStack {
                 HStack(alignment: .top) {
                     Image(game.coverImageName)
                         .resizable()

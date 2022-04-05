@@ -88,8 +88,15 @@ struct SearchGameAdd: View {
                 }
                 
                 Section {
-                    Button("Add Game") {
+                    Button {
                         // TODO: Include game data to gameToAdd in adding to library
+                    } label: {
+                        HStack {
+                            Text("Add Game")
+                            Spacer()
+                            Label("Add Game", systemImage: "plus")
+                                .labelStyle(.iconOnly)
+                        }
                     }
                 }
             }

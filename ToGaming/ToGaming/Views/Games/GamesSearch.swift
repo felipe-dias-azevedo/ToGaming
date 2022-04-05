@@ -9,12 +9,12 @@ import SwiftUI
 
 struct GamesSearch: View {
     
-    @Binding var games: [Game]
+    @EnvironmentObject var modelData: ModelData
     @Binding var canceled: Bool
     @State private var searchText = ""
     
     var gamesSortedSearched: Array<Binding<Game>> {
-        let gamesSorted = $games.sorted {
+        let gamesSorted = $modelData.games.sorted {
             $0.wrappedValue.isFavorite && !$1.wrappedValue.isFavorite
         }
         
@@ -35,12 +35,24 @@ struct GamesSearch: View {
                         GameRow(game: game)
                     }
                 }
+                .onDelete(perform: { gamesToDelete in
+                    // FIXME: If deleted from parent component, it doesnt show delete action anymore
+                    gamesToDelete
+                        .map({ gamesSortedSearched[$0].id })
+                        .forEach({ gameToDelete in
+                            modelData.games.removeAll(where: { $0.id == gameToDelete })
+                        })
+                })
             }
             .listStyle(.inset)
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .navigationTitle("All Games")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    EditButton()
+                }
+                
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
                         canceled.toggle()
@@ -55,6 +67,7 @@ struct GamesSearch: View {
 
 struct GamesSearch_Previews: PreviewProvider {
     static var previews: some View {
-        GamesSearch(games: .constant(ModelData().games), canceled: .constant(false))
+        GamesSearch(canceled: .constant(false))
+            .environmentObject(ModelData())
     }
 }

@@ -35,7 +35,7 @@ struct GameItem: View {
                 }
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .top, spacing: 0) {
+                    LazyHStack(alignment: .top, spacing: 0) {
                         ForEach(games) { $game in
                             NavigationLink {
                                 GameDetail(game: $game)

@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var modelData: ModelData
-    @State private var selection: Tab = .search
+    @State private var selection: Tab = .games
     
     enum Tab {
         case games

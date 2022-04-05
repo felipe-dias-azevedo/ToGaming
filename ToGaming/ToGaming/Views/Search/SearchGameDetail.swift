@@ -30,7 +30,7 @@ struct SearchGameDetail: View {
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 .aspectRatio(contentMode: .fill)
                 
-            VStack {
+            LazyVStack {
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
                         Text(game.name)

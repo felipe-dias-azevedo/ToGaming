@@ -61,7 +61,7 @@ struct GamesHome: View {
                 }
             }
             .sheet(isPresented: $searching) {
-                GamesSearch(games: $games, canceled: $searching)
+                GamesSearch(canceled: $searching)
             }
         }
     }
