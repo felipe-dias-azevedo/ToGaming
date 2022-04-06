@@ -21,9 +21,13 @@ struct SearchHome: View {
     @State private var publisherFilter: String? = nil
     @State private var developerFilter: String? = nil
     
+    var isRecentsSearchs: Bool {
+        return searchText.isEmpty
+    }
+    
     var searchResults: [GameSearch] {
         let recentlySearched = modelData.recentlySearched
-        if searchText.isEmpty {
+        if isRecentsSearchs {
             return recentlySearched
         }
         return recentlySearched
@@ -33,20 +37,31 @@ struct SearchHome: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(searchResults, id: \.self) { gameSearched in
-                    NavigationLink {
-                        SearchGameDetail(game: gameSearched)
-                    } label: {
-                        SearchGameRow(game: gameSearched)
+                if isRecentsSearchs {
+                    ForEach(searchResults, id: \.self) { gameSearched in
+                        NavigationLink {
+                            SearchGameDetail(game: gameSearched, isRecentSearched: isRecentsSearchs)
+                        } label: {
+                            RecentlySearchedGameRow(game: gameSearched)
+                        }
+                    }
+                    .onDelete(perform: { searchesToDelete in
+                        searchesToDelete
+                            .map({ searchResults[$0].id })
+                            .forEach({ searchToDelete in
+                                modelData.recentlySearched.removeAll(where: { $0.id == searchToDelete })
+                            })
+                    })
+                }
+                else {
+                    ForEach(searchResults, id: \.self) { gameSearched in
+                        NavigationLink {
+                            SearchGameDetail(game: gameSearched, isRecentSearched: isRecentsSearchs)
+                        } label: {
+                            SearchGameRow(game: gameSearched)
+                        }
                     }
                 }
-                .onDelete(perform: { searchesToDelete in
-                    searchesToDelete
-                        .map({ searchResults[$0].id })
-                        .forEach({ searchToDelete in
-                            modelData.recentlySearched.removeAll(where: { $0.id == searchToDelete })
-                        })
-                })
             }
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .navigationTitle("Search")

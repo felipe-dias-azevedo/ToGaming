@@ -22,7 +22,7 @@ struct GameCard: View {
             VStack(alignment: .leading, spacing: 2) {
                 HStack(alignment: .center) {
                     Text(game.name)
-                        .font(.headline)
+                        .font(.subheadline)
                         .foregroundColor(.primary)
                         .bold()
                     

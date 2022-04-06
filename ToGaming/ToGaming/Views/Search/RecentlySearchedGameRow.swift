@@ -1,18 +1,24 @@
 //
-//  SearchGameRow.swift
+//  RecentlySearchedGameRow.swift
 //  ToGaming
 //
-//  Created by felipe azevedo on 20/03/22.
+//  Created by felipe azevedo on 05/04/22.
 //
 
 import SwiftUI
 
-struct SearchGameRow: View {
+struct RecentlySearchedGameRow: View {
     
     var game: GameSearch
     
     var body: some View {
         HStack {
+            Image(game.coverImageName)
+                .resizable()
+                .frame(width: 56.25, height: 75)
+                .aspectRatio(contentMode: .fit)
+                .cornerRadius(8)
+            
             VStack(alignment: .leading, spacing: 4) {
                 Text(game.name)
                     .font(.body)
@@ -32,7 +38,7 @@ struct SearchGameRow: View {
             VStack(alignment: .trailing, spacing: 4) {
                 Text(String.init(format: "%.0f%%", game.rating))
                     .font(.subheadline)
-                    .fontWeight(.medium)
+                    .fontWeight(.regular)
                     .foregroundColor(.primary)
                 Text(DateHelper.toString(game.releaseDate))
                     .font(.caption2)
@@ -43,12 +49,12 @@ struct SearchGameRow: View {
     }
 }
 
-struct SearchGameRow_Previews: PreviewProvider {
+struct RecentlySearchedGameRow_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            SearchGameRow(game: ModelData().recentlySearched[0])
-            SearchGameRow(game: ModelData().recentlySearched[1])
-            SearchGameRow(game: ModelData().recentlySearched[2])
+            RecentlySearchedGameRow(game: ModelData().recentlySearched[0])
+            RecentlySearchedGameRow(game: ModelData().recentlySearched[1])
+            RecentlySearchedGameRow(game: ModelData().recentlySearched[2])
         }
     }
 }

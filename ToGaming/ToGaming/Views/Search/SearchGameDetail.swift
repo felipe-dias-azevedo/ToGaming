@@ -9,9 +9,11 @@ import SwiftUI
 
 struct SearchGameDetail: View {
     
+    @EnvironmentObject var modelData: ModelData
     @Environment(\.openURL) var openURL
     
     var game: GameSearch
+    var isRecentSearched: Bool
     @State private var index = 0
     @State private var addingGame = false
     
@@ -209,13 +211,20 @@ struct SearchGameDetail: View {
         .sheet(isPresented: $addingGame) {
             SearchGameAdd(game: game, adding: $addingGame)
         }
+        .onAppear(perform: {
+            // TODO: load data from IGDB
+            if !isRecentSearched && modelData.recentlySearched.first(where: { $0.igdbId == game.igdbId }) == nil {
+                    modelData.recentlySearched.append(game)
+                }
+            })
     }
 }
 
 struct SearchGameDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SearchGameDetail(game: ModelData().recentlySearched[0])
+            SearchGameDetail(game: ModelData().recentlySearched[0], isRecentSearched: false)
+                .environmentObject(ModelData())
                 .preferredColorScheme(.light)
         }
     }
