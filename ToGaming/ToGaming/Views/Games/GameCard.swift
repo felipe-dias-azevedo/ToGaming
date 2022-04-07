@@ -41,6 +41,11 @@ struct GameCard: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                     
+                    Image(systemName: StatusToIcon.name(game.gameState))
+                        .font(.caption)
+                        .accessibilityLabel(game.gameState.rawValue)
+                        .foregroundColor(.blue)
+                    
                     Spacer()
                     
                     if let score = game.score {
@@ -65,12 +70,17 @@ struct GameCard: View {
 
 struct GameCard_Previews: PreviewProvider {
     static var previews: some View {
-        
-        GameCard(game: ModelData().games[0])
-            .previewLayout(.fixed(width: 230, height: 180))
-        
-        GameCard(game: ModelData().games[2])
-            .previewLayout(.fixed(width: 230, height: 180))
-            .preferredColorScheme(.dark)
+        Group {
+            GameCard(game: ModelData().games[0])
+                .previewLayout(.fixed(width: 230, height: 180))
+            
+            GameCard(game: ModelData().games[2])
+                .previewLayout(.fixed(width: 230, height: 180))
+                .preferredColorScheme(.dark)
+            
+            GameCard(game: Game(id: UUID(), name: "Grand Theft Auto V", platforms: ["Playstation 4"], favoritePlatform: 0, genres: [], publisher: "", developer: "", insertDate: Date(), releaseDate: Date(), summary: "", rating: 0.0, ratingCount: 0.0, isFavorite: true, score: Game.Score.five, gameState: .playing, artworkImagesName: ["gow"], coverImageName: ""))
+                .previewLayout(.fixed(width: 230, height: 180))
+                .preferredColorScheme(.dark)
+        }
     }
 }

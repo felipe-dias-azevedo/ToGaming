@@ -14,8 +14,6 @@
 		4A1A673627F8AF15006656A6 /* ScrollItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A673527F8AF15006656A6 /* ScrollItems.swift */; };
 		4A1A673827F8B949006656A6 /* KeyValueText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A673727F8B949006656A6 /* KeyValueText.swift */; };
 		4A27352827E36C5C005C129A /* UserConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A27352727E36C5C005C129A /* UserConfig.swift */; };
-		4A2C311C27E97703001CAFD8 /* EmptyGameCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C311B27E97703001CAFD8 /* EmptyGameCard.swift */; };
-		4A2C311E27E97714001CAFD8 /* ToListGameCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C311D27E97714001CAFD8 /* ToListGameCard.swift */; };
 		4A2C312027E97E99001CAFD8 /* GamesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C311F27E97E99001CAFD8 /* GamesList.swift */; };
 		4A2D244927EC165E005A9502 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2D244827EC165E005A9502 /* FormField.swift */; };
 		4A3D48FE27F7EA5F00C390D0 /* SearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D48FD27F7EA5F00C390D0 /* SearchFilter.swift */; };
@@ -55,8 +53,6 @@
 		4A1A673527F8AF15006656A6 /* ScrollItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollItems.swift; sourceTree = "<group>"; };
 		4A1A673727F8B949006656A6 /* KeyValueText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueText.swift; sourceTree = "<group>"; };
 		4A27352727E36C5C005C129A /* UserConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfig.swift; sourceTree = "<group>"; };
-		4A2C311B27E97703001CAFD8 /* EmptyGameCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyGameCard.swift; sourceTree = "<group>"; };
-		4A2C311D27E97714001CAFD8 /* ToListGameCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToListGameCard.swift; sourceTree = "<group>"; };
 		4A2C311F27E97E99001CAFD8 /* GamesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesList.swift; sourceTree = "<group>"; };
 		4A2D244827EC165E005A9502 /* FormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
 		4A3D48FD27F7EA5F00C390D0 /* SearchFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilter.swift; sourceTree = "<group>"; };
@@ -100,16 +96,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4A2C311A27E976DF001CAFD8 /* Card */ = {
-			isa = PBXGroup;
-			children = (
-				4A87D2E327DEC8D800585B01 /* GameCard.swift */,
-				4A2C311B27E97703001CAFD8 /* EmptyGameCard.swift */,
-				4A2C311D27E97714001CAFD8 /* ToListGameCard.swift */,
-			);
-			path = Card;
-			sourceTree = "<group>";
-		};
 		4A2D244727EC164C005A9502 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,7 +213,7 @@
 		4A87D2DA27DEBC9A00585B01 /* Games */ = {
 			isa = PBXGroup;
 			children = (
-				4A2C311A27E976DF001CAFD8 /* Card */,
+				4A87D2E327DEC8D800585B01 /* GameCard.swift */,
 				4A87D2DD27DEBF2900585B01 /* GamesHome.swift */,
 				4A881E3E27E62DD400E86EBA /* GamesSearch.swift */,
 				4A87D2E127DEC5F000585B01 /* NewGame.swift */,
@@ -314,7 +300,6 @@
 				4AE2F22B27E4314A0036EAD9 /* AboutPage.swift in Sources */,
 				4A87D2E227DEC5F000585B01 /* NewGame.swift in Sources */,
 				4A0BE6D027E7F7D400B8D724 /* GameItem.swift in Sources */,
-				4A2C311E27E97714001CAFD8 /* ToListGameCard.swift in Sources */,
 				4A039D8727E5399100F49EEE /* ModelData.swift in Sources */,
 				4A61A97927FBD74D00A0612A /* ListSelect.swift in Sources */,
 				4A3D48FE27F7EA5F00C390D0 /* SearchFilter.swift in Sources */,
@@ -334,7 +319,6 @@
 				4A27352827E36C5C005C129A /* UserConfig.swift in Sources */,
 				4A0BE6D227E8074300B8D724 /* SearchGameRow.swift in Sources */,
 				4A87D2C927DE729400585B01 /* ToGamingApp.swift in Sources */,
-				4A2C311C27E97703001CAFD8 /* EmptyGameCard.swift in Sources */,
 				4A87D2E427DEC8D800585B01 /* GameCard.swift in Sources */,
 				4A3D490027F7F49C00C390D0 /* SearchGameAdd.swift in Sources */,
 				4A1A673627F8AF15006656A6 /* ScrollItems.swift in Sources */,

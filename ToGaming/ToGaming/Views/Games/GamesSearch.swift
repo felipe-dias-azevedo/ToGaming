@@ -10,19 +10,33 @@ import SwiftUI
 struct GamesSearch: View {
     
     @EnvironmentObject var modelData: ModelData
+    
     @Binding var canceled: Bool
+    @State private var showFavoritesOnly = false
+    @State private var filter = FilterStatus.all
     @State private var searchText = ""
     
     var gamesSortedSearched: Array<Binding<Game>> {
-        let gamesSorted = $modelData.games.sorted {
-            $0.wrappedValue.isFavorite && !$1.wrappedValue.isFavorite
-        }
+        let gamesSorted = $modelData.games
+            .sorted { $0.wrappedValue.isFavorite && !$1.wrappedValue.isFavorite }
+            .filter({ game in
+                (!showFavoritesOnly || game.isFavorite.wrappedValue) && (filter == .all || filter.rawValue == game.gameState.wrappedValue.rawValue) })
         
         if searchText.isEmpty || searchText.count < 3 {
             return gamesSorted
         }
         return gamesSorted
             .filter { $0.wrappedValue .name.lowercased().contains(searchText.lowercased()) }
+    }
+    
+    enum FilterStatus: String, CaseIterable, Identifiable {
+        case all = "All"
+        case playing = "Playing"
+        case played = "Played"
+        case toPlay = "To Play"
+        case toBuy = "To Buy"
+        
+        var id: FilterStatus { self }
     }
     
     var body: some View {
@@ -46,12 +60,32 @@ struct GamesSearch: View {
             }
             .listStyle(.inset)
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
-            .navigationTitle("All Games")
+            .navigationTitle("Saved Games")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-//                ToolbarItemGroup(placement: .navigationBarLeading) {
-//                    EditButton()
-//                }
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Menu {
+                        Picker("Status", selection: $filter) {
+                            ForEach(FilterStatus.allCases) { status in
+                                if status == .all {
+                                    Text(status.rawValue)
+                                        .tag(status)
+                                } else {
+                                    Label(status.rawValue, systemImage: StatusToIcon.name(status.rawValue))
+                                        .labelStyle(.titleAndIcon)
+                                        .tag(status)
+                                }
+                            }
+                        }
+                        .pickerStyle(.inline)
+                        
+                        Toggle(isOn: $showFavoritesOnly) {
+                            Label("Favorites only", systemImage: "heart.fill")
+                        }
+                    } label: {
+                        Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+                    }
+                }
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {

@@ -44,6 +44,7 @@ struct SearchHome: View {
                         } label: {
                             RecentlySearchedGameRow(game: gameSearched)
                         }
+                        // TODO: Swipe Actions with focused value (like apple landmarks)
                     }
                     .onDelete(perform: { searchesToDelete in
                         searchesToDelete
@@ -73,13 +74,13 @@ struct SearchHome: View {
                         Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
                     }
                 }
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button {
-                        addingNew.toggle()
-                    } label: {
-                        Label("New Game", systemImage: "square.and.pencil")
-                    }
-                }
+//                ToolbarItemGroup(placement: .navigationBarTrailing) {
+//                    Button {
+//                        addingNew.toggle()
+//                    } label: {
+//                        Label("New Game", systemImage: "square.and.pencil")
+//                    }
+//                }
             }
             .sheet(isPresented: $addingNew) {
                 NewGame(canceled: $addingNew, game: .new)

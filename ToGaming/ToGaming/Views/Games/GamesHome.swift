@@ -33,6 +33,8 @@ struct GamesHome: View {
                 GameItem(title: "Recent Games", games: recentGamesAvailable)
                 
                 GameItem(title: "Bought Games", games: gamesBought)
+                
+                // TODO: Recent games on list on bottom
             }
             .listStyle(.inset)
             .navigationTitle("Games")
@@ -41,7 +43,8 @@ struct GamesHome: View {
                     Button {
                         searching.toggle()
                     } label: {
-                        Label("Filter", systemImage: "magnifyingglass.circle")
+                        Label("Saved Search", systemImage: "magnifyingglass.circle")
+                            .labelStyle(.iconOnly)
                     }
                 }
                 

@@ -23,4 +23,9 @@ class StatusToIcon {
                 return "questionmark.circle.fill"
         }
     }
+    
+    static func name(_ value: String) -> String {
+        let status = Game.Status(rawValue: value)
+        return name(status)
+    }
 }

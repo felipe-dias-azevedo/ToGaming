@@ -12,6 +12,10 @@ struct NewGame: View {
     @Binding var canceled: Bool
     @State var game: Game
     
+    func addNewGame() {
+        // TODO: Insert igdbId as random number between 0 and 10000 and make it negative
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -44,6 +48,7 @@ struct NewGame: View {
                     Button("Save") {
                         // TODO: Save new game locally
                         canceled.toggle()
+                        addNewGame()
                     }
                 }
             }
