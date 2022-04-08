@@ -31,7 +31,8 @@ final class ModelData: ObservableObject {
             score: .four,
             gameState: .playing,
             artworkImagesName: ["gow", "tw"],
-            coverImageName: "cover_gow"),
+            coverImageName: "cover_gow",
+            updateDate: Date()),
         Game(
             id: UUID(),
             igdbId: 2,
@@ -49,7 +50,8 @@ final class ModelData: ObservableObject {
             isFavorite: false,
             gameState: .played,
             artworkImagesName: ["tw"],
-            coverImageName: "cover_gow"),
+            coverImageName: "cover_gow",
+            updateDate: Date()),
         Game(
             id: UUID(),
             igdbId: 3,
@@ -67,7 +69,8 @@ final class ModelData: ObservableObject {
             isFavorite: true,
             gameState: .toBuy,
             artworkImagesName: ["gt"],
-            coverImageName: "cover_gow"),
+            coverImageName: "cover_gow",
+            updateDate: Date()),
         Game(
             id: UUID(),
             igdbId: 4,
@@ -86,7 +89,8 @@ final class ModelData: ObservableObject {
             isFavorite: true,
             gameState: .toPlay,
             artworkImagesName: ["legosw"],
-            coverImageName: "cover_legosw"),
+            coverImageName: "cover_legosw",
+            updateDate: Date()),
         Game(
             id: UUID(),
             igdbId: 5,
@@ -104,7 +108,8 @@ final class ModelData: ObservableObject {
             isFavorite: false,
             gameState: .toBuy,
             artworkImagesName: ["nm"],
-            coverImageName: "cover_gow")
+            coverImageName: "cover_gow",
+            updateDate: Date())
     ]
     
     @Published var recentlySearched: [GameSearch] = [

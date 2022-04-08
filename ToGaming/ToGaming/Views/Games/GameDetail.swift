@@ -90,6 +90,7 @@ struct GameDetail: View {
                         
                         Button {
                             game.isFavorite.toggle()
+                            game.updateDate = Date()
                         } label: {
                             Label("Toggle Favorite", systemImage: game.isFavorite ? "heart.fill" : "heart")
                                 .labelStyle(.iconOnly)

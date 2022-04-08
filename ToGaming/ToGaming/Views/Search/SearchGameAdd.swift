@@ -17,7 +17,8 @@ struct SearchGameAdd: View {
     @State private var gameToAdd: Game = .new
     
     func addGameToLibrary() {
-        let newGame = Game(id: UUID(), igdbId: game.igdbId, name: game.name, platforms: game.platforms, favoritePlatform: gameToAdd.favoritePlatform, genres: game.genres, publisher: game.publisher, developer: game.developer, insertDate: Date(), releaseDate: game.releaseDate, summary: game.summary, storyline: game.storyline, rating: game.rating, ratingCount: game.ratingCount, igdbReference: game.igdbReference, isFavorite: gameToAdd.isFavorite, score: gameToAdd.score, gameState: gameToAdd.gameState, artworkImagesName: game.artworkImagesName, coverImageName: game.coverImageName)
+        let dateNow = Date()
+        let newGame = Game(id: UUID(), igdbId: game.igdbId, name: game.name, platforms: game.platforms, favoritePlatform: gameToAdd.favoritePlatform, genres: game.genres, publisher: game.publisher, developer: game.developer, insertDate: dateNow, releaseDate: game.releaseDate, summary: game.summary, storyline: game.storyline, rating: game.rating, ratingCount: game.ratingCount, igdbReference: game.igdbReference, isFavorite: gameToAdd.isFavorite, score: gameToAdd.score, gameState: gameToAdd.gameState, artworkImagesName: game.artworkImagesName, coverImageName: game.coverImageName, updateDate: dateNow)
         modelData.games.append(newGame)
     }
     

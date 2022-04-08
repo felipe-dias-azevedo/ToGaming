@@ -213,8 +213,8 @@
 		4A87D2DA27DEBC9A00585B01 /* Games */ = {
 			isa = PBXGroup;
 			children = (
-				4A87D2E327DEC8D800585B01 /* GameCard.swift */,
 				4A87D2DD27DEBF2900585B01 /* GamesHome.swift */,
+				4A87D2E327DEC8D800585B01 /* GameCard.swift */,
 				4A881E3E27E62DD400E86EBA /* GamesSearch.swift */,
 				4A87D2E127DEC5F000585B01 /* NewGame.swift */,
 				4A87279427E0309200E8F76B /* EditGame.swift */,

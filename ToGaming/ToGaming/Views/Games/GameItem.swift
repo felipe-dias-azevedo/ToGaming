@@ -48,8 +48,7 @@ struct GameItem: View {
                 }
                 .frame(height: 160)
             }
-            .padding(.top, 15)
-            .padding(.bottom, 10)
+            .padding(.vertical, 10)
             .listRowInsets(EdgeInsets())
             .listRowSeparator(.hidden)
         }

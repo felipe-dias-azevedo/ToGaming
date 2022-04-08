@@ -138,7 +138,6 @@ struct EditGame: View {
                     }
                     .foregroundColor(.red)
                 }
-                // TODO: Option to remove game from "games"
             }
             .navigationBarTitle(game.name)
             .navigationBarTitleDisplayMode(.inline)
@@ -146,6 +145,8 @@ struct EditGame: View {
                 ToolbarItemGroup(placement: .confirmationAction) {
                     Button("Done") {
                         editing.toggle()
+                        // FIXME: Update only when there's changes to game
+                        game.updateDate = Date()
                     }
                 }
             }
