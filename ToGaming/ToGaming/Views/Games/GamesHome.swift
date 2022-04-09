@@ -54,29 +54,54 @@ struct GamesHome: View {
         }
     }
     
+    var gamesRecentViewed: Array<Binding<Game>> {
+        // TODO: Get only recent viewed games
+        $games.sorted(by: { $0.isFavorite.wrappedValue && $1.isFavorite.wrappedValue })
+    }
+    
     var body: some View {
         NavigationView {
-            ScrollView {
+            // TODO: Overview of favorite + recent games in summary box
                 
-                // TODO: Overview of favorite + recent games in summary box
-                
+            ScrollView(.vertical, showsIndicators: false) {
+                    
                 GameItem(title: "The Bests", games: gamesBest)
-                
+
                 GameItem(title: "Recently Added", games: gamesRecentlyAdded)
-                
+
                 GameItem(title: "Recently Updated", games: gamesRecentlyUpdated)
-                
+
                 GameItem(title: "Recently Launched", games: gamesLaunchedRecently)
-                
+
                 GameItem(title: "Bought Recently Added", games: gamesBoughtRecently)
-                
+
                 GameItem(title: "High Rating + Score", games: gamesHighRatingScore)
-                
+
                 GameItem(title: "Finished And Not Scored", games: gamesNotScoredPlayed)
-                
+
                 GameItem(title: "Favorites Not Scored", games: gamesNotScoredFavorites)
-                
-                // TODO: Recent games on list on bottom
+            
+                VStack {
+                    HStack {
+                        Text("Recent Viewed")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        Spacer()
+                    }
+                    
+                    ForEach(gamesRecentViewed) { $game in
+                        Divider()
+                        NavigationLink {
+                            GameDetail(game: $game)
+                        } label: {
+                            GameRow(game: game)
+                                .padding(.trailing, 6)
+                        }
+                    }
+                }
+                .padding(.leading, 20)
+                .padding(.trailing, 18)
+                .padding(.vertical, 16)
             }
             .listStyle(.inset)
             .navigationTitle("Games")
@@ -115,6 +140,6 @@ struct GamesHome: View {
 struct GamesHome_Previews: PreviewProvider {
     static var previews: some View {
         GamesHome(games: .constant(ModelData().games))
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
     }
 }

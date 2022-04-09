@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameRow: View {
     
-    var game: Game
+    let game: Game
     
     var body: some View {
         HStack {
@@ -44,18 +44,17 @@ struct GameRow: View {
 
 struct GameRow_Previews: PreviewProvider {
     static var previews: some View {
-        GameRow(game: ModelData().games[0])
-            .previewLayout(.fixed(width: 300, height: 60))
-        
-        GameRow(game: ModelData().games[1])
-            .previewLayout(.fixed(width: 300, height: 60))
-            .preferredColorScheme(.dark)
-        
-        GameRow(game: ModelData().games[2])
-            .previewLayout(.fixed(width: 300, height: 60))
-        
-        GameRow(game: ModelData().games[3])
-            .previewLayout(.fixed(width: 300, height: 60))
-            .preferredColorScheme(.dark)
+        Group {
+            GameRow(game: ModelData().games[0])
+            
+            GameRow(game: ModelData().games[1])
+                .preferredColorScheme(.dark)
+            
+            GameRow(game: ModelData().games[2])
+            
+            GameRow(game: ModelData().games[3])
+                .preferredColorScheme(.dark)
+        }
+        .previewLayout(.fixed(width: 300, height: 60))
     }
 }
