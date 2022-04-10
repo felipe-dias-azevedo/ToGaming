@@ -16,11 +16,19 @@ struct AboutPage: View {
             VStack {
                 // TODO: Add App icon + App Name on top of information
                 
-                Image("togaming")
-                    .resizable()
-                    .frame(width: 150, height: 150)
-                    .cornerRadius(16)
-                    .shadow(radius: 2)
+                VStack {
+                    Image("togaming")
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                        .cornerRadius(16)
+                        .shadow(radius: 2)
+                        
+                    Text("ToGaming")
+                        .font(.title2)
+                        .fontWeight(.medium)
+                        .padding(.top, 8)
+                }
+                .padding(.bottom, 32)
                 
                 HStack {
                     VStack(alignment: .leading, spacing: 8) {
@@ -70,7 +78,7 @@ struct AboutPage: View {
                     }
                 }
             }
-            .padding(.vertical, 20)
+            .padding(.vertical, 32)
             .padding(.horizontal, 10)
         }
     }

@@ -11,7 +11,7 @@ import SwiftUI
 struct GameSearch: Hashable, Codable, Identifiable {
     
     var id: UUID
-    var igdbId: Int?
+    var igdbId: Int32
     var name: String
     var genres: [String]
     var platforms: [String]

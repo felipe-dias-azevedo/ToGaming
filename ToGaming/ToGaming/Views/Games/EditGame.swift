@@ -84,7 +84,7 @@ struct EditGame: View {
                     footer: Text("Game data from IGDB that updates periodically")) {
                         
                         Group {
-                            KeyValueText(key: "IGDB ID", value: String(game.igdbId ?? 0))
+                            KeyValueText(key: "IGDB ID", value: String(game.igdbId ))
                             
                             KeyValueText(key: "Name", value: game.name)
                             

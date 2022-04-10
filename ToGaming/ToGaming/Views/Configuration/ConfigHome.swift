@@ -9,18 +9,30 @@ import SwiftUI
 
 struct ConfigHome: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.editMode) private var editMode
     
-    @Binding var userConfig: UserConfig
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(
+            keyPath: \UserConfigCore.userName,
+            ascending: false)],
+        animation: .default)
+    private var userConfigCore: FetchedResults<UserConfigCore>
     @State private var seeAbout = false
     @State private var editing: EditMode = .inactive
+    
+    var userConfig: UserConfig {
+        return userConfigCore
+            .map({ UserConfigHelper.convert($0) })
+            .first!
+    }
     
     var body: some View {
         NavigationView {
             Form {
-                EditFormField(title: "User Name", textField: $userConfig.userName, isEditing: editing.isEditing)
+                EditFormField(title: "User Name", textField: userConfig.userName, isEditing: editing.isEditing)
                 
-                EditFormField(title: "Preferred Platform", textField: $userConfig.preferredPlatform, isEditing: editing.isEditing)
+                EditFormField(title: "Preferred Platform", textField: userConfig.preferredPlatform, isEditing: editing.isEditing)
                 
                 // TODO: Change which modes to show in GamesHome (select which to see)
                 
@@ -28,9 +40,9 @@ struct ConfigHome: View {
                     header: Text("API Credentials"),
                     footer: Text("Store your API Credentials for searching for Games")
                 ) {
-                    EditFormField(title: "Client ID", textField: $userConfig.clientId, isEditing: editing.isEditing)
+                    EditFormField(title: "Client ID", textField: userConfig.clientId, isEditing: editing.isEditing)
                     
-                    EditFormField(title: "Secret Key", textField: $userConfig.secretKey, isEditing: editing.isEditing)
+                    EditFormField(title: "Secret Key", textField: userConfig.secretKey, isEditing: editing.isEditing)
                 }
             }
             .toolbar {
@@ -55,6 +67,7 @@ struct ConfigHome: View {
 
 struct ConfigHome_Previews: PreviewProvider {
     static var previews: some View {
-        ConfigHome(userConfig: .constant(ModelData().userConfig))
+        ConfigHome()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

@@ -9,54 +9,65 @@ import SwiftUI
 
 struct GamesHome: View {
     
-    @Binding var games: [Game]
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(
+            keyPath: \GameCore.id,
+            ascending: false)],
+        animation: .default)
+    private var gamesCore: FetchedResults<GameCore>
     @State private var searching = false
     @State private var interval = 0
     @State private var intervals = [7, 15, 30, 90]
     
-    var gamesBest: Array<Binding<Game>> {
-        $games.filter { $0.score.wrappedValue?.rawValue ?? 0 > 4 && $0.rating.wrappedValue > 90 && $0.isFavorite.wrappedValue == true }
+    var games: [Game] {
+        return gamesCore.map({ GameHelper.convert($0) })
     }
     
-    var gamesLaunchedRecently: Array<Binding<Game>> {
-        $games.filter { $0.wrappedValue.releaseDate >= DateHelper.toInterval(from: intervals[interval]) }
+    var gamesBest: Array<Game> {
+        games.filter { $0.score?.rawValue ?? 0 > 4 && $0.rating > 90 && $0.isFavorite == true }
     }
     
-    var gamesRecentlyAdded: Array<Binding<Game>> {
-        $games.filter { $0.wrappedValue.insertDate >= DateHelper.toInterval(from: intervals[interval]) }
+    var gamesLaunchedRecently: Array<Game> {
+        games.filter { $0.releaseDate >= DateHelper.toInterval(from: intervals[interval]) }
     }
     
-    var gamesRecentlyUpdated: Array<Binding<Game>> {
-        $games.filter { $0.wrappedValue.updateDate >= DateHelper.toInterval(from: intervals[interval]) && DateHelper.isNear(from: $0.wrappedValue.insertDate, to: $0.wrappedValue.updateDate, between: 5) }
+    var gamesRecentlyAdded: Array<Game> {
+        games.filter { $0.insertDate >= DateHelper.toInterval(from: intervals[interval]) }
     }
     
-    var gamesBoughtRecently: Array<Binding<Game>> {
-        $games.filter { $game -> Bool in
-            return $game.gameState.wrappedValue != Game.Status.toBuy && $game.insertDate.wrappedValue >= DateHelper.toInterval(from: intervals[interval])
+    var gamesRecentlyUpdated: Array<Game> {
+        games.filter { $0.updateDate >= DateHelper.toInterval(from: intervals[interval]) && DateHelper.isNear(from: $0.wrappedValue.insertDate, to: $0.updateDate, between: 5) }
+    }
+    
+    var gamesBoughtRecently: Array<Game> {
+        games.filter { $game -> Bool in
+            return $game.gameState != Game.Status.toBuy && $game.insertDate >= DateHelper.toInterval(from: intervals[interval])
         }
     }
     
-    var gamesHighRatingScore: Array<Binding<Game>> {
-        $games.filter { $game -> Bool in
-            return $game.rating.wrappedValue >= 70 && $game.score.wrappedValue?.rawValue ?? 0 >= 4
+    var gamesHighRatingScore: Array<Game> {
+        games.filter { $game -> Bool in
+            return $game.rating >= 70 && $game.score?.rawValue ?? 0 >= 4
         }
     }
     
-    var gamesNotScoredPlayed: Array<Binding<Game>> {
-        $games.filter { $game -> Bool in
-            return $game.score.wrappedValue == nil && $game.gameState.wrappedValue == Game.Status.played
+    var gamesNotScoredPlayed: Array<Game> {
+        games.filter { $game -> Bool in
+            return $game.score == nil && $game.gameState == Game.Status.played
         }
     }
     
-    var gamesNotScoredFavorites: Array<Binding<Game>> {
-        $games.filter { $game -> Bool in
-            return $game.score.wrappedValue == nil && $game.isFavorite.wrappedValue == true
+    var gamesNotScoredFavorites: Array<Game> {
+        games.filter { $game -> Bool in
+            return $game.score == nil && $game.isFavorite == true
         }
     }
     
-    var gamesRecentViewed: Array<Binding<Game>> {
+    var gamesRecentViewed: Array<Game> {
         // TODO: Get only recent viewed games
-        $games.sorted(by: { $0.isFavorite.wrappedValue && $1.isFavorite.wrappedValue })
+        games.sorted(by: { $0.isFavorite && $1.isFavorite })
     }
     
     var body: some View {
@@ -89,10 +100,10 @@ struct GamesHome: View {
                         Spacer()
                     }
                     
-                    ForEach(gamesRecentViewed) { $game in
+                    ForEach(gamesRecentViewed) { game in
                         Divider()
                         NavigationLink {
-                            GameDetail(game: $game)
+                            GameDetail(game: game)
                         } label: {
                             GameRow(game: game)
                                 .padding(.trailing, 6)
@@ -139,7 +150,8 @@ struct GamesHome: View {
 
 struct GamesHome_Previews: PreviewProvider {
     static var previews: some View {
-        GamesHome(games: .constant(ModelData().games))
+        GamesHome()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .preferredColorScheme(.light)
     }
 }

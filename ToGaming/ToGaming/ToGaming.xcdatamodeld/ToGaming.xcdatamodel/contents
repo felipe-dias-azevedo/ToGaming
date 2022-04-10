@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E230" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="GameCore" representedClassName="GameCore" syncable="YES" codeGenerationType="class">
+        <attribute name="artworkImagesName" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="coverImageName" attributeType="String"/>
+        <attribute name="developer" attributeType="String"/>
+        <attribute name="favoritePlatform" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="gameState" attributeType="String"/>
+        <attribute name="genres" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="igdbId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="igdbReference" optional="YES" attributeType="URI"/>
+        <attribute name="insertDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isFavorite" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="platforms" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="publisher" attributeType="String"/>
+        <attribute name="rating" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="ratingCount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="releaseDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="storyline" optional="YES" attributeType="String"/>
+        <attribute name="summary" attributeType="String"/>
+        <attribute name="updateDate" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="GameSearchCore" representedClassName="GameSearchCore" syncable="YES" codeGenerationType="class">
+        <attribute name="artworkImagesName" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="coverImageName" attributeType="String"/>
+        <attribute name="developer" attributeType="String"/>
+        <attribute name="genres" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="igdbId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="igdbReference" optional="YES" attributeType="URI"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="platforms" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="publisher" attributeType="String"/>
+        <attribute name="rating" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="ratingCount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="releaseDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="storyline" optional="YES" attributeType="String"/>
+        <attribute name="summary" attributeType="String"/>
+    </entity>
+    <entity name="UserConfigCore" representedClassName="UserConfigCore" syncable="YES" codeGenerationType="class">
+        <attribute name="clientId" attributeType="String"/>
+        <attribute name="preferredPlatform" attributeType="String"/>
+        <attribute name="secretKey" attributeType="String"/>
+        <attribute name="userName" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="GameCore" positionX="-54" positionY="0" width="128" height="344"/>
+        <element name="GameSearchCore" positionX="-36" positionY="18" width="128" height="254"/>
+        <element name="UserConfigCore" positionX="-18" positionY="189" width="128" height="89"/>
+    </elements>
+</model>

@@ -111,7 +111,7 @@ struct GameDetail: View {
                         
                         Spacer()
                         
-                        Text(game.platforms[game.favoritePlatform])
+                        Text(game.platforms[Int(game.favoritePlatform)])
                             .fontWeight(.bold)
                             .font(.headline)
                             .foregroundColor(.primary)

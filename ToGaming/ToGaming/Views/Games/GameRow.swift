@@ -23,7 +23,7 @@ struct GameRow: View {
                 Text(game.name)
                     .foregroundColor(.primary)
                 
-                Text(game.platforms[game.favoritePlatform])
+                Text(game.platforms[Int(game.favoritePlatform)])
                     .font(.caption)
                     .foregroundColor(.secondary)
             }

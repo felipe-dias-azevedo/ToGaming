@@ -19,6 +19,12 @@
 		4A3D48FE27F7EA5F00C390D0 /* SearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D48FD27F7EA5F00C390D0 /* SearchFilter.swift */; };
 		4A3D490027F7F49C00C390D0 /* SearchGameAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D48FF27F7F49C00C390D0 /* SearchGameAdd.swift */; };
 		4A3F991B27E217D60016AC9C /* StatsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3F991A27E217D60016AC9C /* StatsHome.swift */; };
+		4A5604282803097D008A15C6 /* ToGaming.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A5604262803097D008A15C6 /* ToGaming.xcdatamodeld */; };
+		4A56042A28031588008A15C6 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56042928031588008A15C6 /* PreviewData.swift */; };
+		4A56042C28031604008A15C6 /* GameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56042B28031604008A15C6 /* GameHelper.swift */; };
+		4A56042E28031EF5008A15C6 /* GameSearchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56042D28031EF5008A15C6 /* GameSearchHelper.swift */; };
+		4A560430280324EF008A15C6 /* UserConfigHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56042F280324EF008A15C6 /* UserConfigHelper.swift */; };
+		4A56043228032665008A15C6 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56043128032665008A15C6 /* Persistence.swift */; };
 		4A61A97927FBD74D00A0612A /* ListSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A61A97827FBD74D00A0612A /* ListSelect.swift */; };
 		4A61A97B27FBDFBF00A0612A /* FilterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A61A97A27FBDFBF00A0612A /* FilterSection.swift */; };
 		4A61A97D27FBEA9500A0612A /* EditFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A61A97C27FBEA9500A0612A /* EditFormField.swift */; };
@@ -58,6 +64,12 @@
 		4A3D48FD27F7EA5F00C390D0 /* SearchFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilter.swift; sourceTree = "<group>"; };
 		4A3D48FF27F7F49C00C390D0 /* SearchGameAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGameAdd.swift; sourceTree = "<group>"; };
 		4A3F991A27E217D60016AC9C /* StatsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsHome.swift; sourceTree = "<group>"; };
+		4A5604272803097D008A15C6 /* ToGaming.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToGaming.xcdatamodel; sourceTree = "<group>"; };
+		4A56042928031588008A15C6 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
+		4A56042B28031604008A15C6 /* GameHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHelper.swift; sourceTree = "<group>"; };
+		4A56042D28031EF5008A15C6 /* GameSearchHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSearchHelper.swift; sourceTree = "<group>"; };
+		4A56042F280324EF008A15C6 /* UserConfigHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfigHelper.swift; sourceTree = "<group>"; };
+		4A56043128032665008A15C6 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		4A61A97827FBD74D00A0612A /* ListSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSelect.swift; sourceTree = "<group>"; };
 		4A61A97A27FBDFBF00A0612A /* FilterSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSection.swift; sourceTree = "<group>"; };
 		4A61A97C27FBEA9500A0612A /* EditFormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFormField.swift; sourceTree = "<group>"; };
@@ -123,6 +135,9 @@
 			children = (
 				4A81A29127E58A200078BD7B /* DateHelper.swift */,
 				4AB9583E27F2A9A500EAE362 /* StatusToIcon.swift */,
+				4A56042B28031604008A15C6 /* GameHelper.swift */,
+				4A56042D28031EF5008A15C6 /* GameSearchHelper.swift */,
+				4A56042F280324EF008A15C6 /* UserConfigHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -152,6 +167,7 @@
 				4A87D2C827DE729400585B01 /* ToGamingApp.swift */,
 				4AB6898427F4E0F200718215 /* ContentView.swift */,
 				4A87D2CC27DE729500585B01 /* Assets.xcassets */,
+				4A5604262803097D008A15C6 /* ToGaming.xcdatamodeld */,
 				4A87D2CE27DE729500585B01 /* Preview Content */,
 			);
 			path = ToGaming;
@@ -185,6 +201,8 @@
 				4A27352727E36C5C005C129A /* UserConfig.swift */,
 				4A039D8627E5399100F49EEE /* ModelData.swift */,
 				4A81A28A27E571830078BD7B /* GameSearch.swift */,
+				4A56042928031588008A15C6 /* PreviewData.swift */,
+				4A56043128032665008A15C6 /* Persistence.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -302,13 +320,16 @@
 				4A0BE6D027E7F7D400B8D724 /* GameItem.swift in Sources */,
 				4A039D8727E5399100F49EEE /* ModelData.swift in Sources */,
 				4A61A97927FBD74D00A0612A /* ListSelect.swift in Sources */,
+				4A5604282803097D008A15C6 /* ToGaming.xcdatamodeld in Sources */,
 				4A3D48FE27F7EA5F00C390D0 /* SearchFilter.swift in Sources */,
 				4AB9583D27F297D800EAE362 /* AddGame.swift in Sources */,
 				4A87D2DE27DEBF2900585B01 /* GamesHome.swift in Sources */,
+				4A56043228032665008A15C6 /* Persistence.swift in Sources */,
 				4A81A28F27E585FA0078BD7B /* SearchGameDetail.swift in Sources */,
 				4A87D2DC27DEBCFD00585B01 /* SearchHome.swift in Sources */,
 				4A61A97B27FBDFBF00A0612A /* FilterSection.swift in Sources */,
 				4A87279727E0330600E8F76B /* GameDetail.swift in Sources */,
+				4A56042A28031588008A15C6 /* PreviewData.swift in Sources */,
 				4A2D244927EC165E005A9502 /* FormField.swift in Sources */,
 				4A1A673427F89D3C006656A6 /* Rating.swift in Sources */,
 				4AB9583F27F2A9A500EAE362 /* StatusToIcon.swift in Sources */,
@@ -318,6 +339,7 @@
 				4AB70CE127FD29B6002DA54B /* RecentlySearchedGameRow.swift in Sources */,
 				4A27352827E36C5C005C129A /* UserConfig.swift in Sources */,
 				4A0BE6D227E8074300B8D724 /* SearchGameRow.swift in Sources */,
+				4A56042C28031604008A15C6 /* GameHelper.swift in Sources */,
 				4A87D2C927DE729400585B01 /* ToGamingApp.swift in Sources */,
 				4A87D2E427DEC8D800585B01 /* GameCard.swift in Sources */,
 				4A3D490027F7F49C00C390D0 /* SearchGameAdd.swift in Sources */,
@@ -327,6 +349,8 @@
 				4A87279527E0309200E8F76B /* EditGame.swift in Sources */,
 				4A881E3F27E62DD400E86EBA /* GamesSearch.swift in Sources */,
 				4A61A97D27FBEA9500A0612A /* EditFormField.swift in Sources */,
+				4A560430280324EF008A15C6 /* UserConfigHelper.swift in Sources */,
+				4A56042E28031EF5008A15C6 /* GameSearchHelper.swift in Sources */,
 				4A87D2E027DEBF3300585B01 /* ConfigHome.swift in Sources */,
 				4A81A29227E58A200078BD7B /* DateHelper.swift in Sources */,
 				4A87279327E02F0700E8F76B /* Game.swift in Sources */,
@@ -458,12 +482,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ToGaming/Preview Content\"";
 				DEVELOPMENT_TEAM = X9ZWB64F79;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ToGaming/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -476,6 +502,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = felipe.ToGaming;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -487,12 +514,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ToGaming/Preview Content\"";
 				DEVELOPMENT_TEAM = X9ZWB64F79;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ToGaming/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -505,6 +534,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = felipe.ToGaming;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -533,6 +563,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4A5604262803097D008A15C6 /* ToGaming.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4A5604272803097D008A15C6 /* ToGaming.xcdatamodel */,
+			);
+			currentVersion = 4A5604272803097D008A15C6 /* ToGaming.xcdatamodel */;
+			path = ToGaming.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4A87D2BD27DE729300585B01 /* Project object */;
 }
