@@ -9,29 +9,31 @@ import SwiftUI
 
 struct GameRow: View {
     
-    let game: Game
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    let game: FetchedResults<GameCore>.Element
     
     var body: some View {
         HStack {
-            Image(game.artworkImagesName[0])
+            Image(game.artworkImagesName![0])
                 .resizable()
                 .frame(width: 88.88, height: 50)
                 .aspectRatio(contentMode: .fit)
                 .cornerRadius(10)
             
             VStack(alignment: .leading, spacing: 2) {
-                Text(game.name)
+                Text(game.name!)
                     .foregroundColor(.primary)
                 
-                Text(game.platforms[Int(game.favoritePlatform)])
+                Text(game.platforms![Int(game.favoritePlatform)])
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
             
             Spacer()
             
-            Image(systemName: StatusToIcon.name(game.gameState))
-                .accessibilityLabel(game.gameState.rawValue)
+            Image(systemName: StatusToIcon.name(Game.Status.init(rawValue: game.gameState!)!))
+                .accessibilityLabel(Game.Status.init(rawValue: game.gameState!)!.rawValue)
                 .foregroundColor(.blue)
             
             if (game.isFavorite) {
@@ -45,16 +47,17 @@ struct GameRow: View {
 struct GameRow_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            GameRow(game: ModelData().games[0])
+            GameRow(game: GameCore.example)
             
-            GameRow(game: ModelData().games[1])
+            GameRow(game: GameCore.example)
                 .preferredColorScheme(.dark)
             
-            GameRow(game: ModelData().games[2])
+            GameRow(game: GameCore.example)
             
-            GameRow(game: ModelData().games[3])
+            GameRow(game: GameCore.example)
                 .preferredColorScheme(.dark)
         }
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         .previewLayout(.fixed(width: 300, height: 60))
     }
 }

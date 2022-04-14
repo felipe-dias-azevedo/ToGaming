@@ -9,8 +9,10 @@ import SwiftUI
 
 struct GameItem: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
     var title: String
-    var games: Array<Binding<Game>>
+    var games: [FetchedResults<GameCore>.Element]
     
     var body: some View {
         if (!games.isEmpty) {
@@ -36,9 +38,9 @@ struct GameItem: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(alignment: .top, spacing: 0) {
-                        ForEach(games) { $game in
+                        ForEach(games) { game in
                             NavigationLink {
-                                GameDetail(game: $game)
+                                GameDetail(game: game)
                             } label: {
                                 GameCard(game: game)
                             }
@@ -56,19 +58,14 @@ struct GameItem: View {
 }
 
 struct GameItem_Previews: PreviewProvider {
-    
-    static let games = ModelData().games
-    
     static var previews: some View {
-        GameItem(title: "All Games", games: games.map { .constant($0) })
-            .previewLayout(.fixed(width: 360, height: 250))
-        
-        GameItem(title: "New Games", games: games.map { .constant($0) })
-            .previewLayout(.fixed(width: 360, height: 250))
-            .preferredColorScheme(.dark)
-        
-        GameItem(title: "New Games", games: Array())
-            .previewLayout(.fixed(width: 360, height: 250))
-            .preferredColorScheme(.dark)
+        Group {
+            GameItem(title: "All Games", games: GameCore.examples)
+            
+            GameItem(title: "New Games", games: GameCore.examples)
+                .preferredColorScheme(.dark)
+        }
+        .previewLayout(.fixed(width: 360, height: 250))
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

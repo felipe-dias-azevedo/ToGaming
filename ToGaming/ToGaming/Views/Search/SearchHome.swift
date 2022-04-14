@@ -9,7 +9,11 @@ import SwiftUI
 
 struct SearchHome: View {
     
-    @EnvironmentObject var modelData: ModelData
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \GameCore.id, ascending: true)], animation: .default)
+    private var recentlySearched: FetchedResults<GameSearchCore>
+    
     @State private var searchText = ""
     @State private var addingNew = false
     @State private var filtering = false
@@ -25,13 +29,13 @@ struct SearchHome: View {
         return searchText.isEmpty
     }
     
-    var searchResults: [GameSearch] {
-        let recentlySearched = modelData.recentlySearched
+    var searchResults: [GameSearchCore] {
         if isRecentsSearchs {
-            return recentlySearched
+            // TODO: Sort by "insert date" on memory of recent searches
+            return recentlySearched.sorted(by: { $0.releaseDate! > $1.releaseDate! })
         }
         return recentlySearched
-            .filter { $0.name.uppercased().contains(searchText.uppercased()) }
+            .filter { $0.name!.uppercased().contains(searchText.uppercased()) }
     }
     
     var body: some View {
@@ -46,12 +50,11 @@ struct SearchHome: View {
                         }
                         // TODO: Swipe Actions with focused value (like apple landmarks)
                     }
-                    .onDelete(perform: { searchesToDelete in
-                        searchesToDelete
-                            .map({ searchResults[$0].id })
-                            .forEach({ searchToDelete in
-                                modelData.recentlySearched.removeAll(where: { $0.id == searchToDelete })
-                            })
+                    .onDelete(perform: { offsets in
+                        withAnimation {
+                            offsets.map{ recentlySearched[$0] }.forEach(viewContext.delete)
+                            PersistenceController().save(context: viewContext)
+                        }
                     })
                 }
                 else {
@@ -65,6 +68,7 @@ struct SearchHome: View {
                 }
             }
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+            .navigationViewStyle(.stack)
             .navigationTitle("Search")
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
@@ -95,7 +99,7 @@ struct SearchHome: View {
 struct SearchHome_Previews: PreviewProvider {
     static var previews: some View {
         SearchHome()
-            .environmentObject(ModelData())
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .preferredColorScheme(.dark)
     }
 }

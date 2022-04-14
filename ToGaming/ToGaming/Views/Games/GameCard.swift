@@ -9,11 +9,13 @@ import SwiftUI
 
 struct GameCard: View {
     
-    var game: Game
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    var game: FetchedResults<GameCore>.Element
     
     var body: some View {
         VStack(alignment: .leading) {
-            Image(game.artworkImagesName[0])
+            Image(game.artworkImagesName![0])
                 .renderingMode(.original)
                 .resizable()
                 .frame(width: 195.55, height: 110)
@@ -21,7 +23,7 @@ struct GameCard: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 HStack(alignment: .center) {
-                    Text(game.name)
+                    Text(game.name!)
                         .font(.subheadline)
                         .foregroundColor(.primary)
                         .bold()
@@ -37,18 +39,18 @@ struct GameCard: View {
                 }
                 
                 HStack(alignment: .center) {
-                    Text(game.platforms[Int(game.favoritePlatform)])
+                    Text(game.platforms![Int(game.favoritePlatform)])
                         .font(.caption)
                         .foregroundColor(.secondary)
                     
-                    Image(systemName: StatusToIcon.name(game.gameState))
+                    Image(systemName: StatusToIcon.name(Game.Status.init(rawValue: game.gameState!)!))
                         .font(.caption)
-                        .accessibilityLabel(game.gameState.rawValue)
+                        .accessibilityLabel(Game.Status.init(rawValue: game.gameState!)!.rawValue)
                         .foregroundColor(.blue)
                     
                     Spacer()
                     
-                    if let score = game.score {
+                    if let score = Game.Score.init(rawValue: game.score) {
                         HStack(alignment: .center, spacing: 2) {
                             Text(String(score.rawValue))
                                 .font(.caption)
@@ -71,16 +73,14 @@ struct GameCard: View {
 struct GameCard_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            GameCard(game: ModelData().games[0])
-                .previewLayout(.fixed(width: 230, height: 180))
+            GameCard(game: GameCore.example)
             
-            GameCard(game: ModelData().games[2])
-                .previewLayout(.fixed(width: 230, height: 180))
+            GameCard(game: GameCore.example)
                 .preferredColorScheme(.dark)
             
-            GameCard(game: Game(id: UUID(), igdbId: 1, name: "Grand Theft Auto V", platforms: ["Playstation 4"], favoritePlatform: 0, genres: [], publisher: "", developer: "", insertDate: Date(), releaseDate: Date(), summary: "", rating: 0.0, ratingCount: 0.0, isFavorite: true, score: Game.Score.five, gameState: .playing, artworkImagesName: ["gow"], coverImageName: "", updateDate: Date()))
-                .previewLayout(.fixed(width: 230, height: 180))
+            GameCard(game: GameCore.example)
                 .preferredColorScheme(.dark)
         }
+        .previewLayout(.fixed(width: 230, height: 180))
     }
 }

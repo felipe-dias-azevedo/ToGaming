@@ -9,12 +9,17 @@ import SwiftUI
 
 struct EditGame: View {
     
-    @EnvironmentObject var modelData: ModelData
+    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.openURL) var openURL
     
     @Binding var editing: Bool
-    @Binding var game: Game
+    var game: FetchedResults<GameCore>.Element
+    
+    @State private var isFavorite: Bool = false
+    @State private var favoritePlatform: Int16 = 0
+    @State private var gameState: Game.Status = .toBuy
+    @State private var score: Game.Score? = nil
     
     var body: some View {
         NavigationView {
@@ -24,7 +29,7 @@ struct EditGame: View {
                     footer: Text("Game data stored locally that can be changed")) {
                     
                         Group {
-                            Toggle(isOn: $game.isFavorite) {
+                            Toggle(isOn: $isFavorite) {
                                 Text("Favorite Game")
                                     .fontWeight(.medium)
                             }
@@ -33,9 +38,9 @@ struct EditGame: View {
                                 Text("Platform")
                                     .fontWeight(.medium)
                                 Spacer()
-                                Picker("Platform", selection: $game.favoritePlatform) {
-                                    ForEach((0..<game.platforms.count), id: \.self) { index in
-                                        Label(game.platforms[index], systemImage: "star")
+                                Picker("Platform", selection: $favoritePlatform) {
+                                    ForEach((0..<game.platforms!.count), id: \.self) { index in
+                                        Label(game.platforms![index], systemImage: "star")
                                             .labelStyle(.titleOnly)
                                             .tag(index)
                                     }
@@ -47,7 +52,7 @@ struct EditGame: View {
                                 Text("Status")
                                     .fontWeight(.medium)
                                 Spacer()
-                                Picker("Status", selection: $game.gameState) {
+                                Picker("Status", selection: $gameState) {
                                     ForEach(Game.Status.allCases) { status in
                                         Label(status.rawValue, systemImage: StatusToIcon.name(status))
                                             .labelStyle(.titleAndIcon)
@@ -68,7 +73,7 @@ struct EditGame: View {
                                     
                                 Spacer()
                                 
-                                Picker("Score", selection: $game.score) {
+                                Picker("Score", selection: $score) {
                                     ForEach(Game.Score.allCases) { status in
                                         Text(String(status.rawValue))
                                             .tag(status as Game.Score?)
@@ -86,13 +91,13 @@ struct EditGame: View {
                         Group {
                             KeyValueText(key: "IGDB ID", value: String(game.igdbId ))
                             
-                            KeyValueText(key: "Name", value: game.name)
+                            KeyValueText(key: "Name", value: game.name!)
                             
-                            KeyValueText(key: "Publisher", value: game.publisher)
+                            KeyValueText(key: "Publisher", value: game.publisher!)
                             
-                            KeyValueText(key: "Developer", value: game.developer)
+                            KeyValueText(key: "Developer", value: game.developer!)
                             
-                            KeyValueText(key: "Release Date", value: DateHelper.toString(game.releaseDate))
+                            KeyValueText(key: "Release Date", value: DateHelper.toString(game.releaseDate!))
                             
                             KeyValueText(key: "Rating", value: String.init(format: "%.2f%%", game.rating))
                             
@@ -124,9 +129,10 @@ struct EditGame: View {
                 
                 Section {
                     Button {
-                        guard let index = modelData.games.firstIndex(of: game) else { return }
-                        modelData.games.remove(at: index)
-                        self.presentationMode.wrappedValue.dismiss()
+                        withAnimation {
+                            viewContext.delete(game)
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
                     } label: {
                         HStack {
                             Text("Remove Game")
@@ -139,7 +145,7 @@ struct EditGame: View {
                     .foregroundColor(.red)
                 }
             }
-            .navigationBarTitle(game.name)
+            .navigationBarTitle(game.name!)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .confirmationAction) {
@@ -156,6 +162,7 @@ struct EditGame: View {
 
 struct EditGame_Previews: PreviewProvider {
     static var previews: some View {
-        EditGame(editing: .constant(true), game: .constant(ModelData().games[0]))
+        EditGame(editing: .constant(true), game: GameCore.example)
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

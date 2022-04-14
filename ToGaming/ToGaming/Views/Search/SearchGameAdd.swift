@@ -9,16 +9,16 @@ import SwiftUI
 
 struct SearchGameAdd: View {
     
-    @EnvironmentObject var modelData: ModelData
+    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
     
-    var game: GameSearch
+    var game: FetchedResults<GameSearchCore>.Element
     @Binding var adding: Bool
     @State private var gameToAdd: Game = .new
     
     func addGameToLibrary() {
         let dateNow = Date()
-        let newGame = Game(id: UUID(), igdbId: game.igdbId, name: game.name, platforms: game.platforms, favoritePlatform: gameToAdd.favoritePlatform, genres: game.genres, publisher: game.publisher, developer: game.developer, insertDate: dateNow, releaseDate: game.releaseDate, summary: game.summary, storyline: game.storyline, rating: game.rating, ratingCount: game.ratingCount, igdbReference: game.igdbReference, isFavorite: gameToAdd.isFavorite, score: gameToAdd.score, gameState: gameToAdd.gameState, artworkImagesName: game.artworkImagesName, coverImageName: game.coverImageName, updateDate: dateNow)
+        let newGame = Game(id: UUID(), igdbId: game.igdbId, name: game.name!, platforms: game.platforms!, favoritePlatform: gameToAdd.favoritePlatform, genres: game.genres, publisher: game.publisher, developer: game.developer, insertDate: dateNow, releaseDate: game.releaseDate!, summary: game.summary, storyline: game.storyline, rating: game.rating, ratingCount: game.ratingCount, igdbReference: game.igdbReference, isFavorite: gameToAdd.isFavorite, score: gameToAdd.score, gameState: gameToAdd.gameState, artworkImagesName: game.artworkImagesName, coverImageName: game.coverImageName, updateDate: dateNow)
         modelData.games.append(newGame)
     }
     
@@ -27,10 +27,10 @@ struct SearchGameAdd: View {
             Form {
                 Section {
                     Group {
-                        KeyValueText(key: "Name", value: game.name)
-                        KeyValueText(key: "Developer", value: game.developer)
+                        KeyValueText(key: "Name", value: game.name!)
+                        KeyValueText(key: "Developer", value: game.developer!)
                         KeyValueText(key: "Rating", value: String.init(format: "%.2f%%", game.rating))
-                        KeyValueText(key: "Release Date", value: DateHelper.toString(game.releaseDate))
+                        KeyValueText(key: "Release Date", value: DateHelper.toString(game.releaseDate!))
                     }
                     .padding(.vertical, 6)
                 }
@@ -50,8 +50,8 @@ struct SearchGameAdd: View {
                                 .fontWeight(.medium)
                             Spacer()
                             Picker("Platform", selection: $gameToAdd.favoritePlatform) {
-                                ForEach((0..<game.platforms.count), id: \.self) { index in
-                                    Label(game.platforms[index], systemImage: "star")
+                                ForEach((0..<game.platforms!.count), id: \.self) { index in
+                                    Label(game.platforms![index], systemImage: "star")
                                         .labelStyle(.titleOnly)
                                         .tag(index)
                                 }
@@ -145,7 +145,7 @@ struct SearchGameAdd: View {
 
 struct SearchGameAdd_Previews: PreviewProvider {
     static var previews: some View {
-        SearchGameAdd(game: ModelData().recentlySearched[0], adding: .constant(true))
-            .environmentObject(ModelData())
+        SearchGameAdd(game: , adding: .constant(true))
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

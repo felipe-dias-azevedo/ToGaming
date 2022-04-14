@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct EditFormField: View {
+struct EditFormField<Content: View>: View {
     
     var title: String
-    var placeholder: String?
-    @Binding var textField: String
+    var textField: String
     var isEditing: Bool
+    @ViewBuilder var content: Content
     
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
@@ -21,7 +21,7 @@ struct EditFormField: View {
                 .fontWeight(.regular)
             
             if isEditing {
-                TextField(placeholder ?? title, text: $textField)
+                content
             } else {
                 Spacer()
                 
@@ -37,9 +37,9 @@ struct EditFormField_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             Form {
-                EditFormField(title: "Name", textField: .constant(String()), isEditing: true)
-                
-                EditFormField(title: "Object", textField: .constant("value"), isEditing: false)
+                EditFormField(title: "Name", textField: "", isEditing: true) {
+                    TextField("Name", text: .constant(""))
+                }
             }
         }
     }

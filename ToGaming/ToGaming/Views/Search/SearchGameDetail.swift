@@ -9,10 +9,10 @@ import SwiftUI
 
 struct SearchGameDetail: View {
     
-    @EnvironmentObject var modelData: ModelData
+    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.openURL) var openURL
     
-    var game: GameSearch
+    var game: FetchedResults<GameSearchCore>.Element
     var isRecentSearched: Bool
     @State private var index = 0
     @State private var addingGame = false
@@ -22,8 +22,8 @@ struct SearchGameDetail: View {
             // TODO: When requesting data show ProgressView (loader)
             ScrollView(.vertical, showsIndicators: false) {
                 TabView(selection: $index) {
-                    ForEach((0..<game.artworkImagesName.count), id: \.self) { index in
-                        Image(game.artworkImagesName[index])
+                    ForEach((0..<game.artworkImagesName!.count), id: \.self) { index in
+                        Image(game.artworkImagesName![index])
                             .renderingMode(.original)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -36,21 +36,21 @@ struct SearchGameDetail: View {
             LazyVStack {
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
-                        Text(game.name)
+                        Text(game.name!)
                             .fontWeight(.bold)
                             .font(.largeTitle)
                             .foregroundColor(.primary)
                         Spacer()
                     }
                     HStack {
-                        Text(game.developer)
+                        Text(game.developer!)
                             .fontWeight(.medium)
                             .font(.title3)
                             .foregroundColor(.secondary)
                         Spacer()
                     }
                     HStack {
-                        Text(game.publisher)
+                        Text(game.publisher!)
                             .fontWeight(.heavy)
                             .font(.footnote)
                             .foregroundColor(.secondary)
@@ -60,7 +60,7 @@ struct SearchGameDetail: View {
                 .padding(.bottom, 12)
                 
                 HStack {
-                    Image(game.coverImageName)
+                    Image(game.coverImageName!)
                         .renderingMode(.original)
                         .resizable()
                         .frame(width: 112.5, height: 150)
@@ -110,10 +110,10 @@ struct SearchGameDetail: View {
                 }
                 
                 
-                ScrollItems(title: "Genres:", items: game.genres)
+                ScrollItems(title: "Genres:", items: game.genres!)
                     .padding(.vertical, 6)
                 
-                ScrollItems(title: "Platforms:", subtitle: "Total: \(game.platforms.count)", items: game.platforms)
+                ScrollItems(title: "Platforms:", subtitle: "Total: \(game.platforms.count)", items: game.platforms!)
                     .padding(.vertical, 6)
                 
                 HStack {
@@ -121,7 +121,7 @@ struct SearchGameDetail: View {
                         .fontWeight(.light)
                         .font(.callout)
                     Spacer()
-                    Text(DateHelper.toString(game.releaseDate))
+                    Text(DateHelper.toString(game.releaseDate!))
                         .fontWeight(.bold)
                         .font(.subheadline)
                 }
@@ -141,7 +141,7 @@ struct SearchGameDetail: View {
                     }
                     .padding(.vertical, 10)
 
-                    Text(game.summary)
+                    Text(game.summary!)
                         .multilineTextAlignment(.leading)
                         .font(.body)
                         .foregroundColor(.primary)
@@ -196,7 +196,7 @@ struct SearchGameDetail: View {
             }
             .shadow(radius: 8)
         }
-        .navigationBarTitle(game.name)
+        .navigationBarTitle(game.name!)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -223,8 +223,8 @@ struct SearchGameDetail: View {
 struct SearchGameDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SearchGameDetail(game: ModelData().recentlySearched[0], isRecentSearched: false)
-                .environmentObject(ModelData())
+            SearchGameDetail(game: , isRecentSearched: false)
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
                 .preferredColorScheme(.light)
         }
     }

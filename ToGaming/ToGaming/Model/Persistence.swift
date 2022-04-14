@@ -6,21 +6,19 @@
 //
 
 import CoreData
+import SwiftUI
 
-struct PersistenceController {
+class PersistenceController: ObservableObject {
     static let shared = PersistenceController()
 
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        let games = PreviewData.Games(to: viewContext)
+        _ = PreviewData.Games(to: viewContext)
+        _ = PreviewData.GamesSearch(to: viewContext)
+        _ = PreviewData.UsersConfig(to: viewContext)
         
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+        result.save(context: viewContext)
         return result
     }()
 
@@ -37,5 +35,37 @@ struct PersistenceController {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+    
+    func save(context: NSManagedObjectContext) {
+        do {
+            try context.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+}
+
+extension GameCore {
+    static var example: GameCore {
+        let context = PersistenceController.preview.container.viewContext
+                
+        let fetchRequest: NSFetchRequest<GameCore> = GameCore.fetchRequest()
+        fetchRequest.fetchLimit = 1
+        
+        let results = try? context.fetch(fetchRequest)
+        
+        return (results?.first!)!
+    }
+    
+    static var examples: [FetchedResults<GameCore>.Element] {
+        let context = PersistenceController.preview.container.viewContext
+                
+        let fetchRequest: NSFetchRequest<GameCore> = GameCore.fetchRequest()
+        
+        let results = try? context.fetch(fetchRequest)
+        
+        return results!
     }
 }

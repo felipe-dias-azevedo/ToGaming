@@ -9,20 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @Environment(\.managedObjectContext) private var viewContext
-    
-    
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(
-            keyPath: \GameSearchCore.id,
-            ascending: false)],
-        animation: .default)
-    private var gamesSearchCore: FetchedResults<GameSearchCore>
     @State private var selection: Tab = .games
-    
-    var games: [Game] {
-        return gamesCore.map({ GameHelper.convert($0) })
-    }
     
     enum Tab {
         case games
