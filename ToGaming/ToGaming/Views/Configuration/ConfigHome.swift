@@ -12,7 +12,7 @@ struct ConfigHome: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.editMode) private var editMode
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \UserConfigCore.userName, ascending: false)], animation: .default)
+    @FetchRequest(sortDescriptors: [], animation: .default)
     private var userConfig: FetchedResults<UserConfigCore>
     
     @State private var userName: String = ""

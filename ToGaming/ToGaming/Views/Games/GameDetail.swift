@@ -12,9 +12,10 @@ struct GameDetail: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.openURL) var openURL
     
-    var game: FetchedResults<GameCore>.Element
+    let game: FetchedResults<GameCore>.Element
     @State var editing = false
     @State private var index = 0
+    @State private var isFavorite = false
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -29,7 +30,7 @@ struct GameDetail: View {
             .frame(height: 220)
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             .aspectRatio(contentMode: .fill)
-            
+
             LazyVStack {
                 HStack(alignment: .top) {
                     Image(game.coverImageName!)
@@ -90,13 +91,15 @@ struct GameDetail: View {
                         Spacer()
                         
                         Button {
-                            game.isFavorite.toggle()
+                            isFavorite.toggle()
                             game.updateDate = Date()
+                            game.isFavorite = isFavorite
+                            PersistenceController().save(context: viewContext)
                         } label: {
-                            Label("Toggle Favorite", systemImage: game.isFavorite ? "heart.fill" : "heart")
+                            Label("Toggle Favorite", systemImage: isFavorite ? "heart.fill" : "heart")
                                 .labelStyle(.iconOnly)
                                 .font(.title2)
-                                .foregroundColor(game.isFavorite ? .red : .secondary)
+                                .foregroundColor(isFavorite ? .red : .secondary)
                         }
                     }
                     
@@ -226,6 +229,9 @@ struct GameDetail: View {
             .padding(.bottom, 30)
             .padding(.horizontal, 20)
         }
+        .onAppear(perform: {
+            isFavorite = game.isFavorite
+        })
         .navigationTitle(game.name!)
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $editing) {

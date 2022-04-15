@@ -36,7 +36,7 @@ struct GameRow: View {
                 .accessibilityLabel(Game.Status.init(rawValue: game.gameState!)!.rawValue)
                 .foregroundColor(.blue)
             
-            if (game.isFavorite) {
+            if game.isFavorite {
                 Image(systemName: "heart.fill")
                     .foregroundColor(.red)
             }

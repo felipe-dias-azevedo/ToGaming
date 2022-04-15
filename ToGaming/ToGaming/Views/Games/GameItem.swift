@@ -12,7 +12,7 @@ struct GameItem: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     var title: String
-    var games: [FetchedResults<GameCore>.Element]
+    let games: [FetchedResults<GameCore>.Element]
     
     var body: some View {
         if (!games.isEmpty) {
@@ -38,7 +38,7 @@ struct GameItem: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(alignment: .top, spacing: 0) {
-                        ForEach(games) { game in
+                        ForEach(games, id: \.self) { game in
                             NavigationLink {
                                 GameDetail(game: game)
                             } label: {

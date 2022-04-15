@@ -52,7 +52,7 @@ struct SearchHome: View {
                     }
                     .onDelete(perform: { offsets in
                         withAnimation {
-                            offsets.map{ recentlySearched[$0] }.forEach(viewContext.delete)
+                            offsets.map{ searchResults[$0] }.forEach(viewContext.delete)
                             PersistenceController().save(context: viewContext)
                         }
                     })

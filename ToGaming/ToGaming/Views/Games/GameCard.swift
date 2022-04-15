@@ -11,7 +11,7 @@ struct GameCard: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
-    var game: FetchedResults<GameCore>.Element
+    let game: FetchedResults<GameCore>.Element
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -74,9 +74,6 @@ struct GameCard_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             GameCard(game: GameCore.example)
-            
-            GameCard(game: GameCore.example)
-                .preferredColorScheme(.dark)
             
             GameCard(game: GameCore.example)
                 .preferredColorScheme(.dark)

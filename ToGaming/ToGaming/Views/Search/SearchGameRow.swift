@@ -9,20 +9,20 @@ import SwiftUI
 
 struct SearchGameRow: View {
     
-    var game: GameSearch
+    var game: FetchedResults<GameSearchCore>.Element
     
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text(game.name)
+                Text(game.name!)
                     .font(.body)
                     .fontWeight(.medium)
                     .foregroundColor(.primary)
-                Text(game.platforms.joined(separator: ", "))
+                Text(game.platforms!.joined(separator: ", "))
                     .font(.caption)
                     .fontWeight(.regular)
                     .foregroundColor(.secondary)
-                Text(game.developer)
+                Text(game.developer!)
                     .font(.caption2)
                     .fontWeight(.light)
                     .foregroundColor(.secondary)
@@ -34,7 +34,7 @@ struct SearchGameRow: View {
                     .font(.subheadline)
                     .fontWeight(.medium)
                     .foregroundColor(.primary)
-                Text(DateHelper.toString(game.releaseDate))
+                Text(DateHelper.toString(game.releaseDate!))
                     .font(.caption2)
                     .fontWeight(.light)
                     .foregroundColor(.secondary)
@@ -46,9 +46,7 @@ struct SearchGameRow: View {
 struct SearchGameRow_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            SearchGameRow(game: ModelData().recentlySearched[0])
-            SearchGameRow(game: ModelData().recentlySearched[1])
-            SearchGameRow(game: ModelData().recentlySearched[2])
+            SearchGameRow(game: GameSearchCore.example)
         }
     }
 }

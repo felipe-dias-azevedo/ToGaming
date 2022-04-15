@@ -69,3 +69,26 @@ extension GameCore {
         return results!
     }
 }
+
+extension GameSearchCore {
+    static var example: GameSearchCore {
+        let context = PersistenceController.preview.container.viewContext
+                
+        let fetchRequest: NSFetchRequest<GameSearchCore> = GameSearchCore.fetchRequest()
+        fetchRequest.fetchLimit = 1
+        
+        let results = try? context.fetch(fetchRequest)
+        
+        return (results?.first!)!
+    }
+    
+    static var examples: [FetchedResults<GameSearchCore>.Element] {
+        let context = PersistenceController.preview.container.viewContext
+                
+        let fetchRequest: NSFetchRequest<GameSearchCore> = GameSearchCore.fetchRequest()
+        
+        let results = try? context.fetch(fetchRequest)
+        
+        return results!
+    }
+}

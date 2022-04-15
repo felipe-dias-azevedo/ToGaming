@@ -113,7 +113,7 @@ struct SearchGameDetail: View {
                 ScrollItems(title: "Genres:", items: game.genres!)
                     .padding(.vertical, 6)
                 
-                ScrollItems(title: "Platforms:", subtitle: "Total: \(game.platforms.count)", items: game.platforms!)
+                ScrollItems(title: "Platforms:", subtitle: "Total: \(game.platforms!.count)", items: game.platforms!)
                     .padding(.vertical, 6)
                 
                 HStack {
@@ -213,9 +213,9 @@ struct SearchGameDetail: View {
         }
         .onAppear(perform: {
             // TODO: load data from IGDB
-            if !isRecentSearched && modelData.recentlySearched.first(where: { $0.igdbId == game.igdbId }) == nil {
-                    modelData.recentlySearched.append(game)
-                }
+//            if !isRecentSearched && modelData.recentlySearched.first(where: { $0.igdbId == game.igdbId }) == nil {
+//                    modelData.recentlySearched.append(game)
+//                }
             })
     }
 }
@@ -223,7 +223,7 @@ struct SearchGameDetail: View {
 struct SearchGameDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SearchGameDetail(game: , isRecentSearched: false)
+            SearchGameDetail(game: GameSearchCore.example, isRecentSearched: false)
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
                 .preferredColorScheme(.light)
         }

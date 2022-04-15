@@ -54,7 +54,7 @@ struct GamesSearch: View {
                 .onDelete(perform: { offsets in
                     // FIXME: If deleted from parent component, it doesnt show delete action anymore
                     withAnimation {
-                        offsets.map{ games[$0] }.forEach(viewContext.delete)
+                        offsets.map{ gamesSortedSearched[$0] }.forEach(viewContext.delete)
                         PersistenceController().save(context: viewContext)
                     }
                 })
