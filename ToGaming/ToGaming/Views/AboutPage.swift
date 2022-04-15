@@ -37,7 +37,7 @@ struct AboutPage: View {
                             .foregroundColor(.secondary)
                         
                         Text("Felipe Azevedo")
-                            .font(.title)
+                            .font(.title2)
                     }
                     .padding()
                     
@@ -50,7 +50,7 @@ struct AboutPage: View {
                             .foregroundColor(.secondary)
                         
                         Text("2022")
-                            .font(.title2)
+                            .font(.title3)
                             .foregroundColor(.primary)
                     }
                     .padding()
@@ -58,9 +58,13 @@ struct AboutPage: View {
                 .padding(.top, 10)
                 
                 Divider()
-                    .padding(.horizontal, 10)
+                    .padding(.horizontal, 18)
                 
-                Text("Version 0.1")
+                
+                if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+                    Text("Version \(version)")
+                        .padding(.top, 10)
+                }
                 
                 Spacer()
                 

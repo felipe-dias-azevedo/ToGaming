@@ -124,22 +124,23 @@ struct SearchGameAdd: View {
                 }
                 
                 Section {
-                    if games.firstIndex(where: { $0.igdbId == game.igdbId }) != nil
+                    if let index = games.firstIndex(where: { $0.igdbId == game.igdbId })
                     {
                         Button {
                             withAnimation {
-                                viewContext.delete(game)
+                                viewContext.delete(games[index])
                                 PersistenceController().save(context: viewContext)
                                 
                                 self.presentationMode.wrappedValue.dismiss()
                             }
                         } label: {
                             HStack {
+                                Spacer()
                                 Text("Remove Game")
                                     .fontWeight(.medium)
-                                Spacer()
                                 Label("Remove Game", systemImage: "minus")
                                     .labelStyle(.iconOnly)
+                                Spacer()
                             }
                         }
                         .foregroundColor(.red)
@@ -152,11 +153,12 @@ struct SearchGameAdd: View {
                             }
                         } label: {
                             HStack {
+                                Spacer()
                                 Text("Add Game")
                                     .fontWeight(.medium)
-                                Spacer()
                                 Label("Add Game", systemImage: "plus")
                                     .labelStyle(.iconOnly)
+                                Spacer()
                             }
                         }
                     }

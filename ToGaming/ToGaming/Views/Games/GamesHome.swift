@@ -77,27 +77,29 @@ struct GamesHome: View {
 
                 GameItem(title: "Favorites Not Scored", games: gamesNotScoredFavorites)
             
-                VStack {
-                    HStack {
-                        Text("Recent Viewed")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                        Spacer()
-                    }
-                    
-                    ForEach(gamesRecentViewed) { game in
-                        Divider()
-                        NavigationLink {
-                            GameDetail(game: game)
-                        } label: {
-                            GameRow(game: game)
-                                .padding(.trailing, 6)
+                if !gamesRecentViewed.isEmpty {
+                    VStack {
+                        HStack {
+                            Text("Recent Viewed")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                            Spacer()
+                        }
+                        
+                        ForEach(gamesRecentViewed) { game in
+                            Divider()
+                            NavigationLink {
+                                GameDetail(game: game)
+                            } label: {
+                                GameRow(game: game)
+                                    .padding(.trailing, 6)
+                            }
                         }
                     }
+                    .padding(.leading, 20)
+                    .padding(.trailing, 18)
+                    .padding(.vertical, 16)
                 }
-                .padding(.leading, 20)
-                .padding(.trailing, 18)
-                .padding(.vertical, 16)
             }
             .navigationViewStyle(.stack)
             .listStyle(.inset)

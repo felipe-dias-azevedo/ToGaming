@@ -75,6 +75,7 @@ struct ConfigHome: View {
                                 user.preferredPlatform = preferredPlatform
                                 user.clientId = clientId
                                 user.secretKey = secretKey
+                                PersistenceController().save(context: viewContext)
                             }
                         })
                 }
