@@ -42,6 +42,10 @@
 		4A87D2E227DEC5F000585B01 /* NewGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87D2E127DEC5F000585B01 /* NewGame.swift */; };
 		4A87D2E427DEC8D800585B01 /* GameCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87D2E327DEC8D800585B01 /* GameCard.swift */; };
 		4A881E3F27E62DD400E86EBA /* GamesSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A881E3E27E62DD400E86EBA /* GamesSearch.swift */; };
+		4AAA0B3F280CF29900D5410E /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 4AAA0B3E280CF29900D5410E /* SwiftyJSON */; };
+		4AAA0B42280CF2AE00D5410E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4AAA0B41280CF2AE00D5410E /* Alamofire */; };
+		4AAA0B44280CF88900D5410E /* GameSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAA0B43280CF88900D5410E /* GameSearchViewModel.swift */; };
+		4AAA0B46280D013900D5410E /* GameNewSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAA0B45280D013900D5410E /* GameNewSearch.swift */; };
 		4AB6898527F4E0F300718215 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6898427F4E0F200718215 /* ContentView.swift */; };
 		4AB70CE127FD29B6002DA54B /* RecentlySearchedGameRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB70CE027FD29B6002DA54B /* RecentlySearchedGameRow.swift */; };
 		4AB9583D27F297D800EAE362 /* AddGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB9583C27F297D800EAE362 /* AddGame.swift */; };
@@ -89,6 +93,8 @@
 		4A87D2E127DEC5F000585B01 /* NewGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGame.swift; sourceTree = "<group>"; };
 		4A87D2E327DEC8D800585B01 /* GameCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCard.swift; sourceTree = "<group>"; };
 		4A881E3E27E62DD400E86EBA /* GamesSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesSearch.swift; sourceTree = "<group>"; };
+		4AAA0B43280CF88900D5410E /* GameSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSearchViewModel.swift; sourceTree = "<group>"; };
+		4AAA0B45280D013900D5410E /* GameNewSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNewSearch.swift; sourceTree = "<group>"; };
 		4AB6898427F4E0F200718215 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4AB70CE027FD29B6002DA54B /* RecentlySearchedGameRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySearchedGameRow.swift; sourceTree = "<group>"; };
 		4AB9583C27F297D800EAE362 /* AddGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGame.swift; sourceTree = "<group>"; };
@@ -104,6 +110,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AAA0B3F280CF29900D5410E /* SwiftyJSON in Frameworks */,
+				4AAA0B42280CF2AE00D5410E /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +211,7 @@
 				4A87279227E02F0700E8F76B /* Game.swift */,
 				4A27352727E36C5C005C129A /* UserConfig.swift */,
 				4A81A28A27E571830078BD7B /* GameSearch.swift */,
+				4AAA0B45280D013900D5410E /* GameNewSearch.swift */,
 				4A56042928031588008A15C6 /* PreviewData.swift */,
 				4A56043128032665008A15C6 /* Persistence.swift */,
 			);
@@ -252,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				4AE830AC280A039300D6BEFE /* IgdbService.swift */,
+				4AAA0B43280CF88900D5410E /* GameSearchViewModel.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -272,6 +282,10 @@
 			dependencies = (
 			);
 			name = ToGaming;
+			packageProductDependencies = (
+				4AAA0B3E280CF29900D5410E /* SwiftyJSON */,
+				4AAA0B41280CF2AE00D5410E /* Alamofire */,
+			);
 			productName = ToGaming;
 			productReference = 4A87D2C527DE729400585B01 /* ToGaming.app */;
 			productType = "com.apple.product-type.application";
@@ -300,6 +314,10 @@
 				Base,
 			);
 			mainGroup = 4A87D2BC27DE729300585B01;
+			packageReferences = (
+				4AAA0B3D280CF29900D5410E /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				4AAA0B40280CF2AE00D5410E /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 4A87D2C627DE729400585B01 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -352,12 +370,14 @@
 				4A0BE6D227E8074300B8D724 /* SearchGameRow.swift in Sources */,
 				4A56042C28031604008A15C6 /* GameHelper.swift in Sources */,
 				4A87D2C927DE729400585B01 /* ToGamingApp.swift in Sources */,
+				4AAA0B44280CF88900D5410E /* GameSearchViewModel.swift in Sources */,
 				4A87D2E427DEC8D800585B01 /* GameCard.swift in Sources */,
 				4A3D490027F7F49C00C390D0 /* SearchGameAdd.swift in Sources */,
 				4A1A673627F8AF15006656A6 /* ScrollItems.swift in Sources */,
 				4A1A673827F8B949006656A6 /* KeyValueText.swift in Sources */,
 				4A81A28B27E571830078BD7B /* GameSearch.swift in Sources */,
 				4AE830AA2809E01500D6BEFE /* SearchGameResults.swift in Sources */,
+				4AAA0B46280D013900D5410E /* GameNewSearch.swift in Sources */,
 				4A87279527E0309200E8F76B /* EditGame.swift in Sources */,
 				4A881E3F27E62DD400E86EBA /* GamesSearch.swift in Sources */,
 				4A61A97D27FBEA9500A0612A /* EditFormField.swift in Sources */,
@@ -575,6 +595,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4AAA0B3D280CF29900D5410E /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		4AAA0B40280CF2AE00D5410E /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4AAA0B3E280CF29900D5410E /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4AAA0B3D280CF29900D5410E /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		4AAA0B41280CF2AE00D5410E /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4AAA0B40280CF2AE00D5410E /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		4A5604262803097D008A15C6 /* ToGaming.xcdatamodeld */ = {

@@ -14,11 +14,14 @@ struct SearchHome: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \GameCore.id, ascending: true)], animation: .default)
     private var recentlySearched: FetchedResults<GameSearchCore>
     
+    let service = IgdbService()
+    
     @State private var searchText = ""
-    @State private var searchGamesResults: [GameSearchCore] = []
+    @State private var searchGamesResults: [GameNewSearch] = []
     @State private var addingNew = false
     @State private var filtering = false
     @State private var showAlert = false
+    @State private var isLoading = false
     
     @State private var dateBeforeFilter: Date = Date()
     @State private var dateAfterFilter: Date = Date()
@@ -28,17 +31,34 @@ struct SearchHome: View {
     @State private var developerFilter: String? = nil
     
     func searchGameBy() {
+        isLoading = true
         if searchText.isEmpty {
             searchGamesResults = []
+            isLoading = false
             return
         }
-        // TODO: Search game on IGDB
-        searchGamesResults = recentlySearched.filter { $0.name!.uppercased().contains(searchText.uppercased()) }
+        service.config()
+        service.searchGame(name: searchText) { gameSearchData in
+            if let data = gameSearchData {
+                searchGamesResults = data.compactMap({ GameNewSearch(
+                    id: $0.id,
+                    name: $0.name,
+                    rating: $0.aggregatedRating,
+                    releaseDate: DateHelper.toDate(from: $0.firstReleaseDate),
+                    platforms: $0.platforms.map{ $0.name },
+                    developer: $0.involvedCompanies
+                        .first(where: { $0.developer })
+                        .map({ $0.company.name })) })
+            } else {
+                showAlert = true
+            }
+            isLoading = false
+        }
     }
     
     var body: some View {
         NavigationView {
-            SearchGameResults(searchResults: searchGamesResults, recentlySearched: recentlySearched.sorted(by: { $0.releaseDate! > $1.releaseDate! }))
+            SearchGameResults(searchResults: searchGamesResults, recentlySearched: recentlySearched.sorted(by: { $0.releaseDate! > $1.releaseDate! }), isLoading: isLoading)
                 .alert("Search Error", isPresented: $showAlert) {
                     Button("OK", role: .cancel) {}
                 } message: {

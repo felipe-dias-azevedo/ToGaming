@@ -45,6 +45,18 @@ class PersistenceController: ObservableObject {
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
+    
+    func getUserConfig() -> UserConfigCore? {
+        do {
+            let fetchRequest: NSFetchRequest<UserConfigCore> = UserConfigCore.fetchRequest()
+            fetchRequest.fetchLimit = 1
+            let results = try container.viewContext.fetch(fetchRequest)
+            
+            return results.first
+        } catch {
+            return nil
+        }
+    }
 }
 
 extension GameCore {

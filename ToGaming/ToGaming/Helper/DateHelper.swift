@@ -27,6 +27,15 @@ class DateHelper {
         return Date.now.addingTimeInterval(-interval)
     }
     
+    static func toDate(from timestamp: Int?) -> Date? {
+        
+        guard let time = timestamp else {
+            return nil
+        }
+        
+        return Date(timeIntervalSince1970: TimeInterval(time))
+    }
+    
     static func isNear(from oldDate: Date, to newDate: Date, between minutes: Int) -> Bool {
         
         let time = 3600 * minutes

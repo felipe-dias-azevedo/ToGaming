@@ -167,10 +167,10 @@ class PreviewData {
     
     static func UsersConfig(to context: NSManagedObjectContext) -> UserConfigCore {
         let userConfig = UserConfig(
-            userName: "",
-            preferredPlatform: "",
-            clientId: "",
-            secretKey: "")
+            userName: "artnault",
+            preferredPlatform: "Playstation 4",
+            clientId: "uja0s93r4ari8uzsqcffpabdze15ul",
+            secretKey: "oqlqejfg58ss78tsis0xrt2oyyvyaf")
         return UserConfigHelper.convert(userConfig, context)
     }
 }
