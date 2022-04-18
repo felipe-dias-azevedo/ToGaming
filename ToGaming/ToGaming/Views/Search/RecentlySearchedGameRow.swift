@@ -46,6 +46,7 @@ struct RecentlySearchedGameRow: View {
                     .foregroundColor(.secondary)
             }
         }
+        .padding(.vertical, 4)
     }
 }
 

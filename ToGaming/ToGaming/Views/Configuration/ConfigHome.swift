@@ -22,6 +22,7 @@ struct ConfigHome: View {
     
     @State private var seeAbout = false
     @State private var editing: EditMode = .inactive
+    @State private var showError = false
     
     var body: some View {
         NavigationView {
@@ -51,6 +52,11 @@ struct ConfigHome: View {
                     }
                 }
             }
+            .alert("Data Error", isPresented: $showError) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("The app had a internal problem")
+            }
             .onAppear {
                 if let user = userConfig.first {
                     userName = user.userName!
@@ -63,7 +69,11 @@ struct ConfigHome: View {
                     newUserConfig.preferredPlatform = preferredPlatform
                     newUserConfig.clientId = clientId
                     newUserConfig.secretKey = secretKey
-                    PersistenceController().save(context: viewContext)
+                    do {
+                        try viewContext.save()
+                    } catch {
+                        showError = true
+                    }
                 }
             }
             .toolbar {
@@ -75,7 +85,11 @@ struct ConfigHome: View {
                                 user.preferredPlatform = preferredPlatform
                                 user.clientId = clientId
                                 user.secretKey = secretKey
-                                PersistenceController().save(context: viewContext)
+                                do {
+                                    try viewContext.save()
+                                } catch {
+                                    showError = true
+                                }
                             }
                         })
                 }
