@@ -49,6 +49,7 @@ struct SearchHome: View {
                     developer: $0.involvedCompanies
                         .first(where: { $0.developer })
                         .map({ $0.company.name })) })
+                .filter({ $0.developer != nil && $0.platforms.count > 0 })
             } else {
                 showAlert = true
             }

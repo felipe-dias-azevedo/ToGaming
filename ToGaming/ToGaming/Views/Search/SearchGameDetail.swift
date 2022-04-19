@@ -23,10 +23,7 @@ struct SearchGameDetail: View {
             ScrollView(.vertical, showsIndicators: false) {
                 TabView(selection: $index) {
                     ForEach((0..<game.artworkImagesName!.count), id: \.self) { index in
-                        Image(game.artworkImagesName![index])
-                            .renderingMode(.original)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
+                        RemoteImage(url: ImageHelper.toURL(game.artworkImagesName![index]), type: .artwork)
                     }
                 }
                 .frame(height: 220)
@@ -38,7 +35,7 @@ struct SearchGameDetail: View {
                     HStack {
                         Text(game.name!)
                             .fontWeight(.bold)
-                            .font(.largeTitle)
+                            .font(.title)
                             .foregroundColor(.primary)
                         Spacer()
                     }
@@ -60,13 +57,7 @@ struct SearchGameDetail: View {
                 .padding(.bottom, 12)
                 
                 HStack {
-                    Image(game.coverImageName!)
-                        .renderingMode(.original)
-                        .resizable()
-                        .frame(width: 112.5, height: 150)
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                        .shadow(radius: 2)
+                    RemoteImage(url: ImageHelper.toURL(game.coverImageName!), type: .cover)
                     
                     Spacer()
                     

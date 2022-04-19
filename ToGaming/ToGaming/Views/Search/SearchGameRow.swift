@@ -22,11 +22,13 @@ struct SearchGameRow: View {
                     .font(.caption)
                     .fontWeight(.regular)
                     .foregroundColor(.secondary)
+                    .lineLimit(1)
                 if let developer = game.developer {
                     Text(developer)
                         .font(.caption2)
                         .fontWeight(.light)
                         .foregroundColor(.secondary)
+                        .lineLimit(1)
                 }
             }
             Spacer()
@@ -37,12 +39,14 @@ struct SearchGameRow: View {
                         .font(.subheadline)
                         .fontWeight(.medium)
                         .foregroundColor(.primary)
+                        .lineLimit(1)
                 }
                 if let releaseDate = game.releaseDate {
                     Text(DateHelper.toString(releaseDate))
                         .font(.caption2)
                         .fontWeight(.light)
                         .foregroundColor(.secondary)
+                        .lineLimit(1)
                 }
             }
         }

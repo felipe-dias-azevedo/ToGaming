@@ -21,10 +21,7 @@ struct GameDetail: View {
         ScrollView(.vertical, showsIndicators: false) {
             TabView(selection: $index) {
                 ForEach((0..<game.artworkImagesName!.count), id: \.self) { index in
-                    Image(game.artworkImagesName![index])
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
+                    RemoteImage(url: ImageHelper.toURL(game.artworkImagesName![index]), type: .artwork)
                 }
             }
             .frame(height: 220)
@@ -33,13 +30,7 @@ struct GameDetail: View {
 
             LazyVStack {
                 HStack(alignment: .top) {
-                    Image(game.coverImageName!)
-                        .renderingMode(.original)
-                        .resizable()
-                        .frame(width: 112.5, height: 150)
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                        .shadow(radius: 4)
+                    RemoteImage(url: ImageHelper.toURL(game.coverImageName!), type: .cover)
                     
                     VStack(alignment: .leading) {
                         
@@ -84,7 +75,7 @@ struct GameDetail: View {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
                         Text(game.name!)
-                            .font(.largeTitle)
+                            .font(.title)
                             .bold()
                             .foregroundColor(.primary)
                         

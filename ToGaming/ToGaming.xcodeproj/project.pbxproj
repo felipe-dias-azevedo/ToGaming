@@ -27,6 +27,8 @@
 		4A61A97927FBD74D00A0612A /* ListSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A61A97827FBD74D00A0612A /* ListSelect.swift */; };
 		4A61A97B27FBDFBF00A0612A /* FilterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A61A97A27FBDFBF00A0612A /* FilterSection.swift */; };
 		4A61A97D27FBEA9500A0612A /* EditFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A61A97C27FBEA9500A0612A /* EditFormField.swift */; };
+		4A7DD6E6280F302A0083DE2C /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7DD6E5280F302A0083DE2C /* RemoteImage.swift */; };
+		4A7DD6E8280F30840083DE2C /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7DD6E7280F30840083DE2C /* ImageHelper.swift */; };
 		4A81A28B27E571830078BD7B /* GameSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A81A28A27E571830078BD7B /* GameSearch.swift */; };
 		4A81A28F27E585FA0078BD7B /* SearchGameDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A81A28E27E585FA0078BD7B /* SearchGameDetail.swift */; };
 		4A81A29227E58A200078BD7B /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A81A29127E58A200078BD7B /* DateHelper.swift */; };
@@ -79,6 +81,8 @@
 		4A61A97827FBD74D00A0612A /* ListSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSelect.swift; sourceTree = "<group>"; };
 		4A61A97A27FBDFBF00A0612A /* FilterSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSection.swift; sourceTree = "<group>"; };
 		4A61A97C27FBEA9500A0612A /* EditFormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFormField.swift; sourceTree = "<group>"; };
+		4A7DD6E5280F302A0083DE2C /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
+		4A7DD6E7280F30840083DE2C /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		4A81A28A27E571830078BD7B /* GameSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSearch.swift; sourceTree = "<group>"; };
 		4A81A28E27E585FA0078BD7B /* SearchGameDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGameDetail.swift; sourceTree = "<group>"; };
 		4A81A29127E58A200078BD7B /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 				4A1A673727F8B949006656A6 /* KeyValueText.swift */,
 				4A61A97827FBD74D00A0612A /* ListSelect.swift */,
 				4A61A97A27FBDFBF00A0612A /* FilterSection.swift */,
+				4A7DD6E5280F302A0083DE2C /* RemoteImage.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 		4A81A29027E58A0C0078BD7B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				4A7DD6E7280F30840083DE2C /* ImageHelper.swift */,
 				4A81A29127E58A200078BD7B /* DateHelper.swift */,
 				4AB9583E27F2A9A500EAE362 /* StatusToIcon.swift */,
 				4A56042B28031604008A15C6 /* GameHelper.swift */,
@@ -354,6 +360,7 @@
 				4A87D2E227DEC5F000585B01 /* NewGame.swift in Sources */,
 				4A0BE6D027E7F7D400B8D724 /* GameItem.swift in Sources */,
 				4A61A97927FBD74D00A0612A /* ListSelect.swift in Sources */,
+				4A7DD6E8280F30840083DE2C /* ImageHelper.swift in Sources */,
 				4A5604282803097D008A15C6 /* ToGaming.xcdatamodeld in Sources */,
 				4A3D48FE27F7EA5F00C390D0 /* SearchFilter.swift in Sources */,
 				4A98D7E6280E5079006C4BF6 /* GameSearchDataViewModel.swift in Sources */,
@@ -393,6 +400,7 @@
 				4A56042E28031EF5008A15C6 /* GameSearchHelper.swift in Sources */,
 				4A87D2E027DEBF3300585B01 /* ConfigHome.swift in Sources */,
 				4A81A29227E58A200078BD7B /* DateHelper.swift in Sources */,
+				4A7DD6E6280F302A0083DE2C /* RemoteImage.swift in Sources */,
 				4A87279327E02F0700E8F76B /* Game.swift in Sources */,
 				4A3F991B27E217D60016AC9C /* StatsHome.swift in Sources */,
 			);

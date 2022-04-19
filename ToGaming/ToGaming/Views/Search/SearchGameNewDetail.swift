@@ -34,7 +34,7 @@ struct SearchGameNewDetail: View {
                 gameCore.id = UUID()
                 gameCore.igdbReference = URL(string: data.url)
                 gameCore.releaseDate = DateHelper.toDate(from: data.firstReleaseDate)
-                gameCore.coverImageName = data.cover?.url
+                gameCore.coverImageName = ImageHelper.format(data.cover?.url ?? "", format: .coverBig)
                 gameCore.developer = data.involvedCompanies
                     .first(where: { $0.developer })
                     .map({ $0.company.name })
@@ -49,7 +49,7 @@ struct SearchGameNewDetail: View {
                 gameCore.igdbId = Int32(data.id)
                 gameCore.platforms = data.platforms.map({ $0.name })
                 gameCore.genres = data.genres.map({ $0.name }) + data.themes.map({ $0.name })
-                gameCore.artworkImagesName = data.screenshots.map({ $0.url })
+                gameCore.artworkImagesName = data.screenshots.map({ ImageHelper.format($0.url, format: .screenshotBig) })
                 do {
                     try viewContext.save()
                     game = gameCore
@@ -71,10 +71,7 @@ struct SearchGameNewDetail: View {
                     ScrollView(.vertical, showsIndicators: false) {
                         TabView(selection: $index) {
                             ForEach((0..<game.artworkImagesName!.count), id: \.self) { index in
-                                Image(game.artworkImagesName![index])
-                                    .renderingMode(.original)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
+                                RemoteImage(url: ImageHelper.toURL(game.artworkImagesName![index]), type: .artwork)
                             }
                         }
                         .frame(height: 220)
@@ -86,7 +83,7 @@ struct SearchGameNewDetail: View {
                             HStack {
                                 Text(game.name!)
                                     .fontWeight(.bold)
-                                    .font(.largeTitle)
+                                    .font(.title)
                                     .foregroundColor(.primary)
                                 Spacer()
                             }
@@ -108,13 +105,7 @@ struct SearchGameNewDetail: View {
                         .padding(.bottom, 12)
                         
                         HStack {
-                            Image(game.coverImageName!)
-                                .renderingMode(.original)
-                                .resizable()
-                                .frame(width: 112.5, height: 150)
-                                .aspectRatio(contentMode: .fit)
-                                .cornerRadius(10)
-                                .shadow(radius: 2)
+                            RemoteImage(url: ImageHelper.toURL(game.coverImageName!), type: .cover)
                             
                             Spacer()
                             

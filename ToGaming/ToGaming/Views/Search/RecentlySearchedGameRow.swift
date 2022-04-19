@@ -13,11 +13,7 @@ struct RecentlySearchedGameRow: View {
     
     var body: some View {
         HStack {
-            Image(game.coverImageName!)
-                .resizable()
-                .frame(width: 56.25, height: 75)
-                .aspectRatio(contentMode: .fit)
-                .cornerRadius(8)
+            RemoteImage(url: ImageHelper.toURL(game.coverImageName!), type: .recentRow)
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(game.name!)
@@ -28,10 +24,12 @@ struct RecentlySearchedGameRow: View {
                     .font(.caption)
                     .fontWeight(.regular)
                     .foregroundColor(.secondary)
+                    .lineLimit(1)
                 Text(game.developer!)
                     .font(.caption2)
                     .fontWeight(.light)
                     .foregroundColor(.secondary)
+                    .lineLimit(1)
             }
             Spacer()
             // TODO: If game platform is in preferred then green Check else red Cross (X)

@@ -15,11 +15,7 @@ struct GameRow: View {
     
     var body: some View {
         HStack {
-            Image(game.artworkImagesName![0])
-                .resizable()
-                .frame(width: 88.88, height: 50)
-                .aspectRatio(contentMode: .fit)
-                .cornerRadius(10)
+            RemoteImage(url: ImageHelper.toURL(game.artworkImagesName!.first!), type: .row)
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(game.name!)

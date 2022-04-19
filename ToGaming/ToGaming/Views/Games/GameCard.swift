@@ -15,11 +15,7 @@ struct GameCard: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Image(game.artworkImagesName![0])
-                .renderingMode(.original)
-                .resizable()
-                .frame(width: 195.55, height: 110)
-                .cornerRadius(10)
+            RemoteImage(url: ImageHelper.toURL(game.artworkImagesName!.first!), type: .card)
             
             VStack(alignment: .leading, spacing: 2) {
                 HStack(alignment: .center) {
