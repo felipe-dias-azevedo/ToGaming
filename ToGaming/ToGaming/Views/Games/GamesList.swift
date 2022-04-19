@@ -9,14 +9,16 @@ import SwiftUI
 
 struct GamesList: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
     var titleList: String
-    var games: Array<Binding<Game>>
+    var games: [FetchedResults<GameCore>.Element]
     @State private var searchText = ""
     
-    var gamesSortedSearched: Array<Binding<Game>> {
+    var gamesSortedSearched: [GameCore] {
         let gamesSorted = games
             .sorted(by: {
-                $0.wrappedValue.insertDate.compare($1.wrappedValue.insertDate) == .orderedDescending
+                $0.insertDate!.compare($1.insertDate!) == .orderedDescending
             })
         
         if searchText.isEmpty || searchText.count < 3 {
@@ -24,15 +26,15 @@ struct GamesList: View {
         }
         return gamesSorted
             .filter {
-                $0.wrappedValue.name.lowercased().contains(searchText.lowercased())
+                $0.name!.lowercased().contains(searchText.lowercased())
             }
     }
         
     var body: some View {
         List {
-            ForEach(gamesSortedSearched) { $game in
+            ForEach(gamesSortedSearched) { game in
                 NavigationLink {
-                    GameDetail(game: $game)
+                    GameDetail(game: game)
                 } label: {
                     GameRow(game: game)
                 }
@@ -46,9 +48,11 @@ struct GamesList: View {
 }
 
 struct GamesList_Previews: PreviewProvider {
+    
     static var previews: some View {
         NavigationView {
-            GamesList(titleList: "Example List", games: ModelData().games.map { .constant($0) })
+            GamesList(titleList: "Example List", games: GameCore.examples)
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
 }

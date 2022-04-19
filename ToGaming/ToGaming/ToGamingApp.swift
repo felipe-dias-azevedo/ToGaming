@@ -9,13 +9,12 @@ import SwiftUI
 
 @main
 struct ToGamingApp: App {
-    
-    @StateObject private var modelData = ModelData()
+    @StateObject private var persistenceController = PersistenceController.shared
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(modelData)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

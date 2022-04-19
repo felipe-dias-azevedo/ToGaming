@@ -6,20 +6,47 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SearchGameAdd: View {
     
-    @EnvironmentObject var modelData: ModelData
+    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
     
-    var game: GameSearch
+    var game: FetchedResults<GameSearchCore>.Element
+    @State private var games: [GameCore] = []
+    
     @Binding var adding: Bool
-    @State private var gameToAdd: Game = .new
+    @State private var isFavorite: Bool = false
+    @State private var favoritePlatform: Int16 = 0
+    @State private var gameState: Game.Status = .toBuy
+    @State private var score: Game.Score? = nil
     
     func addGameToLibrary() {
         let dateNow = Date()
-        let newGame = Game(id: UUID(), igdbId: game.igdbId, name: game.name, platforms: game.platforms, favoritePlatform: gameToAdd.favoritePlatform, genres: game.genres, publisher: game.publisher, developer: game.developer, insertDate: dateNow, releaseDate: game.releaseDate, summary: game.summary, storyline: game.storyline, rating: game.rating, ratingCount: game.ratingCount, igdbReference: game.igdbReference, isFavorite: gameToAdd.isFavorite, score: gameToAdd.score, gameState: gameToAdd.gameState, artworkImagesName: game.artworkImagesName, coverImageName: game.coverImageName, updateDate: dateNow)
-        modelData.games.append(newGame)
+        let newGame = GameCore(context: viewContext)
+        newGame.id = UUID()
+        newGame.igdbId = game.igdbId
+        newGame.name = game.name!
+        newGame.platforms = game.platforms!
+        newGame.favoritePlatform = favoritePlatform
+        newGame.genres = game.genres
+        newGame.publisher = game.publisher
+        newGame.developer = game.developer
+        newGame.insertDate = dateNow
+        newGame.releaseDate = game.releaseDate!
+        newGame.summary = game.summary
+        newGame.storyline = game.storyline
+        newGame.rating = game.rating
+        newGame.ratingCount = game.ratingCount
+        newGame.igdbReference = game.igdbReference
+        newGame.isFavorite = isFavorite
+        newGame.score = score?.rawValue ?? 0
+        newGame.gameState = gameState.rawValue
+        newGame.artworkImagesName = game.artworkImagesName
+        newGame.coverImageName = game.coverImageName
+        newGame.updateDate = dateNow
+        try? viewContext.save()
     }
     
     var body: some View {
@@ -27,10 +54,10 @@ struct SearchGameAdd: View {
             Form {
                 Section {
                     Group {
-                        KeyValueText(key: "Name", value: game.name)
-                        KeyValueText(key: "Developer", value: game.developer)
+                        KeyValueText(key: "Name", value: game.name!)
+                        KeyValueText(key: "Developer", value: game.developer!)
                         KeyValueText(key: "Rating", value: String.init(format: "%.2f%%", game.rating))
-                        KeyValueText(key: "Release Date", value: DateHelper.toString(game.releaseDate))
+                        KeyValueText(key: "Release Date", value: DateHelper.toString(game.releaseDate!))
                     }
                     .padding(.vertical, 6)
                 }
@@ -40,7 +67,7 @@ struct SearchGameAdd: View {
                     footer: Text("User's Game Data Changeable After")
                 ) {
                     Group {
-                        Toggle(isOn: $gameToAdd.isFavorite) {
+                        Toggle(isOn: $isFavorite) {
                             Text("Favorite Game")
                                 .fontWeight(.medium)
                         }
@@ -49,9 +76,9 @@ struct SearchGameAdd: View {
                             Text("Platform")
                                 .fontWeight(.medium)
                             Spacer()
-                            Picker("Platform", selection: $gameToAdd.favoritePlatform) {
-                                ForEach((0..<game.platforms.count), id: \.self) { index in
-                                    Label(game.platforms[index], systemImage: "star")
+                            Picker("Platform", selection: $favoritePlatform) {
+                                ForEach((0..<game.platforms!.count), id: \.self) { index in
+                                    Label(game.platforms![index], systemImage: "star")
                                         .labelStyle(.titleOnly)
                                         .tag(index)
                                 }
@@ -63,7 +90,7 @@ struct SearchGameAdd: View {
                             Text("Status")
                                 .fontWeight(.medium)
                             Spacer()
-                            Picker("Status", selection: $gameToAdd.gameState) {
+                            Picker("Status", selection: $gameState) {
                                 ForEach(Game.Status.allCases) { status in
                                     Label(status.rawValue, systemImage: StatusToIcon.name(status))
                                         .labelStyle(.titleAndIcon)
@@ -84,7 +111,7 @@ struct SearchGameAdd: View {
                                 
                             Spacer()
                             
-                            Picker("Score", selection: $gameToAdd.score) {
+                            Picker("Score", selection: $score) {
                                 ForEach(Game.Score.allCases) { status in
                                     Text(String(status.rawValue))
                                         .tag(status as Game.Score?)
@@ -97,32 +124,41 @@ struct SearchGameAdd: View {
                 }
                 
                 Section {
-                    if let index = modelData.games.firstIndex(where: { $0.igdbId == game.igdbId })
+                    if let index = games.firstIndex(where: { $0.igdbId == game.igdbId })
                     {
                         Button {
-                            modelData.games.remove(at: index)
-                            self.presentationMode.wrappedValue.dismiss()
+                            withAnimation {
+                                viewContext.delete(games[index])
+                                PersistenceController().save(context: viewContext)
+                                
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
                         } label: {
                             HStack {
+                                Spacer()
                                 Text("Remove Game")
                                     .fontWeight(.medium)
-                                Spacer()
                                 Label("Remove Game", systemImage: "minus")
                                     .labelStyle(.iconOnly)
+                                Spacer()
                             }
                         }
                         .foregroundColor(.red)
                     } else {
                         Button {
-                            addGameToLibrary()
-                            self.presentationMode.wrappedValue.dismiss()
+                            withAnimation {
+                                addGameToLibrary()
+                                
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
                         } label: {
                             HStack {
+                                Spacer()
                                 Text("Add Game")
                                     .fontWeight(.medium)
-                                Spacer()
                                 Label("Add Game", systemImage: "plus")
                                     .labelStyle(.iconOnly)
+                                Spacer()
                             }
                         }
                     }
@@ -130,6 +166,14 @@ struct SearchGameAdd: View {
             }
             // TODO: Alert if cancelled pressed for then be sure data will be lost
             // TODO: Alert clicked add game and data is empty
+            .onAppear(perform: {
+                do {
+                    let fetch: NSFetchRequest<GameCore> = GameCore.fetchRequest()
+                    games = try viewContext.fetch(fetch)
+                } catch {
+                    games = []
+                }
+            })
             .navigationBarTitle("Get Game")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -145,7 +189,7 @@ struct SearchGameAdd: View {
 
 struct SearchGameAdd_Previews: PreviewProvider {
     static var previews: some View {
-        SearchGameAdd(game: ModelData().recentlySearched[0], adding: .constant(true))
-            .environmentObject(ModelData())
+        SearchGameAdd(game: GameSearchCore.example, adding: .constant(true))
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

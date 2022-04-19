@@ -41,6 +41,11 @@ struct SearchFilter: View {
                             .fontWeight(.light)
                             .font(.body)
                     }
+                    .onTapGesture {
+                        withAnimation {
+                            filterReleaseDate.toggle()
+                        }
+                    }
                     
                     if filterReleaseDate {
                         DatePicker(selection: $dateBefore, displayedComponents: .date) {

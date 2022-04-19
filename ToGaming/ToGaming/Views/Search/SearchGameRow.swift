@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchGameRow: View {
     
-    var game: GameSearch
+    var game: GameNewSearch
     
     var body: some View {
         HStack {
@@ -22,22 +22,32 @@ struct SearchGameRow: View {
                     .font(.caption)
                     .fontWeight(.regular)
                     .foregroundColor(.secondary)
-                Text(game.developer)
-                    .font(.caption2)
-                    .fontWeight(.light)
-                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+                if let developer = game.developer {
+                    Text(developer)
+                        .font(.caption2)
+                        .fontWeight(.light)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
+                }
             }
             Spacer()
             // TODO: If game platform is in preferred then green Check else red Cross (X)
             VStack(alignment: .trailing, spacing: 4) {
-                Text(String.init(format: "%.0f%%", game.rating))
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .foregroundColor(.primary)
-                Text(DateHelper.toString(game.releaseDate))
-                    .font(.caption2)
-                    .fontWeight(.light)
-                    .foregroundColor(.secondary)
+                if let rating = game.rating {
+                    Text(String.init(format: "%.0f%%", rating))
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.primary)
+                        .lineLimit(1)
+                }
+                if let releaseDate = game.releaseDate {
+                    Text(DateHelper.toString(releaseDate))
+                        .font(.caption2)
+                        .fontWeight(.light)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
+                }
             }
         }
     }
@@ -46,9 +56,7 @@ struct SearchGameRow: View {
 struct SearchGameRow_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            SearchGameRow(game: ModelData().recentlySearched[0])
-            SearchGameRow(game: ModelData().recentlySearched[1])
-            SearchGameRow(game: ModelData().recentlySearched[2])
+            SearchGameRow(game: GameNewSearch(id: 1, name: "Game 1", rating: 10.0, releaseDate: Date(), platforms: ["Playstation 4", "Xbox One", "PC"], developer: "Developer 1"))
         }
     }
 }

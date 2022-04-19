@@ -6,15 +6,14 @@
 //
 
 import Foundation
-import SwiftUI
 
 struct Game: Hashable, Codable, Identifiable {
     
     var id: UUID
-    var igdbId: Int?
+    var igdbId: Int32
     var name: String
     var platforms: [String]
-    var favoritePlatform: Int
+    var favoritePlatform: Int16
     var genres: [String]
     // involved_companies.company.name
     var publisher: String
@@ -31,14 +30,14 @@ struct Game: Hashable, Codable, Identifiable {
     var isFavorite: Bool
     // users defined own rating
     var score: Score?
-    enum Score: Int, CaseIterable, Codable, Identifiable {
+    enum Score: Int16, CaseIterable, Codable, Identifiable {
         case one = 1
         case two = 2
         case three = 3
         case four = 4
         case five = 5
         
-        var id: Int { rawValue }
+        var id: Int16 { rawValue }
     }
     
     var gameState: Status

@@ -16,11 +16,19 @@ struct AboutPage: View {
             VStack {
                 // TODO: Add App icon + App Name on top of information
                 
-                Image("togaming")
-                    .resizable()
-                    .frame(width: 150, height: 150)
-                    .cornerRadius(16)
-                    .shadow(radius: 2)
+                VStack {
+                    Image("togaming")
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                        .cornerRadius(16)
+                        .shadow(radius: 2)
+                        
+                    Text("ToGaming")
+                        .font(.title2)
+                        .fontWeight(.medium)
+                        .padding(.top, 8)
+                }
+                .padding(.bottom, 32)
                 
                 HStack {
                     VStack(alignment: .leading, spacing: 8) {
@@ -29,7 +37,7 @@ struct AboutPage: View {
                             .foregroundColor(.secondary)
                         
                         Text("Felipe Azevedo")
-                            .font(.title)
+                            .font(.title2)
                     }
                     .padding()
                     
@@ -42,7 +50,7 @@ struct AboutPage: View {
                             .foregroundColor(.secondary)
                         
                         Text("2022")
-                            .font(.title2)
+                            .font(.title3)
                             .foregroundColor(.primary)
                     }
                     .padding()
@@ -50,9 +58,13 @@ struct AboutPage: View {
                 .padding(.top, 10)
                 
                 Divider()
-                    .padding(.horizontal, 10)
+                    .padding(.horizontal, 18)
                 
-                Text("Version 0.1")
+                
+                if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+                    Text("Version \(version)")
+                        .padding(.top, 10)
+                }
                 
                 Spacer()
                 
@@ -70,7 +82,7 @@ struct AboutPage: View {
                     }
                 }
             }
-            .padding(.vertical, 20)
+            .padding(.vertical, 32)
             .padding(.horizontal, 10)
         }
     }

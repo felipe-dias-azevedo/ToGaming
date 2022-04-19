@@ -23,7 +23,9 @@ struct FilterSection: View {
                 Spacer()
                 
                 Button {
-                    toggle.toggle()
+                    withAnimation {
+                        toggle.toggle()
+                    }
                 } label: {
                     Label("Open Sheet", systemImage: "list.bullet")
                         .font(.body)
@@ -41,7 +43,9 @@ struct FilterSection: View {
                     Spacer()
                     
                     Button {
-                        selectedItem = nil
+                        withAnimation {
+                            selectedItem = nil
+                        }
                     } label: {
                         Label("Unselect Selected Item", systemImage: "xmark.circle.fill")
                             .font(.body)

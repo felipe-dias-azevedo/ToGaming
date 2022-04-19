@@ -23,6 +23,8 @@ struct ListSelect: View {
             List(items, id: \.self, selection: $itemSelection) { item in
                 Text(item)
             }
+            .listStyle(.inset)
+            .navigationViewStyle(.stack)
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -51,6 +53,6 @@ struct ListSelect: View {
 
 struct ListSelect_Previews: PreviewProvider {
     static var previews: some View {
-        ListSelect(title: "Games", items: ModelData().games.map({ $0.name }), itemSelection: .constant(nil))
+        ListSelect(title: "Games", items: PreviewData.Games(to: PersistenceController.preview.container.viewContext).map({ $0.name! }), itemSelection: .constant(nil))
     }
 }

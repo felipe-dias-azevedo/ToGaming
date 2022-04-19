@@ -9,24 +9,26 @@ import SwiftUI
 
 struct GamesSearch: View {
     
-    @EnvironmentObject var modelData: ModelData
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \GameCore.id, ascending: true)], animation: .default)
+    private var games: FetchedResults<GameCore>
     
     @Binding var canceled: Bool
     @State private var showFavoritesOnly = false
     @State private var filter = FilterStatus.all
     @State private var searchText = ""
     
-    var gamesSortedSearched: Array<Binding<Game>> {
-        let gamesSorted = $modelData.games
-            .sorted { $0.wrappedValue.isFavorite && !$1.wrappedValue.isFavorite }
-            .filter({ game in
-                (!showFavoritesOnly || game.isFavorite.wrappedValue) && (filter == .all || filter.rawValue == game.gameState.wrappedValue.rawValue) })
+    var gamesSortedSearched: [GameCore] {
+        let gamesSorted = games
+            .sorted { $0.isFavorite && !$1.isFavorite }
+            .filter({ (!showFavoritesOnly || $0.isFavorite) && (filter == .all || filter.rawValue == Game.Status.init(rawValue: $0.gameState!)!.rawValue) })
         
         if searchText.isEmpty || searchText.count < 3 {
             return gamesSorted
         }
         return gamesSorted
-            .filter { $0.wrappedValue .name.lowercased().contains(searchText.lowercased()) }
+            .filter { $0 .name!.lowercased().contains(searchText.lowercased()) }
     }
     
     enum FilterStatus: String, CaseIterable, Identifiable {
@@ -42,22 +44,22 @@ struct GamesSearch: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(gamesSortedSearched) { $game in
+                ForEach(gamesSortedSearched) { game in
                     NavigationLink {
-                        GameDetail(game: $game)
+                        GameDetail(game: game)
                     } label: {
                         GameRow(game: game)
                     }
                 }
-                .onDelete(perform: { gamesToDelete in
+                .onDelete(perform: { offsets in
                     // FIXME: If deleted from parent component, it doesnt show delete action anymore
-                    gamesToDelete
-                        .map({ gamesSortedSearched[$0].id })
-                        .forEach({ gameToDelete in
-                            modelData.games.removeAll(where: { $0.id == gameToDelete })
-                        })
+                    withAnimation {
+                        offsets.map{ gamesSortedSearched[$0] }.forEach(viewContext.delete)
+                        PersistenceController().save(context: viewContext)
+                    }
                 })
             }
+            .navigationViewStyle(.stack)
             .listStyle(.inset)
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .navigationTitle("Saved Games")
@@ -102,6 +104,6 @@ struct GamesSearch: View {
 struct GamesSearch_Previews: PreviewProvider {
     static var previews: some View {
         GamesSearch(canceled: .constant(false))
-            .environmentObject(ModelData())
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

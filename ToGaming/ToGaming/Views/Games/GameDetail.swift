@@ -9,45 +9,38 @@ import SwiftUI
 
 struct GameDetail: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.openURL) var openURL
     
-    @Binding var game: Game
+    let game: FetchedResults<GameCore>.Element
     @State var editing = false
     @State private var index = 0
+    @State private var isFavorite = false
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             TabView(selection: $index) {
-                ForEach((0..<game.artworkImagesName.count), id: \.self) { index in
-                    Image(game.artworkImagesName[index])
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
+                ForEach((0..<game.artworkImagesName!.count), id: \.self) { index in
+                    RemoteImage(url: ImageHelper.toURL(game.artworkImagesName![index]), type: .artwork)
                 }
             }
             .frame(height: 220)
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             .aspectRatio(contentMode: .fill)
-            
+
             LazyVStack {
                 HStack(alignment: .top) {
-                    Image(game.coverImageName)
-                        .renderingMode(.original)
-                        .resizable()
-                        .frame(width: 112.5, height: 150)
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                        .shadow(radius: 4)
+                    RemoteImage(url: ImageHelper.toURL(game.coverImageName!), type: .cover)
                     
                     VStack(alignment: .leading) {
                         
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(game.developer)
+                            Text(game.developer!)
                                 .fontWeight(.medium)
                                 .font(.footnote)
                                 .foregroundColor(.primary)
                             
-                            Text(game.publisher)
+                            Text(game.publisher!)
                                 .fontWeight(.light)
                                 .font(.caption)
                                 .foregroundColor(.primary)
@@ -81,51 +74,55 @@ struct GameDetail: View {
                 
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
-                        Text(game.name)
-                            .font(.largeTitle)
+                        Text(game.name!)
+                            .font(.title)
                             .bold()
                             .foregroundColor(.primary)
                         
                         Spacer()
                         
                         Button {
-                            game.isFavorite.toggle()
+                            isFavorite.toggle()
                             game.updateDate = Date()
+                            game.isFavorite = isFavorite
+                            PersistenceController().save(context: viewContext)
                         } label: {
-                            Label("Toggle Favorite", systemImage: game.isFavorite ? "heart.fill" : "heart")
+                            Label("Toggle Favorite", systemImage: isFavorite ? "heart.fill" : "heart")
                                 .labelStyle(.iconOnly)
                                 .font(.title2)
-                                .foregroundColor(game.isFavorite ? .red : .secondary)
+                                .foregroundColor(isFavorite ? .red : .secondary)
                         }
                     }
                     
                     HStack {
                         HStack {
-                            Text(game.gameState.rawValue)
-                                .bold()
-                            Image(systemName: StatusToIcon.name(game.gameState))
-                                .accessibilityLabel(game.gameState.rawValue)
-                                .foregroundColor(.accentColor)
+                            if let status = Game.Status.init(rawValue: game.gameState!) {
+                                Text(status.rawValue)
+                                    .bold()
+                                Image(systemName: StatusToIcon.name(status))
+                                    .accessibilityLabel(status.rawValue)
+                                    .foregroundColor(.accentColor)
+                            }
                         }
                         .font(.headline)
                         
                         Spacer()
                         
-                        Text(game.platforms[game.favoritePlatform])
+                        Text(game.platforms![Int(game.favoritePlatform)])
                             .fontWeight(.bold)
                             .font(.headline)
                             .foregroundColor(.primary)
                     }
                     
                     HStack {
-                        Text("Added: \(DateHelper.toString(game.insertDate))")
+                        Text("Added: \(DateHelper.toString(game.insertDate!))")
                             .fontWeight(.light)
                             .font(.footnote)
                             .foregroundColor(.secondary)
                         
                         Spacer()
                         
-                        if let score = game.score {
+                        if let score = Game.Score.init(rawValue: game.score) {
                             HStack {
                                 Text(String(score.rawValue))
                                     .font(.headline)
@@ -149,7 +146,7 @@ struct GameDetail: View {
                     }
                 }
                 
-                ScrollItems(title: "Genres:", items: game.genres)
+                ScrollItems(title: "Genres:", items: game.genres!)
                     .padding(.top, 10)
                 
                 HStack {
@@ -157,7 +154,7 @@ struct GameDetail: View {
                         .fontWeight(.light)
                         .font(.callout)
                     Spacer()
-                    Text(DateHelper.toString(game.releaseDate))
+                    Text(DateHelper.toString(game.releaseDate!))
                         .fontWeight(.bold)
                         .font(.subheadline)
                 }
@@ -176,7 +173,7 @@ struct GameDetail: View {
                 .padding(.bottom, 10)
                 
                 // TODO: Show in a summarized way value with button to read everything
-                Text(game.summary)
+                Text(game.summary!)
                     .multilineTextAlignment(.leading)
                     .font(.body)
                     .foregroundColor(.primary)
@@ -223,10 +220,13 @@ struct GameDetail: View {
             .padding(.bottom, 30)
             .padding(.horizontal, 20)
         }
-        .navigationTitle(game.name)
+        .onAppear(perform: {
+            isFavorite = game.isFavorite
+        })
+        .navigationTitle(game.name!)
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $editing) {
-            EditGame(editing: $editing, game: $game)
+            EditGame(editing: $editing, game: game)
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -243,7 +243,8 @@ struct GameDetail: View {
 struct GameDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            GameDetail(game: .constant(ModelData().games[0]))
+            GameDetail(game: GameCore.example)
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
                 .preferredColorScheme(.dark)
         }
     }
