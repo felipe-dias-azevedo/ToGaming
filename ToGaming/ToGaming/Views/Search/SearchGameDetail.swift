@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchGameDetail: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.openURL) var openURL
+    @Environment(\.openURL) private var openURL
     
     var game: FetchedResults<GameSearchCore>.Element
     var isRecentSearched: Bool

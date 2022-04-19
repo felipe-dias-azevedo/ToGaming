@@ -43,8 +43,7 @@ struct SearchGameResults: View {
                     Section(footer: Text("\(searchResults.count) Results")) {
                         ForEach(searchResults, id: \.self) { result in
                             NavigationLink {
-                                // TODO: Accept gameNew nullable and gameSearchCore nullable, if one of them is present then show
-                                //SearchGameDetail(game: result, isRecentSearched: recentlySearched.isEmpty)
+                                SearchGameNewDetail(igdbGameId: result.id)
                             } label: {
                                 SearchGameRow(game: result)
                             }

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 struct GameSearch: Hashable, Codable, Identifiable {
     
@@ -27,4 +26,6 @@ struct GameSearch: Hashable, Codable, Identifiable {
     var igdbReference: URL?
     var artworkImagesName: [String]
     var coverImageName: String
+    
+    static let new = GameSearch(id: UUID(), igdbId: 0, name: "", genres: [], platforms: [], publisher: "", developer: "", releaseDate: Date(), summary: "", rating: 0, ratingCount: 0, artworkImagesName: [], coverImageName: "")
 }

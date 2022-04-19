@@ -58,7 +58,10 @@ struct SearchHome: View {
     
     var body: some View {
         NavigationView {
-            SearchGameResults(searchResults: searchGamesResults, recentlySearched: recentlySearched.sorted(by: { $0.releaseDate! > $1.releaseDate! }), isLoading: isLoading)
+            SearchGameResults(
+                searchResults: searchGamesResults,
+                recentlySearched: recentlySearched.sorted(by: { $0.releaseDate! > $1.releaseDate! }),
+                isLoading: isLoading)
                 .alert("Search Error", isPresented: $showAlert) {
                     Button("OK", role: .cancel) {}
                 } message: {
