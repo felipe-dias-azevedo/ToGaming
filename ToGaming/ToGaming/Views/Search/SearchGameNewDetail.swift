@@ -49,7 +49,9 @@ struct SearchGameNewDetail: View {
                 gameCore.igdbId = Int32(data.id)
                 gameCore.platforms = data.platforms.map({ $0.name })
                 gameCore.genres = data.genres.map({ $0.name }) + data.themes.map({ $0.name })
-                gameCore.artworkImagesName = data.screenshots.map({ ImageHelper.format($0.url, format: .screenshotBig) })
+                gameCore.artworkImagesName = Array(data.screenshots
+                    .map({ ImageHelper.format($0.url, format: .screenshotBig) })
+                    .prefix(3))
                 do {
                     try viewContext.save()
                     game = gameCore

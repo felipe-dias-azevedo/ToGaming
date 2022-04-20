@@ -18,7 +18,7 @@ struct SearchGameAdd: View {
     
     @Binding var adding: Bool
     @State private var isFavorite: Bool = false
-    @State private var favoritePlatform: Int16 = 0
+    @State private var favoritePlatform: Int = 0
     @State private var gameState: Game.Status = .toBuy
     @State private var score: Game.Score? = nil
     
@@ -29,7 +29,7 @@ struct SearchGameAdd: View {
         newGame.igdbId = game.igdbId
         newGame.name = game.name!
         newGame.platforms = game.platforms!
-        newGame.favoritePlatform = favoritePlatform
+        newGame.favoritePlatform = Int16(favoritePlatform)
         newGame.genres = game.genres
         newGame.publisher = game.publisher
         newGame.developer = game.developer

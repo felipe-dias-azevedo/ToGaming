@@ -17,7 +17,7 @@ struct EditGame: View {
     var game: FetchedResults<GameCore>.Element
     
     @State private var isFavorite: Bool = false
-    @State private var favoritePlatform: Int16 = 0
+    @State private var favoritePlatform: Int = 0
     @State private var gameState: Game.Status = .toBuy
     @State private var score: Game.Score? = nil
     
@@ -135,11 +135,12 @@ struct EditGame: View {
                         }
                     } label: {
                         HStack {
+                            Spacer()
                             Text("Remove Game")
                                 .fontWeight(.medium)
-                            Spacer()
                             Label("Remove Game", systemImage: "minus")
                                 .labelStyle(.iconOnly)
+                            Spacer()
                         }
                     }
                     .foregroundColor(.red)
@@ -147,7 +148,7 @@ struct EditGame: View {
             }
             .onAppear(perform: {
                 isFavorite = game.isFavorite
-                favoritePlatform = game.favoritePlatform
+                favoritePlatform = Int(game.favoritePlatform)
                 gameState = Game.Status.init(rawValue: game.gameState!)!
                 score = Game.Score.init(rawValue: game.score)
             })
@@ -157,7 +158,7 @@ struct EditGame: View {
                 ToolbarItemGroup(placement: .confirmationAction) {
                     Button("Done") {
                         game.isFavorite = isFavorite
-                        game.favoritePlatform = favoritePlatform
+                        game.favoritePlatform = Int16(favoritePlatform)
                         game.gameState = gameState.rawValue
                         game.score = score?.rawValue ?? 0
                         // FIXME: Update only when there's changes to game
