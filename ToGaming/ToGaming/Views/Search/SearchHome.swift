@@ -21,6 +21,7 @@ struct SearchHome: View {
     @State private var addingNew = false
     @State private var filtering = false
     @State private var showAlert = false
+    @State private var showError = false
     @State private var isLoading = false
     
     @State private var dateBeforeFilter: Date = Date()
@@ -40,18 +41,22 @@ struct SearchHome: View {
         service.config()
         service.searchGame(name: searchText) { gameSearchData in
             if let data = gameSearchData {
-                searchGamesResults = data.compactMap({ GameNewSearch(
-                    id: $0.id,
-                    name: $0.name,
-                    rating: $0.aggregatedRating,
-                    releaseDate: DateHelper.toDate(from: $0.firstReleaseDate),
-                    platforms: $0.platforms.map{ $0.name },
-                    developer: $0.involvedCompanies
-                        .first(where: { $0.developer })
-                        .map({ $0.company.name })) })
-                .filter({ $0.developer != nil && $0.platforms.count > 0 })
+                if data.isEmpty {
+                    showAlert = true
+                } else {
+                    searchGamesResults = data.compactMap({ GameNewSearch(
+                        id: $0.id,
+                        name: $0.name,
+                        rating: $0.aggregatedRating,
+                        releaseDate: DateHelper.toDate(from: $0.firstReleaseDate),
+                        platforms: $0.platforms.map{ $0.name },
+                        developer: $0.involvedCompanies
+                            .first(where: { $0.developer })
+                            .map({ $0.company.name })) })
+                    .filter({ $0.developer != nil && $0.platforms.count > 0 })
+                }
             } else {
-                showAlert = true
+                showError = true
             }
             isLoading = false
         }
@@ -67,6 +72,11 @@ struct SearchHome: View {
                     Button("OK", role: .cancel) {}
                 } message: {
                     Text("Confirm your Client ID and Secret Key on Configuration Tab")
+                }
+                .alert("Search Error", isPresented: $showError) {
+                    Button("OK", role: .cancel) {}
+                } message: {
+                    Text("The app had an internal problem")
                 }
                 .listStyle(.grouped)
                 .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: nil)

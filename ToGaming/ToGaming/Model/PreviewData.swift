@@ -31,8 +31,8 @@ class PreviewData {
                 isFavorite: false,
                 score: .four,
                 gameState: .playing,
-                artworkImagesName: ["gow", "tw"],
-                coverImageName: "cover_gow",
+                artworkImagesName: ["https://images.igdb.com/igdb/image/upload/t_screenshot_big/thhohfsqjs1x77gyjg7b.jpg", "https://images.igdb.com/igdb/image/upload/t_screenshot_big/thhohfsqjs1x77gyjg7b.jpg"],
+                coverImageName: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg",
                 updateDate: Date()),
             Game(
                 id: UUID(),
@@ -50,8 +50,8 @@ class PreviewData {
                 ratingCount: 490000,
                 isFavorite: false,
                 gameState: .played,
-                artworkImagesName: ["tw"],
-                coverImageName: "cover_gow",
+                artworkImagesName: ["https://images.igdb.com/igdb/image/upload/t_screenshot_big/thhohfsqjs1x77gyjg7b.jpg"],
+                coverImageName: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg",
                 updateDate: Date()),
             Game(
                 id: UUID(),
@@ -69,8 +69,8 @@ class PreviewData {
                 ratingCount: 20000,
                 isFavorite: true,
                 gameState: .toBuy,
-                artworkImagesName: ["gt"],
-                coverImageName: "cover_gow",
+                artworkImagesName: ["https://images.igdb.com/igdb/image/upload/t_screenshot_big/thhohfsqjs1x77gyjg7b.jpg"],
+                coverImageName: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg",
                 updateDate: Date()),
             Game(
                 id: UUID(),
@@ -89,8 +89,8 @@ class PreviewData {
                 igdbReference: URL(string: "https://www.igdb.com/games/lego-star-wars-the-skywalker-saga"),
                 isFavorite: true,
                 gameState: .toPlay,
-                artworkImagesName: ["legosw"],
-                coverImageName: "cover_legosw",
+                artworkImagesName: ["https://images.igdb.com/igdb/image/upload/t_screenshot_big/thhohfsqjs1x77gyjg7b.jpg"],
+                coverImageName: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg",
                 updateDate: Date()),
             Game(
                 id: UUID(),
@@ -108,8 +108,8 @@ class PreviewData {
                 ratingCount: 130,
                 isFavorite: false,
                 gameState: .toBuy,
-                artworkImagesName: ["nm"],
-                coverImageName: "cover_gow",
+                artworkImagesName: ["https://images.igdb.com/igdb/image/upload/t_screenshot_big/thhohfsqjs1x77gyjg7b.jpg"],
+                coverImageName: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg",
                 updateDate: Date())
         ]
         return games.map { GameHelper.convert($0, context) }

@@ -146,24 +146,28 @@ struct EditGame: View {
                     .foregroundColor(.red)
                 }
             }
-            .onAppear(perform: {
+            .onAppear {
                 isFavorite = game.isFavorite
                 favoritePlatform = Int(game.favoritePlatform)
                 gameState = Game.Status.init(rawValue: game.gameState!)!
                 score = Game.Score.init(rawValue: game.score)
-            })
+            }
             .navigationBarTitle(game.name!)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .confirmationAction) {
                     Button("Done") {
-                        game.isFavorite = isFavorite
-                        game.favoritePlatform = Int16(favoritePlatform)
-                        game.gameState = gameState.rawValue
-                        game.score = score?.rawValue ?? 0
-                        // FIXME: Update only when there's changes to game
-                        game.updateDate = Date()
-                        editing.toggle()
+                        viewContext.performAndWait {
+                            game.isFavorite = isFavorite
+                            game.favoritePlatform = Int16(favoritePlatform)
+                            game.gameState = gameState.rawValue
+                            game.score = score?.rawValue ?? 0
+                            // FIXME: Update only when there's changes to game
+                            game.updateDate = Date()
+                            try? viewContext.save()
+                            viewContext.refresh(game, mergeChanges: true)
+                            editing.toggle()
+                        }
                     }
                 }
             }

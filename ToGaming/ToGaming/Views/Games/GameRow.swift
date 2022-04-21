@@ -19,9 +19,11 @@ struct GameRow: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(game.name!)
+                    .lineLimit(1)
                     .foregroundColor(.primary)
                 
                 Text(game.platforms![Int(game.favoritePlatform)])
+                    .lineLimit(1)
                     .font(.caption)
                     .foregroundColor(.secondary)
             }

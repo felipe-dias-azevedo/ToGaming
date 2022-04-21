@@ -23,6 +23,7 @@ struct GameCard: View {
                         .font(.subheadline)
                         .foregroundColor(.primary)
                         .bold()
+                        .lineLimit(1)
                     
                     Spacer()
                     
@@ -38,6 +39,7 @@ struct GameCard: View {
                     Text(game.platforms![Int(game.favoritePlatform)])
                         .font(.caption)
                         .foregroundColor(.secondary)
+                        .lineLimit(1)
                     
                     Image(systemName: StatusToIcon.name(Game.Status.init(rawValue: game.gameState!)!))
                         .font(.caption)

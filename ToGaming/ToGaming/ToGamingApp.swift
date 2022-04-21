@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct ToGamingApp: App {
-    @StateObject private var persistenceController = PersistenceController.shared
+    @ObservedObject private var persistenceController = PersistenceController.shared
     
     var body: some Scene {
         WindowGroup {

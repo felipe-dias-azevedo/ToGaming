@@ -18,6 +18,7 @@ struct SearchGameRow: View {
                     .font(.body)
                     .fontWeight(.medium)
                     .foregroundColor(.primary)
+                    .lineLimit(1)
                 Text(game.platforms.joined(separator: ", "))
                     .font(.caption)
                     .fontWeight(.regular)

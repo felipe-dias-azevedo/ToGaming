@@ -53,9 +53,11 @@ struct ConfigHome: View {
                 }
             }
             .alert("Data Error", isPresented: $showError) {
-                Button("OK", role: .cancel) {}
+                Button("OK", role: .cancel) {
+                    showError = false
+                }
             } message: {
-                Text("The app had a internal problem")
+                Text("The app had an internal problem")
             }
             .onAppear {
                 if let user = userConfig.first {

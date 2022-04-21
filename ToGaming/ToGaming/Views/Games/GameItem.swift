@@ -50,6 +50,9 @@ struct GameItem: View {
                 }
                 .frame(height: 160)
             }
+            .onAppear {
+                viewContext.refreshAllObjects()
+            }
             .padding(.vertical, 10)
             .listRowInsets(EdgeInsets())
             .listRowSeparator(.hidden)

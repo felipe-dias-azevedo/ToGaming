@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct GameDetail: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.openURL) var openURL
     
-    let game: FetchedResults<GameCore>.Element
+    var game: FetchedResults<GameCore>.Element
+    
+    @State private var isError = false
+    
     @State var editing = false
     @State private var index = 0
     @State private var isFavorite = false
@@ -85,7 +89,12 @@ struct GameDetail: View {
                             isFavorite.toggle()
                             game.updateDate = Date()
                             game.isFavorite = isFavorite
-                            PersistenceController().save(context: viewContext)
+                            game.objectWillChange.send()
+                            do {
+                                try viewContext.save()
+                            } catch {
+                                isError = true
+                            }
                         } label: {
                             Label("Toggle Favorite", systemImage: isFavorite ? "heart.fill" : "heart")
                                 .labelStyle(.iconOnly)
@@ -220,9 +229,17 @@ struct GameDetail: View {
             .padding(.bottom, 30)
             .padding(.horizontal, 20)
         }
-        .onAppear(perform: {
+        .alert("Data Error", isPresented: $isError) {
+            Button("OK", role: .cancel) {
+                isError = false
+            }
+        } message: {
+            Text("The app had an internal problem")
+        }
+        .onAppear {
+            viewContext.refresh(game, mergeChanges: true)
             isFavorite = game.isFavorite
-        })
+        }
         .navigationTitle(game.name!)
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $editing) {
