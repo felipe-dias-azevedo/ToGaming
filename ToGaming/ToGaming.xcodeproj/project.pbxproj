@@ -56,10 +56,19 @@
 		4AB70CE127FD29B6002DA54B /* RecentlySearchedGameRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB70CE027FD29B6002DA54B /* RecentlySearchedGameRow.swift */; };
 		4AB9583D27F297D800EAE362 /* AddGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB9583C27F297D800EAE362 /* AddGame.swift */; };
 		4AB9583F27F2A9A500EAE362 /* StatusToIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB9583E27F2A9A500EAE362 /* StatusToIcon.swift */; };
+		4AD6AEF7281E3F96000D670D /* RecentSearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6AEF6281E3F96000D670D /* RecentSearchRow.swift */; };
+		4AD6AEF9281E4519000D670D /* SearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6AEF8281E4519000D670D /* SearchRow.swift */; };
+		4AD6AEFB281E4540000D670D /* SearchRowContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6AEFA281E4540000D670D /* SearchRowContent.swift */; };
 		4AE2F22B27E4314A0036EAD9 /* AboutPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2F22A27E4314A0036EAD9 /* AboutPage.swift */; };
 		4AE2F22D27E433F80036EAD9 /* GameRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2F22C27E433F80036EAD9 /* GameRow.swift */; };
 		4AE830AA2809E01500D6BEFE /* SearchGameResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE830A92809E01500D6BEFE /* SearchGameResults.swift */; };
 		4AE830AD280A039300D6BEFE /* IgdbService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE830AC280A039300D6BEFE /* IgdbService.swift */; };
+		4AFD480B281E0726004F72F7 /* ToGamingFaceliftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFD480A281E0726004F72F7 /* ToGamingFaceliftApp.swift */; };
+		4AFD480D281E0726004F72F7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFD480C281E0726004F72F7 /* ContentView.swift */; };
+		4AFD480F281E0727004F72F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AFD480E281E0727004F72F7 /* Assets.xcassets */; };
+		4AFD4812281E0727004F72F7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AFD4811281E0727004F72F7 /* Preview Assets.xcassets */; };
+		4AFD4814281E0727004F72F7 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFD4813281E0727004F72F7 /* Persistence.swift */; };
+		4AFD4817281E0727004F72F7 /* ToGamingFacelift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4AFD4815281E0727004F72F7 /* ToGamingFacelift.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,10 +121,20 @@
 		4AB70CE027FD29B6002DA54B /* RecentlySearchedGameRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySearchedGameRow.swift; sourceTree = "<group>"; };
 		4AB9583C27F297D800EAE362 /* AddGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGame.swift; sourceTree = "<group>"; };
 		4AB9583E27F2A9A500EAE362 /* StatusToIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusToIcon.swift; sourceTree = "<group>"; };
+		4AD6AEF6281E3F96000D670D /* RecentSearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchRow.swift; sourceTree = "<group>"; };
+		4AD6AEF8281E4519000D670D /* SearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRow.swift; sourceTree = "<group>"; };
+		4AD6AEFA281E4540000D670D /* SearchRowContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRowContent.swift; sourceTree = "<group>"; };
 		4AE2F22A27E4314A0036EAD9 /* AboutPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPage.swift; sourceTree = "<group>"; };
 		4AE2F22C27E433F80036EAD9 /* GameRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRow.swift; sourceTree = "<group>"; };
 		4AE830A92809E01500D6BEFE /* SearchGameResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGameResults.swift; sourceTree = "<group>"; };
 		4AE830AC280A039300D6BEFE /* IgdbService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgdbService.swift; sourceTree = "<group>"; };
+		4AFD4808281E0726004F72F7 /* ToGamingFacelift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToGamingFacelift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AFD480A281E0726004F72F7 /* ToGamingFaceliftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToGamingFaceliftApp.swift; sourceTree = "<group>"; };
+		4AFD480C281E0726004F72F7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4AFD480E281E0727004F72F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4AFD4811281E0727004F72F7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4AFD4813281E0727004F72F7 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		4AFD4816281E0727004F72F7 /* ToGamingFacelift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToGamingFacelift.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +144,13 @@
 			files = (
 				4AAA0B3F280CF29900D5410E /* SwiftyJSON in Frameworks */,
 				4AAA0B42280CF2AE00D5410E /* Alamofire in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AFD4805281E0726004F72F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				4A87D2C727DE729400585B01 /* ToGaming */,
+				4AFD4809281E0726004F72F7 /* ToGamingFacelift */,
 				4A87D2C627DE729400585B01 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -180,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				4A87D2C527DE729400585B01 /* ToGaming.app */,
+				4AFD4808281E0726004F72F7 /* ToGamingFacelift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -276,6 +304,13 @@
 			path = Games;
 			sourceTree = "<group>";
 		};
+		4AD6AEF5281E3F7A000D670D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		4AE830AB2809E27C00D6BEFE /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +319,63 @@
 				4A98D7E5280E5079006C4BF6 /* GameSearchDataViewModel.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		4AFD4809281E0726004F72F7 /* ToGamingFacelift */ = {
+			isa = PBXGroup;
+			children = (
+				4AFD481B281E0733004F72F7 /* Views */,
+				4AFD480A281E0726004F72F7 /* ToGamingFaceliftApp.swift */,
+				4AFD480C281E0726004F72F7 /* ContentView.swift */,
+				4AFD4813281E0727004F72F7 /* Persistence.swift */,
+				4AFD480E281E0727004F72F7 /* Assets.xcassets */,
+				4AFD4815281E0727004F72F7 /* ToGamingFacelift.xcdatamodeld */,
+				4AFD4810281E0727004F72F7 /* Preview Content */,
+			);
+			path = ToGamingFacelift;
+			sourceTree = "<group>";
+		};
+		4AFD4810281E0727004F72F7 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				4AFD4811281E0727004F72F7 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4AFD481B281E0733004F72F7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4AD6AEF5281E3F7A000D670D /* Common */,
+				4AFD481E281E07CA004F72F7 /* Config */,
+				4AFD481D281E07BB004F72F7 /* MyGames */,
+				4AFD481C281E07A7004F72F7 /* Search */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4AFD481C281E07A7004F72F7 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				4AD6AEF6281E3F96000D670D /* RecentSearchRow.swift */,
+				4AD6AEF8281E4519000D670D /* SearchRow.swift */,
+				4AD6AEFA281E4540000D670D /* SearchRowContent.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		4AFD481D281E07BB004F72F7 /* MyGames */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MyGames;
+			sourceTree = "<group>";
+		};
+		4AFD481E281E07CA004F72F7 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,6 +402,23 @@
 			productReference = 4A87D2C527DE729400585B01 /* ToGaming.app */;
 			productType = "com.apple.product-type.application";
 		};
+		4AFD4807281E0726004F72F7 /* ToGamingFacelift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AFD481A281E0727004F72F7 /* Build configuration list for PBXNativeTarget "ToGamingFacelift" */;
+			buildPhases = (
+				4AFD4804281E0726004F72F7 /* Sources */,
+				4AFD4805281E0726004F72F7 /* Frameworks */,
+				4AFD4806281E0726004F72F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ToGamingFacelift;
+			productName = ToGamingFacelift;
+			productReference = 4AFD4808281E0726004F72F7 /* ToGamingFacelift.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -317,11 +426,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					4A87D2C427DE729400585B01 = {
 						CreatedOnToolsVersion = 13.2.1;
+					};
+					4AFD4807281E0726004F72F7 = {
+						CreatedOnToolsVersion = 13.3;
 					};
 				};
 			};
@@ -343,6 +455,7 @@
 			projectRoot = "";
 			targets = (
 				4A87D2C427DE729400585B01 /* ToGaming */,
+				4AFD4807281E0726004F72F7 /* ToGamingFacelift */,
 			);
 		};
 /* End PBXProject section */
@@ -355,6 +468,15 @@
 				4A8300662811048F0046F474 /* LaunchScreen.storyboard in Resources */,
 				4A87D2D027DE729500585B01 /* Preview Assets.xcassets in Resources */,
 				4A87D2CD27DE729500585B01 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AFD4806281E0726004F72F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AFD4812281E0727004F72F7 /* Preview Assets.xcassets in Resources */,
+				4AFD480F281E0727004F72F7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +535,20 @@
 				4A7DD6E6280F302A0083DE2C /* RemoteImage.swift in Sources */,
 				4A87279327E02F0700E8F76B /* Game.swift in Sources */,
 				4A3F991B27E217D60016AC9C /* StatsHome.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AFD4804281E0726004F72F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AFD4814281E0727004F72F7 /* Persistence.swift in Sources */,
+				4AFD4817281E0727004F72F7 /* ToGamingFacelift.xcdatamodeld in Sources */,
+				4AFD480D281E0726004F72F7 /* ContentView.swift in Sources */,
+				4AD6AEFB281E4540000D670D /* SearchRowContent.swift in Sources */,
+				4AFD480B281E0726004F72F7 /* ToGamingFaceliftApp.swift in Sources */,
+				4AD6AEF9281E4519000D670D /* SearchRow.swift in Sources */,
+				4AD6AEF7281E3F96000D670D /* RecentSearchRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,6 +737,66 @@
 			};
 			name = Release;
 		};
+		4AFD4818281E0727004F72F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ToGamingFacelift/Preview Content\"";
+				DEVELOPMENT_TEAM = X9ZWB64F79;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = felipe.ToGamingFacelift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4AFD4819281E0727004F72F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ToGamingFacelift/Preview Content\"";
+				DEVELOPMENT_TEAM = X9ZWB64F79;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = felipe.ToGamingFacelift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -618,6 +814,15 @@
 			buildConfigurations = (
 				4A87D2D427DE729500585B01 /* Debug */,
 				4A87D2D527DE729500585B01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AFD481A281E0727004F72F7 /* Build configuration list for PBXNativeTarget "ToGamingFacelift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AFD4818281E0727004F72F7 /* Debug */,
+				4AFD4819281E0727004F72F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -664,6 +869,16 @@
 			);
 			currentVersion = 4A5604272803097D008A15C6 /* ToGaming.xcdatamodel */;
 			path = ToGaming.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		4AFD4815281E0727004F72F7 /* ToGamingFacelift.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4AFD4816281E0727004F72F7 /* ToGamingFacelift.xcdatamodel */,
+			);
+			currentVersion = 4AFD4816281E0727004F72F7 /* ToGamingFacelift.xcdatamodel */;
+			path = ToGamingFacelift.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
