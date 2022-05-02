@@ -59,6 +59,12 @@
 		4AD6AEF7281E3F96000D670D /* RecentSearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6AEF6281E3F96000D670D /* RecentSearchRow.swift */; };
 		4AD6AEF9281E4519000D670D /* SearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6AEF8281E4519000D670D /* SearchRow.swift */; };
 		4AD6AEFB281E4540000D670D /* SearchRowContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6AEFA281E4540000D670D /* SearchRowContent.swift */; };
+		4AD6AEFD281ECCF7000D670D /* ConfigFieldRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6AEFC281ECCF7000D670D /* ConfigFieldRow.swift */; };
+		4AD6AF01281F70B6000D670D /* IconSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6AF00281F70B6000D670D /* IconSymbol.swift */; };
+		4AD6AF03281F77BD000D670D /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6AF02281F77BD000D670D /* Tab.swift */; };
+		4AD6AF05281F7886000D670D /* ConfigHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6AF04281F7886000D670D /* ConfigHome.swift */; };
+		4AD6AF07281F7891000D670D /* SearchHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6AF06281F7891000D670D /* SearchHome.swift */; };
+		4AD6AF09281F8208000D670D /* IconLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6AF08281F8208000D670D /* IconLabel.swift */; };
 		4AE2F22B27E4314A0036EAD9 /* AboutPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2F22A27E4314A0036EAD9 /* AboutPage.swift */; };
 		4AE2F22D27E433F80036EAD9 /* GameRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE2F22C27E433F80036EAD9 /* GameRow.swift */; };
 		4AE830AA2809E01500D6BEFE /* SearchGameResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE830A92809E01500D6BEFE /* SearchGameResults.swift */; };
@@ -124,6 +130,12 @@
 		4AD6AEF6281E3F96000D670D /* RecentSearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchRow.swift; sourceTree = "<group>"; };
 		4AD6AEF8281E4519000D670D /* SearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRow.swift; sourceTree = "<group>"; };
 		4AD6AEFA281E4540000D670D /* SearchRowContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRowContent.swift; sourceTree = "<group>"; };
+		4AD6AEFC281ECCF7000D670D /* ConfigFieldRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigFieldRow.swift; sourceTree = "<group>"; };
+		4AD6AF00281F70B6000D670D /* IconSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSymbol.swift; sourceTree = "<group>"; };
+		4AD6AF02281F77BD000D670D /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		4AD6AF04281F7886000D670D /* ConfigHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigHome.swift; sourceTree = "<group>"; };
+		4AD6AF06281F7891000D670D /* SearchHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHome.swift; sourceTree = "<group>"; };
+		4AD6AF08281F8208000D670D /* IconLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLabel.swift; sourceTree = "<group>"; };
 		4AE2F22A27E4314A0036EAD9 /* AboutPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPage.swift; sourceTree = "<group>"; };
 		4AE2F22C27E433F80036EAD9 /* GameRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRow.swift; sourceTree = "<group>"; };
 		4AE830A92809E01500D6BEFE /* SearchGameResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGameResults.swift; sourceTree = "<group>"; };
@@ -307,8 +319,26 @@
 		4AD6AEF5281E3F7A000D670D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4AD6AF08281F8208000D670D /* IconLabel.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		4AD6AEFE281F709F000D670D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4AD6AEFF281F70A4000D670D /* Enum */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4AD6AEFF281F70A4000D670D /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				4AD6AF00281F70B6000D670D /* IconSymbol.swift */,
+				4AD6AF02281F77BD000D670D /* Tab.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		4AE830AB2809E27C00D6BEFE /* Networking */ = {
@@ -324,6 +354,7 @@
 		4AFD4809281E0726004F72F7 /* ToGamingFacelift */ = {
 			isa = PBXGroup;
 			children = (
+				4AD6AEFE281F709F000D670D /* Models */,
 				4AFD481B281E0733004F72F7 /* Views */,
 				4AFD480A281E0726004F72F7 /* ToGamingFaceliftApp.swift */,
 				4AFD480C281E0726004F72F7 /* ContentView.swift */,
@@ -357,6 +388,7 @@
 		4AFD481C281E07A7004F72F7 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				4AD6AF06281F7891000D670D /* SearchHome.swift */,
 				4AD6AEF6281E3F96000D670D /* RecentSearchRow.swift */,
 				4AD6AEF8281E4519000D670D /* SearchRow.swift */,
 				4AD6AEFA281E4540000D670D /* SearchRowContent.swift */,
@@ -374,6 +406,8 @@
 		4AFD481E281E07CA004F72F7 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				4AD6AF04281F7886000D670D /* ConfigHome.swift */,
+				4AD6AEFC281ECCF7000D670D /* ConfigFieldRow.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -543,12 +577,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AFD4814281E0727004F72F7 /* Persistence.swift in Sources */,
+				4AD6AEFD281ECCF7000D670D /* ConfigFieldRow.swift in Sources */,
 				4AFD4817281E0727004F72F7 /* ToGamingFacelift.xcdatamodeld in Sources */,
 				4AFD480D281E0726004F72F7 /* ContentView.swift in Sources */,
 				4AD6AEFB281E4540000D670D /* SearchRowContent.swift in Sources */,
 				4AFD480B281E0726004F72F7 /* ToGamingFaceliftApp.swift in Sources */,
+				4AD6AF07281F7891000D670D /* SearchHome.swift in Sources */,
+				4AD6AF05281F7886000D670D /* ConfigHome.swift in Sources */,
 				4AD6AEF9281E4519000D670D /* SearchRow.swift in Sources */,
+				4AD6AF03281F77BD000D670D /* Tab.swift in Sources */,
+				4AD6AF01281F70B6000D670D /* IconSymbol.swift in Sources */,
 				4AD6AEF7281E3F96000D670D /* RecentSearchRow.swift in Sources */,
+				4AD6AF09281F8208000D670D /* IconLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
